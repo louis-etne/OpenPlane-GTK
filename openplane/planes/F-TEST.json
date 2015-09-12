@@ -1,54 +1,80 @@
 {
-    "Couleurs": "White and blue",
-    "Piste": {
-        "Unite": "m",
-        "Dure": 280,
-        "Herbe": 350
-    },
-    "Immatriculation": "F-TEST",
-    "RDBA": "4",
-    "Type": "DR300-108",
-    "Certification": "V",
-    "OACI": "DR30",
     "Transpondeur": "C",
+    "Immatriculation": "F-TEST",
+    "Certification": "V",
     "Carburant": {
-        "Type": "100LL",
-        "Unite": "L",
-        "Consomation": 25,
         "Capacite": 110,
+        "Consomation": 25,
+        "Unite": "L",
+        "Type": "100LL",
         "Inutilisable": 10
     },
-    "Equipement": {
-        "T": false,
-        "O": true,
-        "C": false,
-        "F": true,
-        "K": false,
-        "I": false,
-        "U": false,
-        "V": true,
-        "L": false,
-        "D": false,
-        "R": false,
-        "Y": false,
-        "X": false,
-        "J": false,
-        "H": false,
-        "W": false,
-        "G": false
+    "OACI": "DR30",
+    "RDBA": "4",
+    "Piste": {
+        "Unite": "m",
+        "Herbe": 350,
+        "Dure": 280
+    },
+    "Centrage": {
+        "Normale": {
+            "P2y": 975.0,
+            "P1x": 2.08,
+            "P5y": 650.0,
+            "P3x": 2.25,
+            "P4y": 1150.0,
+            "P1y": 650.0,
+            "P5x": 2.36,
+            "P3y": 1150.0,
+            "P2x": 2.08,
+            "P4x": 2.36
+        },
+        "Utilitaire": {
+            "P2y": 975.0,
+            "P1x": 2.08,
+            "P5y": 650.0,
+            "P3x": 2.25,
+            "P4y": 1150.0,
+            "P1y": 650.0,
+            "P5x": 2.36,
+            "P3y": 1150.0,
+            "P2x": 2.08,
+            "P4x": 2.36
+        }
     },
     "Vitesse": {
-        "VzMontee": 100,
-        "VNO": 140,
-        "Montee": 80,
-        "VSO": 43,
-        "VNE": 159,
-        "Descente": 500,
-        "Vy": 81,
-        "VzDescente": 500,
-        "Croisiere": 80,
         "Vx": 70,
-        "VFE": 92
+        "VNE": 159,
+        "Descente": 100,
+        "Montee": 80,
+        "Croisiere": 80,
+        "VzDescente": 500,
+        "VNO": 140,
+        "VSO": 43,
+        "VFE": 92,
+        "Vy": 81,
+        "VzMontee": 500
     },
-    "Turbulance": "L"
+    "Turbulance": "L",
+    "Couleurs": "White and blue",
+    "Type": "DR300-108",
+    "Equipement": {
+        "F": true,
+        "K": false,
+        "R": false,
+        "V": true,
+        "U": false,
+        "O": true,
+        "D": false,
+        "X": false,
+        "T": false,
+        "L": false,
+        "I": false,
+        "Y": false,
+        "G": false,
+        "W": false,
+        "J": false,
+        "H": false,
+        "C": false
+    }
 }
