@@ -25,15 +25,15 @@ class HelpWindow(Gtk.Window):
         main_layout.attach(logo, 0, 0, 2, 1)
 
         app_label = Gtk.Label()
-        app_label.set_markup('<b>LibreAero</b>')
+        app_label.set_markup('<b>OpenPlane</b>')
         main_layout.attach(app_label, 0, 1, 2, 1)
 
         version_label = Gtk.Label()
-        version_label.set_markup('0.3.0:Alpha')
+        version_label.set_markup('0.4.0:Alpha')
         main_layout.attach(version_label, 0, 2, 2, 1)
 
         description_label = Gtk.Label()
-        description_label.set_markup('Une petite description de l\'application')
+        description_label.set_markup('OpenPlane est encore en Alpha')
         main_layout.attach(description_label, 0, 3, 2, 1)
 
         web_label = Gtk.Label()
