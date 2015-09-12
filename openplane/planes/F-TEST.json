@@ -1,0 +1,54 @@
+{
+    "Couleurs": "White and blue",
+    "Piste": {
+        "Unite": "m",
+        "Dure": 280,
+        "Herbe": 350
+    },
+    "Immatriculation": "F-TEST",
+    "RDBA": "4",
+    "Type": "DR300-108",
+    "Certification": "V",
+    "OACI": "DR30",
+    "Transpondeur": "C",
+    "Carburant": {
+        "Type": "100LL",
+        "Unite": "L",
+        "Consomation": 25,
+        "Capacite": 110,
+        "Inutilisable": 10
+    },
+    "Equipement": {
+        "T": false,
+        "O": true,
+        "C": false,
+        "F": true,
+        "K": false,
+        "I": false,
+        "U": false,
+        "V": true,
+        "L": false,
+        "D": false,
+        "R": false,
+        "Y": false,
+        "X": false,
+        "J": false,
+        "H": false,
+        "W": false,
+        "G": false
+    },
+    "Vitesse": {
+        "VzMontee": 100,
+        "VNO": 140,
+        "Montee": 80,
+        "VSO": 43,
+        "VNE": 159,
+        "Descente": 500,
+        "Vy": 81,
+        "VzDescente": 500,
+        "Croisiere": 80,
+        "Vx": 70,
+        "VFE": 92
+    },
+    "Turbulance": "L"
+}

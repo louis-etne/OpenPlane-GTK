@@ -1,0 +1,54 @@
+{
+    "Transpondeur": "N",
+    "Vitesse": {
+        "Vx": 70,
+        "Croisiere": 80,
+        "VSO": 43,
+        "Descente": 500,
+        "VNE": 159,
+        "VzMontee": 100,
+        "VzDescente": 500,
+        "VNO": 140,
+        "VFE": 92,
+        "Vy": 81,
+        "Montee": 80
+    },
+    "Carburant": {
+        "Unite": "L",
+        "Consomation": 25,
+        "Type": "Super",
+        "Inutilisable": 10,
+        "Capacite": 110
+    },
+    "Equipement": {
+        "J": false,
+        "W": false,
+        "I": false,
+        "X": false,
+        "K": false,
+        "G": false,
+        "V": true,
+        "L": false,
+        "U": false,
+        "Y": false,
+        "D": false,
+        "H": false,
+        "F": true,
+        "O": true,
+        "C": false,
+        "R": false,
+        "T": false
+    },
+    "OACI": "DR30",
+    "Immatriculation": "F-BTBB",
+    "Turbulance": "M",
+    "Piste": {
+        "Dure": 280,
+        "Unite": "m",
+        "Herbe": 350
+    },
+    "Couleurs": "White and blue",
+    "RDBA": "N",
+    "Certification": "N",
+    "Type": "DR300-108"
+}
