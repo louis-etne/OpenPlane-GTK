@@ -6,7 +6,7 @@
 # Historique
 
 **_2015/09/12_, v0.5 :**
-Remaniment complet de l'interface de l'éditeur d'avions, qui se présente maintenant sous forme d'onglet et ajout des valeurs de centrage. Plus qu'à ajouter une nouvelle fenêtre pour générer le devis de masse et centrage. Vraiment fière de mon travail ! :muscle:
+Remaniment complet de l'interface de l'éditeur d'avions, qui se présente maintenant sous forme d'onglet et ajout des valeurs de centrage. Plus qu'à ajouter une nouvelle fenêtre pour générer le devis de masse et centrage. Vraiment fier de mon travail ! :muscle:
 
 **_2015/09/12_, v0.4 :**  
 Hangar terminé et ajouté à la fenêtre principale, publication du projet sur Github avec le message *"First commit! :tada:"* et écriture de cet historique.
