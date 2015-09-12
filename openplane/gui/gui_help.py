@@ -29,7 +29,7 @@ class HelpWindow(Gtk.Window):
         main_layout.attach(app_label, 0, 1, 2, 1)
 
         version_label = Gtk.Label()
-        version_label.set_markup('0.4')
+        version_label.set_markup('0.5')
         main_layout.attach(version_label, 0, 2, 2, 1)
 
         description_label = Gtk.Label()
