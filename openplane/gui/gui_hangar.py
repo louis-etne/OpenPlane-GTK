@@ -107,16 +107,16 @@ class HangarWindow(Gtk.Window):
             self.btn_delete.set_sensitive(False)
 
     def on_new_pressed(self, button):
-        add_plane = PlanesManagerWindow()
-        add_plane.window.connect('delete-event', add_plane.app_quit)
-        add_plane.window.show_all()
+        add_plane = PlanesManagerDialog()
+        add_plane.dialog.run()
+        self.update_file_list()
 
     def on_edit_pressed(self, button, selection):
         model, treeiter = selection.get_selected()
         if treeiter is not None:
-            edit_plane = PlanesManagerWindow(model[treeiter][1])
-            edit_plane.window.connect('delete-event', edit_plane.app_quit)
-            edit_plane.window.show_all()
+            edit_plane = PlanesManagerDialog(model[treeiter][1])
+            edit_plane.dialog.run()
+            self.update_file_list()
 
     def on_import_pressed(self, button):
         dialog = Gtk.FileChooserDialog('Sélectionnez le fichier', self,

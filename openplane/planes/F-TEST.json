@@ -1,81 +1,81 @@
 {
-    "Equipement": {
-        "D": false,
-        "H": false,
-        "O": true,
-        "T": false,
-        "I": false,
-        "C": false,
-        "U": false,
-        "W": false,
-        "F": true,
-        "J": false,
-        "X": false,
-        "K": false,
-        "L": false,
-        "Y": false,
-        "V": true,
-        "G": false,
-        "R": false
-    },
-    "Piste": {
-        "Unite": "m",
-        "Dure": 280,
-        "Herbe": 350
-    },
     "Centrage": {
-        "Normale": {
-            "P1y": 700.0,
-            "P1x": 0.889,
-            "P5y": 700.0,
-            "P3x": 1.028,
-            "P4y": 1157.0,
-            "P2y": 884.0,
-            "P5x": 1.201,
-            "P3y": 1157.0,
-            "P4x": 1.201,
-            "P2x": 0.889
-        },
         "Utilitaire": {
+            "P3x": 0.947,
+            "P4x": 1.028,
+            "P3y": 998.0,
             "P1y": 700.0,
             "P1x": 0.889,
-            "P5y": 700.0,
-            "P3x": 0.947,
             "Montrer": true,
-            "P4y": 998.0,
-            "P2y": 884.0,
+            "P2x": 0.889,
+            "P5y": 700.0,
             "P5x": 1.028,
-            "P3y": 998.0,
-            "P4x": 1.028,
-            "P2x": 0.889
+            "P2y": 884.0,
+            "P4y": 998.0
+        },
+        "Normale": {
+            "P3x": 1.028,
+            "P4x": 1.201,
+            "P3y": 1157.0,
+            "P1y": 700.0,
+            "P1x": 0.889,
+            "P2x": 0.889,
+            "P5y": 700.0,
+            "P5x": 1.201,
+            "P2y": 884.0,
+            "P4y": 1157.0
         }
     },
-    "Turbulence": "L",
-    "Transpondeur": "C",
-    "Immatriculation": "F-TEST",
     "Certification": "V",
-    "Carburant": {
-        "Consomation": 25,
-        "Type": "100LL",
-        "Unite": "L",
-        "Capacite": 110,
-        "Inutilisable": 10
+    "Couleurs": "White and blue",
+    "Immatriculation": "F-TEST",
+    "Turbulence": "L",
+    "Piste": {
+        "Herbe": 350,
+        "Dure": 280,
+        "Unite": "m"
     },
-    "Type": "DR300-108",
+    "Transpondeur": "C",
     "OACI": "DR30",
-    "RDBA": "4",
-    "Vitesse": {
-        "VzDescente": 500,
-        "Croisiere": 80,
-        "VFE": 92,
-        "Descente": 490,
-        "Montee": 80,
-        "VNE": 159,
-        "VzMontee": 490,
-        "VSO": 43,
-        "VNO": 140,
-        "Vx": 70,
-        "Vy": 81
+    "Equipement": {
+        "I": false,
+        "J": false,
+        "F": true,
+        "U": false,
+        "W": false,
+        "D": false,
+        "Y": false,
+        "O": true,
+        "V": true,
+        "X": false,
+        "T": false,
+        "R": false,
+        "K": false,
+        "C": false,
+        "G": false,
+        "L": false,
+        "H": false
     },
-    "Couleurs": "White and blue"
+    "Vitesse": {
+        "VzMontee": 500,
+        "VzDescente": 500,
+        "Vx": 70,
+        "Croisiere": 100,
+        "VFE": 92,
+        "Vy": 81,
+        "VNO": 140,
+        "Descente": 100,
+        "VNE": 159,
+        "VSO": 43,
+        "Montee": 80
+    },
+    "RDBA": "4",
+    "Carburant": {
+        "Inutilisable": 10,
+        "Capacite": 110,
+        "Consomation": 25,
+        "Unite": "L",
+        "Type": "100LL"
+    },
+    "Type": "DR300-108"
 }

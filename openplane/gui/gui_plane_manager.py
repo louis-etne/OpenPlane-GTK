@@ -8,7 +8,7 @@ from openplane.gui.gui_help import *
 from openplane.core.Plane import *
 
 
-class PlanesManagerWindow:
+class PlanesManagerDialog:
 
     def __init__(self, filepath=None):
 
@@ -19,7 +19,6 @@ class PlanesManagerWindow:
             "on_mainWindow_destroy": self.app_quit,
             "on_carbuUnits_changed": self.on_carbuUnits_changed,
             "on_showUtil_toggled": self.on_showUtil_toggled,
-            "on_help_clicked": self.on_help_pressed,
             "on_save_clicked": self.on_save_pressed,
             "on_close_clicked": self.app_quit
         }
@@ -112,18 +111,13 @@ class PlanesManagerWindow:
         self.show_utility = builder.get_object('showUtil')
 
         # Création de la fenêtre principale
-        self.window = builder.get_object('mainWindow')
+        self.dialog = builder.get_object('dialog')
 
         if filepath is not None:
             self.import_datas_plane(filepath)
 
     def app_quit(self, *args):
-        self.window.destroy()
-
-    def on_help_pressed(self, *args):
-        help_window = HelpWindow()
-        help_window.connect('delete-event', help_window.app_quit)
-        help_window.show_all()
+        self.dialog.destroy()
 
     def on_showUtil_toggled(self, box):
         if box.get_active():
@@ -178,7 +172,7 @@ class PlanesManagerWindow:
         values.append(self.colors.get_text())
 
         # Section Vitesses
-        values.append(int(self.s_up.get_text()))
+        values.append(int(self.s_cruising.get_text()))
         values.append(int(self.s_up.get_text()))
         values.append(int(self.s_low.get_text()))
         values.append(int(self.v_up.get_text()))
@@ -339,12 +333,11 @@ class PlanesManagerWindow:
         self.show_utility.set_active(plane.utility)
 
         # Ajustements
-        self.window.set_title('Modifier {}'.format(plane.matriculation))
+        self.dialog.set_title('Modifier {}'.format(plane.matriculation))
         self.btn_close.set_label('Annuler')
         self.on_carbuUnits_changed()
 
 if __name__ == '__main__':
     win = PlanesManagerWindow('openplane/planes/F-BTBB.json')
-    win.window.connect('delete-event', Gtk.main_quit)
-    win.window.show_all()
+    win.dialog.run()
     Gtk.main()
