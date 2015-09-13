@@ -6,11 +6,13 @@
 - matplotlib
 
 # Installation
-On commence par installer les dépendances :
+On commence par installer les dépendances :  
 ```sudo apt-get install python3-gi python3-matplotlib```  
-Puis clone ensuite OpenPlane :
+
+Puis clone ensuite OpenPlane :  
 ```git clone https://github.com/boopr/OpenPlane.git```  
-Enfin on lance OpenPlane :
+
+Enfin on lance OpenPlane :  
 ```python3 OpenPlane/app.py```  
 
 # Screenshots
