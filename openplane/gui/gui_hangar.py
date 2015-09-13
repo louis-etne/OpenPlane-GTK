@@ -102,6 +102,9 @@ class HangarWindow(Gtk.Window):
 
             if not self.btn_delete.get_sensitive():
                 self.btn_delete.set_sensitive(True)
+        else:
+            self.btn_edit.set_sensitive(False)
+            self.btn_delete.set_sensitive(False)
 
     def on_new_pressed(self, button):
         add_plane = PlanesManagerWindow()
