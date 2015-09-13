@@ -7,11 +7,11 @@
 
 # Installation
 On commence par installer les dépendances :
-```sudo apt-get install python3-gi python3-matplotlib```
+```sudo apt-get install python3-gi python3-matplotlib```  
 Puis clone ensuite OpenPlane :
-```git clone https://github.com/boopr/OpenPlane.git```
+```git clone https://github.com/boopr/OpenPlane.git```  
 Enfin on lance OpenPlane :
-```python3 OpenPlane/app.py```
+```python3 OpenPlane/app.py```  
 
 # Screenshots
 ![OpenPlane v0.6 : masse et centrage](images/screenshots/preview_weight_v06.png)
