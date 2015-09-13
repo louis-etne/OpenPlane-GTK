@@ -1,1 +1,3 @@
 *.glade~
+openplane/core/__pycache__
+openplane/gui/__pycache__
