@@ -44,5 +44,4 @@ Début du projet ! :smiley:
 
 # Todo
 - METAR/TAF
-- Masse et centrage à partir des données des avions (utilisation intensive de matplotlib, que je ne connais pas du tout)
 - Carnet de vol numérique
