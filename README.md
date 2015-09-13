@@ -12,6 +12,7 @@ Ajout de la fenêtre du devis de masse et centrage avec prévisualisation, *s'il
 
 **_2015/09/12_, v0.5 :**  
 Remaniement complet de l'interface de l'éditeur d'avions, qui se présente maintenant sous forme d'onglet et ajout des valeurs de centrage. Plus qu'à ajouter une nouvelle fenêtre pour générer le devis de masse et centrage. Vraiment fier de mon travail ! :muscle:
+![Nouvelle interface du gestionnaire d'avion](images/screenshots/preview_plane_manager_v05.png)
 
 **_2015/09/12_, v0.4 :**  
 Hangar terminé et ajouté à la fenêtre principale, publication du projet sur [Github](https://github.com/boopr/OpenPlane) avec le message *"First commit! :tada:"* et écriture de cet historique.
