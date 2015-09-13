@@ -32,7 +32,7 @@ class PlanesManagerWindow:
         self.consomUnits = builder.get_object('consomUnitsLab')
 
         preview_centrage = builder.get_object('previewCentrage')
-        preview_centrage.set_from_file('openplane/gui/preview_centrage.png')
+        preview_centrage.set_from_file('openplane/images/preview_centrage.png')
 
         # On récupère tous les objets (au nombre de 44)
         self.immatriculation = builder.get_object('immEntry')
