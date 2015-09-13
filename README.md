@@ -5,6 +5,14 @@
 - gi.repository
 - matplotlib
 
+# Installation
+On commence par installer les dépendances :
+```sudo apt-get install python3-gi python3-matplotlib```
+Puis clone ensuite OpenPlane :
+```git clone https://github.com/boopr/OpenPlane.git```
+Enfin on lance OpenPlane :
+```python3 OpenPlane/app.py```
+
 # Screenshots
 ![OpenPlane v0.6 : masse et centrage](images/screenshots/preview_weight_v06.png)
 ![OpenPlane v0.4](images/screenshots/preview_v04.png)
