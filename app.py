@@ -5,7 +5,7 @@
 
 from openplane.gui.gui_app import *
 
-win = App()
-win.connect('delete-event', win.app_quit)
-win.show_all()
+app = App()
+app.connect('delete-event', app.app_quit)
+app.show_all()
 Gtk.main()
