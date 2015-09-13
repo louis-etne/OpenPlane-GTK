@@ -54,9 +54,8 @@ class App(Gtk.Window):
         convert.show_all()
 
     def on_hangar_pressed(self, *args):
-        hangar = HangarWindow()
-        hangar.connect('delete-event', hangar.app_quit)
-        hangar.show_all()
+        hangar = HangarDialog()
+        hangar.dialog.run()
 
     def on_weight_pressed(self, *args):
         weight = WeightWindow()
