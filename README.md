@@ -2,7 +2,7 @@
 
 # Dépendances
 - python3
-- gi.repository
+- PyGObject
 - matplotlib
 
 # Installation
