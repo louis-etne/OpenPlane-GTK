@@ -2,8 +2,13 @@
 
 # Screenshots
 ![OpenPlane v0.4](images/screenshots/preview_v04.png)
+![OpenPlane v0.6 : masse et centrage](images/screenshots/preview_weight_v06.png)
 
 # Historique
+
+**_2015/09/13_, v0.6 :**  
+Ajout de la fenêtre du devis de masse et centrage avec prévisualisation, *s'il vous plaît*. Le graphique est généré par *pyplot* et peut être exporté en *.png* (recommandé) ou autre format d'image supporté par *pyplot*. Voici un exemple de de devis généré par OpenPlane (avouez qu'il en jette! :grin:) : 
+![Devis de masse et centrage par OpenPlane](images/devis.png)
 
 **_2015/09/12_, v0.5 :**  
 Remaniement complet de l'interface de l'éditeur d'avions, qui se présente maintenant sous forme d'onglet et ajout des valeurs de centrage. Plus qu'à ajouter une nouvelle fenêtre pour générer le devis de masse et centrage. Vraiment fier de mon travail ! :muscle:
