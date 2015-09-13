@@ -1,8 +1,8 @@
 # OpenPlane
 
 # Screenshots
-![OpenPlane v0.4](images/screenshots/preview_v04.png)
 ![OpenPlane v0.6 : masse et centrage](images/screenshots/preview_weight_v06.png)
+![OpenPlane v0.4](images/screenshots/preview_v04.png)
 
 # Historique
 
