@@ -13,7 +13,7 @@ from openplane.gui.gui_help import *
 class App(Gtk.Window):
 
     def __init__(self):
-        Gtk.Window.__init__(self, title='LibreAero')
+        Gtk.Window.__init__(self, title='OpenPlane')
 
         self.set_border_width(10)
 
