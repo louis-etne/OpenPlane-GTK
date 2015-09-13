@@ -13,7 +13,7 @@ class PlanesManagerWindow:
     def __init__(self, filepath=None):
 
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/gui_planes_manager.glade')
+        builder.add_from_file('openplane/gui/gui_plane_manager.glade')
 
         handlers = {
             "on_mainWindow_destroy": self.app_quit,
@@ -110,6 +110,7 @@ class PlanesManagerWindow:
 
         # Création de la fenêtre principale
         self.window = builder.get_object('mainWindow')
+        self.window.set_modal(True)  # Freeze the app
 
         if filepath is not None:
             self.import_datas_plane(filepath)

@@ -988,8 +988,8 @@
                               <object class="GtkEntry" id="p1x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1003,8 +1003,8 @@
                               <object class="GtkEntry" id="p1y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1046,8 +1046,8 @@
                               <object class="GtkEntry" id="p2x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1061,8 +1061,8 @@
                               <object class="GtkEntry" id="p2y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1091,8 +1091,8 @@
                               <object class="GtkEntry" id="p3x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1106,8 +1106,8 @@
                               <object class="GtkEntry" id="p3y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1135,8 +1135,8 @@
                               <object class="GtkEntry" id="p4x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1150,8 +1150,8 @@
                               <object class="GtkEntry" id="p4y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1179,8 +1179,8 @@
                               <object class="GtkEntry" id="p5x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1194,8 +1194,8 @@
                               <object class="GtkEntry" id="p5y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">5</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1288,8 +1288,8 @@
                               <object class="GtkEntry" id="up1x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1303,8 +1303,8 @@
                               <object class="GtkEntry" id="up1y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1346,8 +1346,8 @@
                               <object class="GtkEntry" id="up2x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1361,8 +1361,8 @@
                               <object class="GtkEntry" id="up2y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1391,8 +1391,8 @@
                               <object class="GtkEntry" id="up3x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1406,8 +1406,8 @@
                               <object class="GtkEntry" id="up3y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1435,8 +1435,8 @@
                               <object class="GtkEntry" id="up4x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1479,8 +1479,8 @@
                               <object class="GtkEntry" id="up5x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">7</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>
@@ -1494,8 +1494,8 @@
                               <object class="GtkEntry" id="up5y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="max_length">5</property>
-                                <property name="width_chars">6</property>
+                                <property name="max_length">6</property>
+                                <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
                               </object>
                               <packing>

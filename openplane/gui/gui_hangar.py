@@ -4,7 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk
-from openplane.gui.gui_planes_manager import *
+from openplane.gui.gui_plane_manager import *
 import shutil
 import json
 import glob
@@ -114,7 +114,6 @@ class HangarWindow(Gtk.Window):
             edit_plane = PlanesManagerWindow(model[treeiter][1])
             edit_plane.window.connect('delete-event', edit_plane.app_quit)
             edit_plane.window.show_all()
-            self.update_file_list()
 
     def on_import_pressed(self, button):
         dialog = Gtk.FileChooserDialog('Sélectionnez le fichier', self,
@@ -130,7 +129,9 @@ class HangarWindow(Gtk.Window):
             file_path = dialog.get_filename()
             plane_name = self.get_plane_name(file_path)
 
-            shutil.copy(file_path, 'openplane/planes/{}.json'.format(plane_name))
+            shutil.copy(file_path,
+                        'openplane/planes/{}.json'.format(plane_name))
+
             self.update_file_list()
         elif response == Gtk.ResponseType.CANCEL:
             pass

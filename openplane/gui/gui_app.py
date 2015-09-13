@@ -6,6 +6,7 @@
 from gi.repository import Gtk
 from openplane.gui.gui_convert import *
 from openplane.gui.gui_hangar import *
+from openplane.gui.gui_weight import *
 from openplane.gui.gui_help import *
 
 
@@ -32,13 +33,18 @@ class App(Gtk.Window):
         btn_hangar.connect('clicked', self.on_hangar_pressed)
         main_layout.attach(btn_hangar, 0, 1, 3, 1)
 
+        # Masse et centrage
+        btn_weight = Gtk.Button(label='Masse et centrage')
+        btn_weight.connect('clicked', self.on_weight_pressed)
+        main_layout.attach(btn_weight, 0, 2, 3, 1)
+
         btn_help = Gtk.Button(label='Aide')
         btn_help.connect('clicked', self.on_help_pressed)
-        main_layout.attach(btn_help, 1, 2, 1, 1)
+        main_layout.attach(btn_help, 1, 3, 1, 1)
 
         btn_quit = Gtk.Button(label='Quitter')
         btn_quit.connect('clicked', self.app_quit)
-        main_layout.attach(btn_quit, 2, 2, 1, 1)
+        main_layout.attach(btn_quit, 2, 3, 1, 1)
 
         self.add(main_layout)
 
@@ -51,6 +57,11 @@ class App(Gtk.Window):
         hangar = HangarWindow()
         hangar.connect('delete-event', hangar.app_quit)
         hangar.show_all()
+
+    def on_weight_pressed(self, *args):
+        weight = WeightWindow()
+        weight.window.connect('delete-event', weight.app_quit)
+        weight.window.show_all()
 
     def on_help_pressed(self, *args):
         help_window = HelpWindow()

@@ -89,11 +89,8 @@ class Plane:
         self.up5x = values[62]
         self.up5y = values[63]
 
-
-
-
     def save_plane(self):
-        plane_filename = 'openplane/planes/{}.json'.format(self.immatriculation)
+        filename = 'openplane/planes/{}.json'.format(self.immatriculation)
 
         plane_values = {
              'Immatriculation': self.immatriculation,
@@ -175,7 +172,7 @@ class Plane:
                  }
              }}
 
-        with open(plane_filename, 'w') as outfile:
+        with open(filename, 'w') as outfile:
             json.dump(plane_values, outfile, indent=4)
 
     def import_plane(self, filepath):

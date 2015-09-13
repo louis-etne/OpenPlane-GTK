@@ -33,7 +33,7 @@ class ConvertWindow(Gtk.Window):
         adjustment = Gtk.Adjustment(0, -5000, 300000, 1, 10, 0)
         self.entry = Gtk.SpinButton()
         self.entry.set_adjustment(adjustment)
-        self.entry.set_value(0) # On met 0 comme valeur par défaut
+        self.entry.set_value(0)  # On met 0 comme valeur par défaut
         self.entry.connect('value-changed', self.on_units_changed)
         main_layout.attach(self.entry, 0, 0, 1, 1)
 
@@ -50,7 +50,7 @@ class ConvertWindow(Gtk.Window):
         # On met en place la liste
         self.units_combo = Gtk.ComboBox.new_with_model_and_entry(units)
         self.units_combo.set_entry_text_column(1)
-        self.units_combo.set_active(0) # On définit 'mètre' par défaut
+        self.units_combo.set_active(0)  # On définit 'mètre' par défaut
         self.units_combo.connect('changed', self.on_units_changed)
         main_layout.attach(self.units_combo, 1, 0, 1, 1)
 
@@ -72,12 +72,11 @@ class ConvertWindow(Gtk.Window):
 
         main_layout.attach(btn_layout, 1, 2, 1, 1)
 
-
         self.add(main_layout)
 
-    def on_units_changed(self, combo = None):
+    def on_units_changed(self, combo=None):
         tree_iter = self.units_combo.get_active_iter()
-        if tree_iter != None:
+        if tree_iter is not None:
             model = self.units_combo.get_model()
             row_id, name = model[tree_iter][:2]
 
@@ -124,7 +123,6 @@ class ConvertWindow(Gtk.Window):
         help_window = HelpWindow()
         help_window.connect('delete-event', help_window.app_quit)
         help_window.show_all()
-
 
     def app_quit(self, *args):
         self.destroy()
