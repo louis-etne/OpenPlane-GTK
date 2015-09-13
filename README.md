@@ -12,7 +12,7 @@ On commence par installer les dépendances :
 Puis, on clone OpenPlane :  
 ```git clone https://github.com/boopr/OpenPlane.git```  
 
-Enfin, on lance OpenPlane :  
+Enfin, on le lance :  
 ```python3 OpenPlane/app.py```  
 
 # Screenshots
