@@ -203,6 +203,15 @@ class WeightWindow:
         plt.plot(dom_x, dom_y, linewidth=1)
         plt.ylim((plane.p1y, plane.p3y + 50))  # Limites en y
 
+        # Catégorie utilitaire
+        if plane.utilitaire:
+            dom_u_x = np.array([plane.up1x, plane.up2x, plane.up3x,
+                          plane.up4x, plane.up5x])
+            dom_u_y = np.array([plane.up1y, plane.up2y, plane.up3y,
+                          plane.up4y, plane.up5y])
+
+            plt.plot(dom_u_x, dom_u_y, 'r--', linewidth=1.5, color='g', )
+
         # Points de centrage
         total_x = np.array([bdl_total, bdl_vide])
         total_y = np.array([masse_total, masse_vide])

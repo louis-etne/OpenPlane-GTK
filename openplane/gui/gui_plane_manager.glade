@@ -950,6 +950,7 @@
                       <object class="GtkAlignment" id="alignment7">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="top_padding">6</property>
                         <property name="bottom_padding">6</property>
                         <property name="left_padding">12</property>
                         <property name="right_padding">6</property>
@@ -962,7 +963,9 @@
                               <object class="GtkLabel" id="xLab">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Moment</property>
+                                <property name="label" translatable="yes">Bras de levier
+(m)</property>
+                                <property name="justify">center</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -975,7 +978,9 @@
                               <object class="GtkLabel" id="yLab">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Masse</property>
+                                <property name="label" translatable="yes">Masse
+(kg)</property>
+                                <property name="justify">center</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -1250,6 +1255,7 @@
                       <object class="GtkAlignment" id="alignment8">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="top_padding">6</property>
                         <property name="bottom_padding">6</property>
                         <property name="left_padding">12</property>
                         <property name="right_padding">6</property>
@@ -1262,7 +1268,9 @@
                               <object class="GtkLabel" id="xLab1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Moment</property>
+                                <property name="label" translatable="yes">Bras de levier
+(m)</property>
+                                <property name="justify">center</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1275,7 +1283,9 @@
                               <object class="GtkLabel" id="yLab1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Masse</property>
+                                <property name="label" translatable="yes">Masse
+(kg)</property>
+                                <property name="justify">center</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -1288,6 +1298,7 @@
                               <object class="GtkEntry" id="up1x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1303,6 +1314,7 @@
                               <object class="GtkEntry" id="up1y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1346,6 +1358,7 @@
                               <object class="GtkEntry" id="up2x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1361,6 +1374,7 @@
                               <object class="GtkEntry" id="up2y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1391,6 +1405,7 @@
                               <object class="GtkEntry" id="up3x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1406,6 +1421,7 @@
                               <object class="GtkEntry" id="up3y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1435,6 +1451,7 @@
                               <object class="GtkEntry" id="up4x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1450,6 +1467,7 @@
                               <object class="GtkEntry" id="up4y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">5</property>
                                 <property name="width_chars">6</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1479,6 +1497,7 @@
                               <object class="GtkEntry" id="up5x">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">7</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1494,6 +1513,7 @@
                               <object class="GtkEntry" id="up5y">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
+                                <property name="editable">False</property>
                                 <property name="max_length">6</property>
                                 <property name="width_chars">8</property>
                                 <property name="text" translatable="yes">0</property>
@@ -1513,10 +1533,14 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="utilLab">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                      <object class="GtkCheckButton" id="showUtil">
                         <property name="label" translatable="yes">Catégorie Utilitaire</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_showUtil_toggled" swapped="no"/>
                       </object>
                     </child>
                   </object>

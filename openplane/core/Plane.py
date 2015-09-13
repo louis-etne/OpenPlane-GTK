@@ -9,7 +9,7 @@ import json
 class Plane:
 
     def __init__(self, values=None):
-        if values is not None and len(values) == 64:
+        if values is not None and len(values) == 65:
             self.create_plane(values)
 
     def create_plane(self, values):
@@ -88,6 +88,8 @@ class Plane:
         self.up4y = values[61]
         self.up5x = values[62]
         self.up5y = values[63]
+
+        self.utilitaire = values[64]
 
     def save_plane(self):
         filename = 'openplane/planes/{}.json'.format(self.immatriculation)
@@ -168,7 +170,8 @@ class Plane:
                     'P4x': self.up4x,
                     'P4y': self.up4y,
                     'P5x': self.up5x,
-                    'P5y': self.up5y
+                    'P5y': self.up5y,
+                    'Montrer': self.utilitaire
                  }
              }}
 
@@ -253,5 +256,7 @@ class Plane:
             values.append(datas['Centrage']['Utilitaire']['P4y'])
             values.append(datas['Centrage']['Utilitaire']['P5x'])
             values.append(datas['Centrage']['Utilitaire']['P5y'])
+
+            values.append(datas['Centrage']['Utilitaire']['Montrer'])
 
         self.create_plane(values)

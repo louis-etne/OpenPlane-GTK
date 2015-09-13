@@ -18,6 +18,7 @@ class PlanesManagerWindow:
         handlers = {
             "on_mainWindow_destroy": self.app_quit,
             "on_carbuUnits_changed": self.on_carbuUnits_changed,
+            "on_showUtil_toggled": self.on_showUtil_toggled,
             "on_help_clicked": self.on_help_pressed,
             "on_save_clicked": self.on_save_pressed,
             "on_close_clicked": self.app_quit
@@ -108,6 +109,8 @@ class PlanesManagerWindow:
         self.up5x = builder.get_object('up5x')
         self.up5y = builder.get_object('up5y')
 
+        self.show_utilitaire = builder.get_object('showUtil')
+
         # Création de la fenêtre principale
         self.window = builder.get_object('mainWindow')
 
@@ -121,6 +124,30 @@ class PlanesManagerWindow:
         help_window = HelpWindow()
         help_window.connect('delete-event', help_window.app_quit)
         help_window.show_all()
+
+    def on_showUtil_toggled(self, box):
+        if box.get_active():
+            self.up1x.set_editable(True)
+            self.up1y.set_editable(True)
+            self.up2x.set_editable(True)
+            self.up2y.set_editable(True)
+            self.up3x.set_editable(True)
+            self.up3y.set_editable(True)
+            self.up4x.set_editable(True)
+            self.up4y.set_editable(True)
+            self.up5x.set_editable(True)
+            self.up5y.set_editable(True)
+        else:
+            self.up1x.set_editable(False)
+            self.up1y.set_editable(False)
+            self.up2x.set_editable(False)
+            self.up2y.set_editable(False)
+            self.up3x.set_editable(False)
+            self.up3y.set_editable(False)
+            self.up4x.set_editable(False)
+            self.up4y.set_editable(False)
+            self.up5x.set_editable(False)
+            self.up5y.set_editable(False)
 
     def on_carbuUnits_changed(self, *args):
         units = self.carbuUnits.get_active()
@@ -224,6 +251,8 @@ class PlanesManagerWindow:
         values.append(float(self.up5x.get_text()))
         values.append(float(self.up5y.get_text()))
 
+        values.append(self.show_utilitaire.get_active())
+
         plane = Plane()
         plane.create_plane(values)
         plane.save_plane()
@@ -306,6 +335,8 @@ class PlanesManagerWindow:
         self.up4y.set_text(str(plane.up4y))
         self.up5x.set_text(str(plane.up5x))
         self.up5y.set_text(str(plane.up5y))
+
+        self.show_utilitaire.set_active(plane.utilitaire)
 
         # Ajustements
         self.window.set_title('Modifier {}'.format(plane.immatriculation))
