@@ -14,16 +14,16 @@ class Plane:
 
     def create_plane(self, values):
         # ID section
-        self.immatriculation = values[0].upper()
+        self.matriculation = values[0].upper()
         self.plane_type = values[1].upper()
         self.oaci = values[2].upper()
         self.colors = values[3]
 
-        self.s_croisiere = values[4]
-        self.s_montee = values[5]
-        self.s_descente = values[6]
-        self.v_montee = values[7]
-        self.v_descente = values[8]
+        self.s_cruising = values[4]
+        self.s_up = values[5]
+        self.s_low = values[6]
+        self.v_up = values[7]
+        self.v_low = values[8]
 
         self.vso = values[9]
         self.vfe = values[10]
@@ -35,19 +35,19 @@ class Plane:
         self.carbu_capacity = values[15]
         self.carbu_unit = values[16]
         self.carbu_type = values[17]
-        self.carbu_inutilisable = values[18]
+        self.carbu_useless = values[18]
         self.carbu_consom = values[19]
 
-        self.piste_dure = values[20]
-        self.piste_herbe = values[21]
-        self.piste_unit = values[22]
+        self.runway_hard = values[20]
+        self.runway_grass = values[21]
+        self.runway_unit = values[22]
 
         self.rdba = values[23]
-        self.transpondeur = values[24]
-        self.turbulance = values[25]
+        self.transponder = values[24]
+        self.turbulence = values[25]
         self.certification = values[26]
 
-        self.equipements = {
+        self.equipments = {
             "C": values[27],
             "D": values[28],
             "F": values[29],
@@ -89,22 +89,22 @@ class Plane:
         self.up5x = values[62]
         self.up5y = values[63]
 
-        self.utilitaire = values[64]
+        self.utility = values[64]
 
     def save_plane(self):
-        filename = 'openplane/planes/{}.json'.format(self.immatriculation)
+        filename = 'openplane/planes/{}.json'.format(self.matriculation)
 
         plane_values = {
-             'Immatriculation': self.immatriculation,
+             'Immatriculation': self.matriculation,
              'Type': self.plane_type,
              'OACI': self.oaci,
              'Couleurs': self.colors,
              'Vitesse': {
-                 'Croisiere': self.s_croisiere,
-                 'Montee': self.s_montee,
-                 'VzMontee': self.v_montee,
-                 'Descente': self.s_descente,
-                 'VzDescente': self.v_descente,
+                 'Croisiere': self.s_cruising,
+                 'Montee': self.s_up,
+                 'VzMontee': self.v_up,
+                 'Descente': self.s_low,
+                 'VzDescente': self.v_low,
                  'VSO': self.vso,
                  'VFE': self.vfe,
                  'VNO': self.vno,
@@ -115,37 +115,37 @@ class Plane:
              'Carburant': {
                  'Type': self.carbu_type,
                  'Capacite': self.carbu_capacity,
-                 'Inutilisable': self.carbu_inutilisable,
+                 'Inutilisable': self.carbu_useless,
                  'Consomation': self.carbu_consom,
                  'Unite': self.carbu_unit
              },
              'Piste': {
-                 'Dure': self.piste_dure,
-                 'Herbe': self.piste_herbe,
-                 'Unite': self.piste_unit
+                 'Dure': self.runway_hard,
+                 'Herbe': self.runway_grass,
+                 'Unite': self.runway_unit
              },
              'RDBA': self.rdba,
-             'Transpondeur': self.transpondeur,
-             'Turbulance': self.turbulance,
+             'Transpondeur': self.transponder,
+             'Turbulence': self.turbulence,
              'Certification': self.certification,
              'Equipement': {
-                 'C': self.equipements['C'],
-                 'D': self.equipements['D'],
-                 'F': self.equipements['F'],
-                 'G': self.equipements['G'],
-                 'H': self.equipements['H'],
-                 'I': self.equipements['I'],
-                 'J': self.equipements['J'],
-                 'K': self.equipements['K'],
-                 'L': self.equipements['L'],
-                 'O': self.equipements['O'],
-                 'R': self.equipements['R'],
-                 'T': self.equipements['T'],
-                 'U': self.equipements['U'],
-                 'V': self.equipements['V'],
-                 'W': self.equipements['W'],
-                 'X': self.equipements['X'],
-                 'Y': self.equipements['Y']
+                 'C': self.equipments['C'],
+                 'D': self.equipments['D'],
+                 'F': self.equipments['F'],
+                 'G': self.equipments['G'],
+                 'H': self.equipments['H'],
+                 'I': self.equipments['I'],
+                 'J': self.equipments['J'],
+                 'K': self.equipments['K'],
+                 'L': self.equipments['L'],
+                 'O': self.equipments['O'],
+                 'R': self.equipments['R'],
+                 'T': self.equipments['T'],
+                 'U': self.equipments['U'],
+                 'V': self.equipments['V'],
+                 'W': self.equipments['W'],
+                 'X': self.equipments['X'],
+                 'Y': self.equipments['Y']
              },
              'Centrage': {
                  'Normale': {
@@ -171,7 +171,7 @@ class Plane:
                     'P4y': self.up4y,
                     'P5x': self.up5x,
                     'P5y': self.up5y,
-                    'Montrer': self.utilitaire
+                    'Montrer': self.utility
                  }
              }}
 
@@ -214,7 +214,7 @@ class Plane:
 
             values.append(datas['RDBA'])
             values.append(datas['Transpondeur'])
-            values.append(datas['Turbulance'])
+            values.append(datas['Turbulence'])
             values.append(datas['Certification'])
 
             values.append(datas['Equipement']['C'])

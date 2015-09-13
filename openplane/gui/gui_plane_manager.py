@@ -32,20 +32,20 @@ class PlanesManagerWindow:
         self.uselessCarbuUnits = builder.get_object('uselessCarbuUnits')
         self.consomUnits = builder.get_object('consomUnitsLab')
 
-        preview_centrage = builder.get_object('previewCentrage')
-        preview_centrage.set_from_file('openplane/images/preview_centrage.png')
+        preview_centering = builder.get_object('previewCentrage')
+        preview_centering.set_from_file('openplane/images/preview_centrage.png')
 
         # On récupère tous les objets (au nombre de 44)
-        self.immatriculation = builder.get_object('immEntry')
+        self.matriculation = builder.get_object('immEntry')
         self.plane_type = builder.get_object('typeEntry')
         self.oaci = builder.get_object('oaciEntry')
         self.colors = builder.get_object('colorEntry')
 
-        self.s_croisiere = builder.get_object('sCroisiere')
-        self.s_montee = builder.get_object('sMontee')
-        self.s_descente = builder.get_object('sDescente')
-        self.v_montee = builder.get_object('vMontee')
-        self.v_descente = builder.get_object('vDescente')
+        self.s_cruising = builder.get_object('sCroisiere')
+        self.s_up = builder.get_object('sMontee')
+        self.s_low = builder.get_object('sDescente')
+        self.v_up = builder.get_object('vMontee')
+        self.v_low = builder.get_object('vDescente')
 
         self.vso = builder.get_object('vso')
         self.vfe = builder.get_object('vfe')
@@ -57,16 +57,16 @@ class PlanesManagerWindow:
         self.carbu_capacity = builder.get_object('capacity')
         self.carbu_unit = builder.get_object('carbuUnits')
         self.carbu_type = builder.get_object('carbuTypes')
-        self.carbu_inutilisable = builder.get_object('inutilisable')
+        self.carbu_useless = builder.get_object('inutilisable')
         self.carbu_consom = builder.get_object('consom')
 
-        self.piste_dure = builder.get_object('dureEntry')
-        self.piste_herbe = builder.get_object('herbeEntry')
-        self.piste_unit = builder.get_object('unitsPiste')
+        self.runway_hard = builder.get_object('dureEntry')
+        self.runway_grass = builder.get_object('herbeEntry')
+        self.runway_unit = builder.get_object('unitsPiste')
 
         self.rdba = builder.get_object('rdba')
         self.transpo = builder.get_object('transpondeur')
-        self.turbulance = builder.get_object('turbulance')
+        self.turbulence = builder.get_object('turbulence')
         self.certi = builder.get_object('certification')
 
         self.c = builder.get_object('c')
@@ -109,7 +109,7 @@ class PlanesManagerWindow:
         self.up5x = builder.get_object('up5x')
         self.up5y = builder.get_object('up5y')
 
-        self.show_utilitaire = builder.get_object('showUtil')
+        self.show_utility = builder.get_object('showUtil')
 
         # Création de la fenêtre principale
         self.window = builder.get_object('mainWindow')
@@ -172,17 +172,17 @@ class PlanesManagerWindow:
 
         # tous les widgets contenant des valeurs à enregistrer
         # Section id
-        values.append(self.immatriculation.get_text())
+        values.append(self.matriculation.get_text())
         values.append(self.plane_type.get_text())
         values.append(self.oaci.get_text())
         values.append(self.colors.get_text())
 
         # Section Vitesses
-        values.append(int(self.s_montee.get_text()))
-        values.append(int(self.s_montee.get_text()))
-        values.append(int(self.s_descente.get_text()))
-        values.append(int(self.v_montee.get_text()))
-        values.append(int(self.v_descente.get_text()))
+        values.append(int(self.s_up.get_text()))
+        values.append(int(self.s_up.get_text()))
+        values.append(int(self.s_low.get_text()))
+        values.append(int(self.v_up.get_text()))
+        values.append(int(self.v_low.get_text()))
 
         values.append(int(self.vso.get_text()))
         values.append(int(self.vfe.get_text()))
@@ -195,18 +195,18 @@ class PlanesManagerWindow:
         values.append(int(self.carbu_capacity.get_text()))
         values.append(self.carbu_unit.get_active_id())
         values.append(self.carbu_type.get_active_id())
-        values.append(int(self.carbu_inutilisable.get_text()))
+        values.append(int(self.carbu_useless.get_text()))
         values.append(int(self.carbu_consom.get_text()))
 
         # Section piste
-        values.append(int(self.piste_dure.get_text()))
-        values.append(int(self.piste_herbe.get_text()))
-        values.append(self.piste_unit.get_active_id())
+        values.append(int(self.runway_hard.get_text()))
+        values.append(int(self.runway_grass.get_text()))
+        values.append(self.runway_unit.get_active_id())
 
         # Section Caractéristiques
         values.append(self.rdba.get_active_id())
         values.append(self.transpo.get_active_id())
-        values.append(self.turbulance.get_active_id())
+        values.append(self.turbulence.get_active_id())
         values.append(self.certi.get_active_id())
 
         # Section Équipements
@@ -228,7 +228,7 @@ class PlanesManagerWindow:
         values.append(self.x.get_active())
         values.append(self.y.get_active())
 
-        # Section centrage
+        # Section centering
         values.append(float(self.p1x.get_text()))
         values.append(float(self.p1y.get_text()))
         values.append(float(self.p2x.get_text()))
@@ -251,7 +251,7 @@ class PlanesManagerWindow:
         values.append(float(self.up5x.get_text()))
         values.append(float(self.up5y.get_text()))
 
-        values.append(self.show_utilitaire.get_active())
+        values.append(self.show_utility.get_active())
 
         plane = Plane()
         plane.create_plane(values)
@@ -263,16 +263,16 @@ class PlanesManagerWindow:
         plane = Plane()
         plane.import_plane(filepath)
 
-        self.immatriculation.set_text(plane.immatriculation)
+        self.matriculation.set_text(plane.matriculation)
         self.plane_type.set_text(plane.plane_type)
         self.oaci.set_text(plane.oaci)
         self.colors.set_text(plane.colors)
 
-        self.s_croisiere.set_text(str(plane.s_croisiere))
-        self.s_montee.set_text(str(plane.s_montee))
-        self.s_descente.set_text(str(plane.s_descente))
-        self.v_montee.set_text(str(plane.v_montee))
-        self.v_descente.set_text(str(plane.v_descente))
+        self.s_cruising.set_text(str(plane.s_cruising))
+        self.s_up.set_text(str(plane.s_up))
+        self.s_low.set_text(str(plane.s_low))
+        self.v_up.set_text(str(plane.v_up))
+        self.v_low.set_text(str(plane.v_low))
 
         self.vso.set_text(str(plane.vso))
         self.vfe.set_text(str(plane.vfe))
@@ -284,35 +284,35 @@ class PlanesManagerWindow:
         self.carbu_capacity.set_text(str(plane.carbu_capacity))
         self.carbu_unit.set_active_id(plane.carbu_unit)
         self.carbu_type.set_active_id(plane.carbu_type)
-        self.carbu_inutilisable.set_text(str(plane.carbu_inutilisable))
+        self.carbu_useless.set_text(str(plane.carbu_useless))
         self.carbu_consom.set_text(str(plane.carbu_consom))
 
-        self.piste_dure.set_text(str(plane.piste_dure))
-        self.piste_herbe.set_text(str(plane.piste_herbe))
-        self.piste_unit.set_active_id(plane.piste_unit)
+        self.runway_hard.set_text(str(plane.runway_hard))
+        self.runway_grass.set_text(str(plane.runway_grass))
+        self.runway_unit.set_active_id(plane.runway_unit)
 
         self.rdba.set_active_id(plane.rdba)
-        self.transpo.set_active_id(plane.transpondeur)
-        self.turbulance.set_active_id(plane.turbulance)
+        self.transpo.set_active_id(plane.transponder)
+        self.turbulence.set_active_id(plane.turbulence)
         self.certi.set_active_id(plane.certification)
 
-        self.c.set_active(plane.equipements["C"])
-        self.d.set_active(plane.equipements["D"])
-        self.f.set_active(plane.equipements["F"])
-        self.g.set_active(plane.equipements["G"])
-        self.h.set_active(plane.equipements["H"])
-        self.i.set_active(plane.equipements["I"])
-        self.j.set_active(plane.equipements["J"])
-        self.k.set_active(plane.equipements["K"])
-        self.l.set_active(plane.equipements["L"])
-        self.o.set_active(plane.equipements["O"])
-        self.r.set_active(plane.equipements["R"])
-        self.t.set_active(plane.equipements["T"])
-        self.u.set_active(plane.equipements["U"])
-        self.v.set_active(plane.equipements["V"])
-        self.w.set_active(plane.equipements["W"])
-        self.x.set_active(plane.equipements["X"])
-        self.y.set_active(plane.equipements["Y"])
+        self.c.set_active(plane.equipments["C"])
+        self.d.set_active(plane.equipments["D"])
+        self.f.set_active(plane.equipments["F"])
+        self.g.set_active(plane.equipments["G"])
+        self.h.set_active(plane.equipments["H"])
+        self.i.set_active(plane.equipments["I"])
+        self.j.set_active(plane.equipments["J"])
+        self.k.set_active(plane.equipments["K"])
+        self.l.set_active(plane.equipments["L"])
+        self.o.set_active(plane.equipments["O"])
+        self.r.set_active(plane.equipments["R"])
+        self.t.set_active(plane.equipments["T"])
+        self.u.set_active(plane.equipments["U"])
+        self.v.set_active(plane.equipments["V"])
+        self.w.set_active(plane.equipments["W"])
+        self.x.set_active(plane.equipments["X"])
+        self.y.set_active(plane.equipments["Y"])
 
         self.p1x.set_text(str(plane.p1x))
         self.p1y.set_text(str(plane.p1y))
@@ -336,10 +336,10 @@ class PlanesManagerWindow:
         self.up5x.set_text(str(plane.up5x))
         self.up5y.set_text(str(plane.up5y))
 
-        self.show_utilitaire.set_active(plane.utilitaire)
+        self.show_utility.set_active(plane.utility)
 
         # Ajustements
-        self.window.set_title('Modifier {}'.format(plane.immatriculation))
+        self.window.set_title('Modifier {}'.format(plane.matriculation))
         self.btn_close.set_label('Annuler')
         self.on_carbuUnits_changed()
 

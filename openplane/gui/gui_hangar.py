@@ -30,9 +30,9 @@ class HangarWindow(Gtk.Window):
         tree = Gtk.TreeView(self.store)
 
         column_name = Gtk.TreeViewColumn('Immatriculation')
-        immatriculation = Gtk.CellRendererText()
-        column_name.pack_start(immatriculation, True)
-        column_name.add_attribute(immatriculation, 'text', 0)
+        matriculation = Gtk.CellRendererText()
+        column_name.pack_start(matriculation, True)
+        column_name.add_attribute(matriculation, 'text', 0)
 
         column_path = Gtk.TreeViewColumn('Chemin du fichier')
         file_path = Gtk.CellRendererText()

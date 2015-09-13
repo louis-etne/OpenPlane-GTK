@@ -204,7 +204,7 @@ class WeightWindow:
         plt.ylim((plane.p1y, plane.p3y + 50))  # Limites en y
 
         # Catégorie utilitaire
-        if plane.utilitaire:
+        if plane.utility:
             dom_u_x = np.array([plane.up1x, plane.up2x, plane.up3x,
                           plane.up4x, plane.up5x])
             dom_u_y = np.array([plane.up1y, plane.up2y, plane.up3y,
@@ -228,7 +228,7 @@ class WeightWindow:
         else:
             plt.savefig(figure_path, dpi=75)
 
-        plt.clf()
+        plt.clf()  # On ferme la figure actuelle
 
 if __name__ == '__main__':
     win = WeightWindow()

@@ -1918,7 +1918,7 @@
                               <object class="GtkLabel" id="turbu">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Turbulance :</property>
+                                <property name="label" translatable="yes">Turbulence :</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -1983,7 +1983,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBoxText" id="turbulance">
+                              <object class="GtkComboBoxText" id="turbulence">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="active">0</property>

@@ -59,7 +59,6 @@ class ConvertWindow(Gtk.Window):
         self.convert_label.set_selectable(True)
         main_layout.attach(self.convert_label, 0, 1, 2, 1)
 
-
         btn_layout = Gtk.Box(spacing=6)
 
         btn_help = Gtk.Button(label='Aide')
