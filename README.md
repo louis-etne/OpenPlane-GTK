@@ -9,7 +9,7 @@
 On commence par installer les dépendances :  
 ```sudo apt-get install python3-gi python3-matplotlib```  
 
-Puis, on clone ensuite OpenPlane :  
+Puis, on clone OpenPlane :  
 ```git clone https://github.com/boopr/OpenPlane.git```  
 
 Enfin, on lance OpenPlane :  
