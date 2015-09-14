@@ -4,7 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk
-from openplane.gui.gui_help import *
+from openplane.gui.gui_about import *
 from openplane.core.convert import *
 
 

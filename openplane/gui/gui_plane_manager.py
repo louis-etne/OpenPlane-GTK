@@ -4,9 +4,9 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk
-from openplane.gui.gui_help import *
 from openplane.core.Plane import *
 from openplane import config
+from openplane import text
 
 
 class PlanesManagerDialog:
@@ -334,5 +334,5 @@ class PlanesManagerDialog:
         self.show_utility.set_active(plane.utility)
 
         # Ajustements
-        self.dialog.set_title('Modifier {}'.format(plane.matriculation))
+        self.dialog.set_title(text.edit_plane.format(plane.matriculation))
         self.on_carbuUnits_changed()

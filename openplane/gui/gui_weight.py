@@ -5,8 +5,10 @@
 
 from gi.repository import Gtk
 from openplane.core.Plane import *
+from openplane.gui.gui_hangar import *
 import matplotlib.pyplot as plt
 from openplane import config
+from openplane import text
 import numpy as np
 import glob
 import os
@@ -21,19 +23,18 @@ class WeightWindow:
         handlers = {
             'on_spinButton_changed': self.on_spin_changed,
             'on_save_clicked': self.on_save_clicked,
+            'on_addPlane_clicked': self.on_addPlane_clicked,
             'on_quit_clicked': self.app_quit
         }
 
         builder.connect_signals(handlers)
 
         main_layout = builder.get_object('mainLayout')
-        planes_list = Gtk.ListStore(str, str)
+        self.planes_list = Gtk.ListStore(str, str)
 
-        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
-            plane = os.path.basename(plane_file)
-            planes_list.append([os.path.splitext(plane)[0], plane_file])
+        self.update_plane_list()
 
-        plane_chooser = Gtk.ComboBox.new_with_model(planes_list)
+        plane_chooser = Gtk.ComboBox.new_with_model(self.planes_list)
         plane_chooser.connect('changed', self.on_plane_chooser_changed)
         renderer_text = Gtk.CellRendererText()
         plane_chooser.pack_start(renderer_text, True)
@@ -79,6 +80,17 @@ class WeightWindow:
 
         self.calc_label()
 
+    def update_plane_list(self):
+        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
+                plane = os.path.basename(plane_file)
+                self.planes_list.append([os.path.splitext(plane)[0],
+                                         plane_file])
+
+    def on_addPlane_clicked(self, btn):
+        hangar = HangarDialog()
+        hangar.dialog.run()
+        self.update_plane_list()
+
     def on_plane_chooser_changed(self, combo):
         tree_iter = combo.get_active_iter()
         if tree_iter is not None:
@@ -87,7 +99,7 @@ class WeightWindow:
 
             self.plane = Plane()
             self.plane.import_plane(path)
-            self.window.set_title('Masse et centrage du {}'.format(name))
+            self.window.set_title(text.weight_title.format(name))
             self.btn_save.set_sensitive(True)
             self.masse_std1.set_editable(True)
             self.masse_std2.set_editable(True)
@@ -104,7 +116,7 @@ class WeightWindow:
 
     def on_save_clicked(self, button):
 
-        dialog = Gtk.FileChooserDialog('Enregistrer le bilan', self.window,
+        dialog = Gtk.FileChooserDialog(text.save_weight, self.window,
                                        Gtk.FileChooserAction.SAVE,
                                        (Gtk.STOCK_SAVE,
                                         Gtk.ResponseType.OK,
@@ -132,12 +144,12 @@ class WeightWindow:
 
     def add_filters(self, dialog):
         filter_png = Gtk.FileFilter()
-        filter_png.set_name("Images PNG")
+        filter_png.set_name(text.png_files)
         filter_png.add_mime_type("image/png")
         dialog.add_filter(filter_png)
 
         filter_any = Gtk.FileFilter()
-        filter_any.set_name("Tous les fichiers")
+        filter_any.set_name(text.all_files)
         filter_any.add_pattern("*")
         dialog.add_filter(filter_any)
 
@@ -222,8 +234,8 @@ class WeightWindow:
         plt.plot(total_x, total_y, color='r', marker='.', markersize=12)
 
         # Un peu de déco
-        plt.xlabel('Bras de levier (m)')
-        plt.ylabel('Masse (kg)')
+        plt.xlabel(text.lever_arm)
+        plt.ylabel(text.mass)
         plt.grid(True)
 
         if full:
