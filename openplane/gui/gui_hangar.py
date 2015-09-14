@@ -6,6 +6,7 @@
 from gi.repository import Gtk
 from openplane.gui.gui_plane_manager import *
 from openplane import config
+from openplane import text
 import shutil
 import json
 import glob
@@ -13,6 +14,7 @@ import os
 
 
 class HangarDialog():
+
     def __init__(self):
         builder = Gtk.Builder()
         builder.add_from_file(config.hangar)
@@ -40,12 +42,12 @@ class HangarDialog():
         tree = builder.get_object('planesView')
         tree.set_model(self.planes_list)
 
-        column_name = Gtk.TreeViewColumn('Immatriculation')
+        column_name = Gtk.TreeViewColumn(text.matriculation)
         matriculation = Gtk.CellRendererText()
         column_name.pack_start(matriculation, True)
         column_name.add_attribute(matriculation, 'text', 0)
 
-        column_path = Gtk.TreeViewColumn('Chemin du fichier')
+        column_path = Gtk.TreeViewColumn(text.file_path)
         file_path = Gtk.CellRendererText()
         file_path.props.style = 2
         column_path.pack_start(file_path, True)
@@ -95,7 +97,7 @@ class HangarDialog():
             self.update_file_list()
 
     def on_import_clicked(self, button):
-        dialog = Gtk.FileChooserDialog('Sélectionnez le fichier', self.dialog,
+        dialog = Gtk.FileChooserDialog(text.select_file, self.dialog,
                                        Gtk.FileChooserAction.OPEN,
                                        (Gtk.STOCK_CANCEL,
                                         Gtk.ResponseType.CANCEL,
@@ -126,12 +128,12 @@ class HangarDialog():
 
     def add_filters(self, dialog):
         filter_json = Gtk.FileFilter()
-        filter_json.set_name("Fichiers JSON")
+        filter_json.set_name(text.json_file)
         filter_json.add_pattern("*.json")
         dialog.add_filter(filter_json)
 
         filter_any = Gtk.FileFilter()
-        filter_any.set_name("Tous les fichiers")
+        filter_any.set_name(text.all_files)
         filter_any.add_pattern("*")
         dialog.add_filter(filter_any)
 
