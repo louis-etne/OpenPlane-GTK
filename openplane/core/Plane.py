@@ -3,6 +3,7 @@
 
 # Made by Louis Etienne
 
+from openplane import config
 import json
 
 
@@ -92,7 +93,7 @@ class Plane:
         self.utility = values[64]
 
     def save_plane(self):
-        filename = 'openplane/planes/{}.json'.format(self.matriculation)
+        filename = '{}{}.json'.format(config.planes_folder, self.matriculation)
 
         plane_values = {
              'Immatriculation': self.matriculation,

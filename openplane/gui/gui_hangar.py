@@ -5,6 +5,7 @@
 
 from gi.repository import Gtk
 from openplane.gui.gui_plane_manager import *
+from openplane import config
 import shutil
 import json
 import glob
@@ -14,7 +15,7 @@ import os
 class HangarDialog():
     def __init__(self):
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/gui_hangar.glade')
+        builder.add_from_file(config.hangar)
 
         handlers = {
             'on_close_clicked': self.app_quit,
@@ -55,12 +56,13 @@ class HangarDialog():
 
         self.dialog = builder.get_object('dialog')
         self.dialog.set_modal(True)
+        self.dialog.set_icon_from_file(config.logo_path)
 
     def update_file_list(self, btn=None):
         self.planes_list.clear()
         planes_path = []
 
-        for plane_file in glob.glob(r'openplane/planes/*.json'):
+        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
             planes_path.append(plane_file)
 
         for plane in planes_path:
@@ -106,7 +108,7 @@ class HangarDialog():
             file_path = dialog.get_filename()
             plane_name = self.get_plane_name(file_path)
 
-            new_path = 'openplane/planes/{}.json'.format(plane_name)
+            new_path = '{}{}.json'.format(config.planes_folder, plane_name)
 
             shutil.copy(file_path, new_path)
 

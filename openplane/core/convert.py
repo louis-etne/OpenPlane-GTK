@@ -4,11 +4,6 @@
 # Made by Louis Etienne
 
 
-##
-# Unitées supportées : m, km, ft, mn, F°, C°, K°
-##
-
-
 #########
 # GÉNÉRAL
 ##

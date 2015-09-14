@@ -6,6 +6,7 @@
 from gi.repository import Gtk
 from openplane.gui.gui_help import *
 from openplane.core.Plane import *
+from openplane import config
 
 
 class PlanesManagerDialog:
@@ -13,7 +14,7 @@ class PlanesManagerDialog:
     def __init__(self, filepath=None):
 
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/gui_plane_manager.glade')
+        builder.add_from_file(config.plane_manager)
 
         handlers = {
             "on_mainWindow_destroy": self.app_quit,
@@ -31,8 +32,8 @@ class PlanesManagerDialog:
         self.uselessCarbuUnits = builder.get_object('uselessCarbuUnits')
         self.consomUnits = builder.get_object('consomUnitsLab')
 
-        preview_centering = builder.get_object('previewCentrage')
-        preview_centering.set_from_file('openplane/images/preview_centrage.png')
+        preview_balance = builder.get_object('previewCentrage')
+        preview_balance.set_from_file(config.preview_balance)
 
         # On récupère tous les objets (au nombre de 44)
         self.matriculation = builder.get_object('immEntry')
@@ -334,10 +335,4 @@ class PlanesManagerDialog:
 
         # Ajustements
         self.dialog.set_title('Modifier {}'.format(plane.matriculation))
-        self.btn_close.set_label('Annuler')
         self.on_carbuUnits_changed()
-
-if __name__ == '__main__':
-    win = PlanesManagerWindow('openplane/planes/F-BTBB.json')
-    win.dialog.run()
-    Gtk.main()

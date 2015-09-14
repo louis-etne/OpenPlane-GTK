@@ -4,6 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk
+from openplane import config
 
 
 class HelpWindow(Gtk.Window):
@@ -21,15 +22,15 @@ class HelpWindow(Gtk.Window):
         main_layout.set_column_homogeneous(True)
         self.add(main_layout)
 
-        logo = Gtk.Image.new_from_file('logo.png')
+        logo = Gtk.Image.new_from_file(config.logo_path)
         main_layout.attach(logo, 0, 0, 2, 1)
 
         app_label = Gtk.Label()
-        app_label.set_markup('<b>OpenPlane</b>')
+        app_label.set_markup('<b>{}</b>'.format(config.name))
         main_layout.attach(app_label, 0, 1, 2, 1)
 
         version_label = Gtk.Label()
-        version_label.set_markup('0.6')
+        version_label.set_markup(config.version)
         main_layout.attach(version_label, 0, 2, 2, 1)
 
         description_label = Gtk.Label()

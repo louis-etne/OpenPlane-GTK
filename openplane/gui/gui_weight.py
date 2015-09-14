@@ -6,6 +6,7 @@
 from gi.repository import Gtk
 from openplane.core.Plane import *
 import matplotlib.pyplot as plt
+from openplane import config
 import numpy as np
 import glob
 import os
@@ -15,7 +16,7 @@ class WeightWindow:
 
     def __init__(self):
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/gui_weight.glade')
+        builder.add_from_file(config.weight)
 
         handlers = {
             'on_spinButton_changed': self.on_spin_changed,
@@ -28,7 +29,7 @@ class WeightWindow:
         main_layout = builder.get_object('mainLayout')
         planes_list = Gtk.ListStore(str, str)
 
-        for plane_file in glob.glob(r'openplane/planes/*.json'):
+        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
             plane = os.path.basename(plane_file)
             planes_list.append([os.path.splitext(plane)[0], plane_file])
 
@@ -181,8 +182,10 @@ class WeightWindow:
             self.bdl_sns_carbu_lab.set_text(str(0.00))
 
     def on_spin_changed(self, spin):
-        figure_path = 'openplane/images/preview.png'
+        figure_path = config.preview
+
         self.calc_label()
+
         if self.masse_avec_carbu > 0 or self.masse_sans_carbu > 0:
             self.create_graph(figure_path, self.plane, self.masse_avec_carbu,
                                self.bdl_avec_carbu, self.masse_vide,
@@ -229,9 +232,3 @@ class WeightWindow:
             plt.savefig(figure_path, dpi=75)
 
         plt.clf()  # On ferme la figure actuelle
-
-if __name__ == '__main__':
-    win = WeightWindow()
-    win.window.connect('delete-event', Gtk.main_quit)
-    win.window.show_all()
-    Gtk.main()

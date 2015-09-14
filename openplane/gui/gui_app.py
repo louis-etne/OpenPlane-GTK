@@ -8,14 +8,16 @@ from openplane.gui.gui_convert import *
 from openplane.gui.gui_hangar import *
 from openplane.gui.gui_weight import *
 from openplane.gui.gui_help import *
+from openplane import config
 
 
 class App(Gtk.Window):
 
     def __init__(self):
-        Gtk.Window.__init__(self, title='OpenPlane')
+        Gtk.Window.__init__(self, title=config.name)
 
         self.set_border_width(10)
+        self.set_icon_from_file(config.logo_path)
 
         main_layout = Gtk.Grid()
         main_layout.set_row_spacing(6)
@@ -69,9 +71,3 @@ class App(Gtk.Window):
 
     def app_quit(self, *args):
         Gtk.main_quit()
-
-if __name__ == '__main__':
-    win = App()
-    win.connect('delete-event', win.app_quit)
-    win.show_all()
-    Gtk.main()
