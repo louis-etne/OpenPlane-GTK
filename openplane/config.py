@@ -16,7 +16,7 @@ glade_folder = 'openplane{0}gui{0}glade{0}'.format(os.sep)
 images_folder = 'openplane{0}images{0}'.format(os.sep)
 planes_folder = 'openplane{0}planes{0}'.format(os.sep)
 
-# Logo
+# Logo (Thanks to Blackline)
 logo_file_name = 'logo.png'
 logo_path = '{}{}'.format(images_folder, logo_file_name)
 
