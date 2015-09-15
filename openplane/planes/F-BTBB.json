@@ -76,6 +76,26 @@
             "P2y": 0.0,
             "P5y": 0.0,
             "P3x": 0.0
+        },
+        "Masse_vide": {
+            "Masse": 722.0,
+            "Bras_levier": 2.181
+        },
+        "Options": {
+            "Masse": 0,
+            "Bras_levier": 0
+        },
+        "Passager_AV": {
+            "Bras_levier": 2.045
+        },
+        "Passager_AR": {
+            "Bras_levier": 3.000
+        },
+        "Carburant": {
+            "Bras_levier": 2.431
+        },
+        "Bagages": {
+            "Bras_levier": 3.627
         }
     }
 }

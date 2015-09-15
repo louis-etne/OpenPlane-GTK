@@ -50,6 +50,26 @@
             "Montrer": true,
             "P3x": 0.947,
             "P1x": 0.889
+        },
+        "Masse_vide": {
+            "Masse": 0,
+            "Bras_levier": 0
+        },
+        "Options": {
+            "Masse": 0,
+            "Bras_levier": 0
+        },
+        "Passager_AV": {
+            "Bras_levier": 0
+        },
+        "Passager_AR": {
+            "Bras_levier": 0
+        },
+        "Carburant": {
+            "Bras_levier": 0
+        },
+        "Bagages": {
+            "Bras_levier": 0
         }
     },
     "Piste": {

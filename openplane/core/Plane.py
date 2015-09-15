@@ -10,7 +10,7 @@ import json
 class Plane:
 
     def __init__(self, values=None):
-        if values is not None and len(values) == 65:
+        if values is not None and len(values) == 73:
             self.create_plane(values)
 
     def create_plane(self, values):
@@ -91,6 +91,15 @@ class Plane:
         self.up5y = values[63]
 
         self.utility = values[64]
+
+        self.empty_mass = values[65]
+        self.empty_bdl = values[66]
+        self.options_mass = values[67]
+        self.options_bdl = values[68]
+        self.pass_av = values[69]
+        self.pass_ar = values[70]
+        self.fuel = values[71]
+        self.baggage = values[72]
 
     def save_plane(self):
         filename = '{}{}.json'.format(config.planes_folder, self.matriculation)
@@ -173,6 +182,26 @@ class Plane:
                     'P5x': self.up5x,
                     'P5y': self.up5y,
                     'Montrer': self.utility
+                 },
+                 'Masse_vide': {
+                    'Masse': self.empty_mass,
+                    'Bras_levier': self.empty_bdl
+                 },
+                 'Options': {
+                    'Masse': self.option_mass,
+                    'Bras_levier': self.options_lab
+                 },
+                 'Passager_AV': {
+                    'Bras_levier': self.pass_av
+                 },
+                 'Passager_AR': {
+                    'Bras_levier': self.pass_ar
+                 },
+                 'Carburant': {
+                    'Bras_levier': self.fuel
+                 },
+                 'Bagages': {
+                    'Bras_levier': self.baggage
                  }
              }}
 
@@ -259,5 +288,14 @@ class Plane:
             values.append(datas['Centrage']['Utilitaire']['P5y'])
 
             values.append(datas['Centrage']['Utilitaire']['Montrer'])
+
+            values.append(datas['Centrage']['Masse_vide']['Masse'])
+            values.append(datas['Centrage']['Masse_vide']['Bras_levier'])
+            values.append(datas['Centrage']['Options']['Masse'])
+            values.append(datas['Centrage']['Options']['Bras_levier'])
+            values.append(datas['Centrage']['Passager_AV']['Bras_levier'])
+            values.append(datas['Centrage']['Passager_AR']['Bras_levier'])
+            values.append(datas['Centrage']['Carburant']['Bras_levier'])
+            values.append(datas['Centrage']['Bagages']['Bras_levier'])
 
         self.create_plane(values)

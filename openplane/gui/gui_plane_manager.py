@@ -17,10 +17,10 @@ class PlanesManagerDialog:
         builder.add_from_file(config.plane_manager)
 
         handlers = {
-            "on_mainWindow_destroy": self.app_quit,
             "on_carbuUnits_changed": self.on_carbuUnits_changed,
             "on_showUtil_toggled": self.on_showUtil_toggled,
             "on_save_clicked": self.on_save_pressed,
+            "on_spin_changed": self.on_spin_changed,
             "on_close_clicked": self.app_quit
         }
 
@@ -111,6 +111,21 @@ class PlanesManagerDialog:
 
         self.show_utility = builder.get_object('showUtil')
 
+        self.empty_mass = builder.get_object('masseVideStd1')
+        self.empty_bdl = builder.get_object('masseVideStd2')
+        self.options_mass = builder.get_object('options1')
+        self.options_bdl = builder.get_object('options2')
+        self.pass_av = builder.get_object('passagersAv2')
+        self.pass_ar = builder.get_object('passagersAr2')
+        self.carbu = builder.get_object('carbu2')
+        self.bagages = builder.get_object('bagages2')
+
+        self.total_empty = builder.get_object('masseVideStd')
+        self.total_options = builder.get_object('options')
+        self.total_mass = builder.get_object('masseVideBase1')
+        self.total_bdl = builder.get_object('bdlMasseVide')
+        self.total_total = builder.get_object('masseVideBase2')
+
         # Création de la fenêtre principale
         self.dialog = builder.get_object('dialog')
 
@@ -119,6 +134,22 @@ class PlanesManagerDialog:
 
     def app_quit(self, *args):
         self.dialog.destroy()
+
+    def on_spin_changed(self, spin):
+        self.calc_label()
+
+    def calc_label(self):
+        empty_moment = float(self.empty_mass.get_value()) * float(self.empty_bdl.get_value())
+        options_moment = float(self.options_mass.get_value()) * float(self.options_bdl.get_value())
+        total1 = float(self.empty_mass.get_value()) + float(self.options_mass.get_value())
+        total2 = float(self.empty_bdl.get_value()) + float(self.options_bdl.get_value())
+        total_moment = empty_moment + options_moment
+
+        self.total_empty.set_text(str(round(empty_moment)))
+        self.total_options.set_text(str(round(options_moment)))
+        self.total_mass.set_text(str(round(total1)))
+        self.total_bdl.set_text(str(round(total2)))
+        self.total_total.set_text(str(round(total_moment)))
 
     def on_showUtil_toggled(self, box):
         if box.get_active():
@@ -248,6 +279,15 @@ class PlanesManagerDialog:
 
         values.append(self.show_utility.get_active())
 
+        values.append(float(self.empty_mass.get_text()))
+        values.append(float(self.empty_bdl.get_text()))
+        values.append(float(self.otpions_mass.get_text()))
+        values.append(float(self.options_bdl.get_text()))
+        values.append(float(self.pass_av.get_text()))
+        values.append(float(self.pass_ar.get_text()))
+        values.append(float(self.carbu.get_text()))
+        values.append(float(self.bagages.get_text()))
+
         plane = Plane()
         plane.create_plane(values)
         plane.save_plane()
@@ -333,6 +373,16 @@ class PlanesManagerDialog:
 
         self.show_utility.set_active(plane.utility)
 
+        self.empty_mass.set_text(str(plane.empty_mass))
+        self.empty_bdl.set_text(str(plane.empty_bdl))
+        self.options_mass.set_text(str(plane.options_mass))
+        self.options_bdl.set_text(str(plane.options_bdl))
+        self.pass_av.set_text(str(plane.pass_av))
+        self.pass_ar.set_text(str(plane.pass_ar))
+        self.carbu.set_text(str(plane.fuel))
+        self.bagages.set_text(str(plane.baggage))
+
         # Ajustements
         self.dialog.set_title(text.edit_plane.format(plane.matriculation))
         self.on_carbuUnits_changed()
+        self.calc_label()
