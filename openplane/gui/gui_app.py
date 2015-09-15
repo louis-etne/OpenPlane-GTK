@@ -28,11 +28,11 @@ class App:
 
         builder.connect_signals(handlers)
         self.window = builder.get_object('mainWindow')
+        self.window.set_icon_from_file(config.icon_path)
 
     def on_convert_clicked(self, *args):
         convert = ConvertWindow()
-        convert.connect('delete-event', convert.app_quit)
-        convert.show_all()
+        convert.window.show_all()
 
     def on_hangar_clicked(self, *args):
         hangar = HangarDialog()
@@ -40,7 +40,6 @@ class App:
 
     def on_weight_clicked(self, *args):
         weight = WeightWindow()
-        weight.window.connect('delete-event', weight.app_quit)
         weight.window.show_all()
 
     def on_about_clicked(self, *args):

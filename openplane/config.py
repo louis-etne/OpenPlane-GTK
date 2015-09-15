@@ -12,7 +12,7 @@ images_folder = 'openplane{0}images{0}'.format(os.sep)
 planes_folder = 'openplane{0}planes{0}'.format(os.sep)
 
 # Logo (Thanks to Blackline)
-logo_file_name = 'logo.png'
+logo_file_name = 'OpenPlane.png'
 icon_file_name = 'icon.png'
 logo_path = '{}{}'.format(images_folder, logo_file_name)
 icon_path = '{}{}'.format(images_folder, icon_file_name)
@@ -23,6 +23,7 @@ plane_manager = '{}gui_plane_manager.glade'.format(glade_folder)
 weight = '{}gui_weight.glade'.format(glade_folder)
 app = '{}gui_app.glade'.format(glade_folder)
 about = '{}gui_about.glade'.format(glade_folder)
+convert = '{}gui_convert.glade'.format(glade_folder)
 
 # Images
 preview_balance = '{}preview_balance.png'.format(images_folder)

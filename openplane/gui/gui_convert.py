@@ -6,14 +6,13 @@
 from gi.repository import Gtk
 from openplane.gui.gui_about import *
 from openplane.core.convert import *
+from openplane import text
+from openplane import config
 
 
-class ConvertWindow(Gtk.Window):
+class ConvertWindow:
 
     def __init__(self):
-        Gtk.Window.__init__(self, title='Convertisseur')
-        self.set_border_width(10)
-        self.set_resizable(False)
         self.create_gui()
         self.on_units_changed()
 
@@ -22,12 +21,9 @@ class ConvertWindow(Gtk.Window):
             Met en place l'interface graphique
         '''
 
-        # Le layout principal
-        main_layout = Gtk.Grid()
-        main_layout.set_row_spacing(6)
-        main_layout.set_column_spacing(6)
-        main_layout.set_row_homogeneous(False)
-        main_layout.set_column_homogeneous(False)
+        builder = Gtk.Builder()
+        builder.add_from_file(config.convert)
+        main_layout = builder.get_object('mainLayout')
 
         # L'entrée
         adjustment = Gtk.Adjustment(0, -5000, 300000, 1, 10, 0)
@@ -39,17 +35,19 @@ class ConvertWindow(Gtk.Window):
 
         # Les différentres unitées
         units = Gtk.ListStore(str, str)
-        units.append(['m', 'Mètre(s)'])
-        units.append(['km', 'Kilomètre(s)'])
-        units.append(['ft', 'Pied(s)'])
-        units.append(['nm', 'Mile(s) Nautique'])
-        units.append(['c', 'Degré(s) Celsius'])
-        units.append(['f', 'Degré(s) Fahrenheit'])
-        units.append(['k', 'Kelvin'])
+        units.append(['m', text.meters])
+        units.append(['km', text.kilometers])
+        units.append(['ft', text.feet])
+        units.append(['nm', text.nm])
+        units.append(['c', text.celsius])
+        units.append(['f', text.fahrenheit])
+        units.append(['k', text.kelvin])
 
         # On met en place la liste
-        self.units_combo = Gtk.ComboBox.new_with_model_and_entry(units)
-        self.units_combo.set_entry_text_column(1)
+        self.units_combo = Gtk.ComboBox.new_with_model(units)
+        renderer_text = Gtk.CellRendererText()
+        self.units_combo.pack_start(renderer_text, True)
+        self.units_combo.add_attribute(renderer_text, "text", 1)
         self.units_combo.set_active(0)  # On définit 'mètre' par défaut
         self.units_combo.connect('changed', self.on_units_changed)
         main_layout.attach(self.units_combo, 1, 0, 1, 1)
@@ -59,19 +57,15 @@ class ConvertWindow(Gtk.Window):
         self.convert_label.set_selectable(True)
         main_layout.attach(self.convert_label, 0, 1, 2, 1)
 
-        btn_layout = Gtk.Box(spacing=6)
+        handlers = {
+            'on_delete_event': self.app_quit,
+            'on_about_clicked': self.on_about_clicked,
+            'on_close_clicked': self.app_quit
+        }
 
-        btn_help = Gtk.Button(label='Aide')
-        btn_help.connect('clicked', self.on_help_pressed)
-        btn_layout.pack_start(btn_help, True, True, 0)
+        builder.connect_signals(handlers)
 
-        btn_quit = Gtk.Button(label='Fermer')
-        btn_quit.connect('clicked', self.app_quit)
-        btn_layout.pack_start(btn_quit, True, True, 0)
-
-        main_layout.attach(btn_layout, 1, 2, 1, 1)
-
-        self.add(main_layout)
+        self.window = builder.get_object('mainWindow')
 
     def on_units_changed(self, combo=None):
         tree_iter = self.units_combo.get_active_iter()
@@ -83,51 +77,58 @@ class ConvertWindow(Gtk.Window):
             result = None
 
             if row_id == 'm':
-                result = 'Kilomètre(s) : {}km\n'.format(meters2kilometers(value))
-                result += 'Pied(s) : {}ft\n'.format(meters2feet(value))
-                result += 'Mile(s) Nautique : {}NM'.format(meters2miles(value))
+                result = '{0} : {1}km\n'.format(text.kilometers,
+                                                meters2kilometers(value))
+                result += '{0} : {1}ft\n'.format(text.feet, meters2feet(value))
+                result += '{0} : {1}NM'.format(text.nm, meters2miles(value))
 
             elif row_id == 'km':
-                result = 'Mètre(s) : {}m\n'.format(kilometers2meters(value))
-                result += 'Pied(s) : {}ft\n'.format(kilometers2feet(value))
-                result += 'Mile(s) Nautique : {}NM'.format(kilometers2miles(value))
+                result = '{0} : {1}m\n'.format(text.meters,
+                                               kilometers2meters(value))
+                result += '{0} : {1}ft\n'.format(text.feet,
+                                                 kilometers2feet(value))
+                result += '{0} : {1}NM'.format(text.nm,
+                                               kilometers2miles(value))
 
             elif row_id == 'ft':
-                result = 'Mètre(s) : {}m\n'.format(feet2meters(value))
-                result += 'Kilomètre(s) : {}km\n'.format(feet2kilometers(value))
-                result += 'Mile(s) Nautique : {}NM'.format(feet2miles(value))
+                result = '{0} : {1}m\n'.format(text.meters, feet2meters(value))
+                result += '{0} : {1}km\n'.format(text.kilometers,
+                                                 feet2kilometers(value))
+                result += '{0} : {1}NM'.format(text.nm, feet2miles(value))
 
             elif row_id == 'nm':
-                result = 'Mètre(s) : {}m\n'.format(miles2meters(value))
-                result += 'Kilomètre(s) : {}km\n'.format(miles2kilometers(value))
-                result += 'Pied(s) : {}ft'.format(miles2feet(value))
+                result = '{0} : {1}m\n'.format(text.meters,
+                                               miles2meters(value))
+                result += '{0} : {1}km\n'.format(text.kilometers,
+                                                 miles2kilometers(value))
+                result += '{0} : {1}ft'.format(text.feet, miles2feet(value))
 
             elif row_id == 'c':
-                result = 'Degré(s) Fahrenheit : {}°F\n'.format(celsius2fahrenheit(value))
-                result += 'Kelvin : {}K\n'.format(celsius2kelvin(value))
+                result = '{0} : {1}°F\n'.format(text.fahrenheit,
+                                                celsius2fahrenheit(value))
+                result += '{0} : {1}K\n'.format(text.kelvin,
+                                                celsius2kelvin(value))
 
             elif row_id == 'f':
-                result = 'Degré(s) Celsius : {}°C\n'.format(fahrenheit2celsius(value))
-                result += 'Kelvin : {}K\n'.format(fahrenheit2kelvin(value))
+                result = '{0} : {1}°C\n'.format(text.celsius,
+                                                fahrenheit2celsius(value))
+                result += '{0} : {1}K\n'.format(text.kelvin,
+                                                fahrenheit2kelvin(value))
 
             elif row_id == 'k':
-                result = 'Degré(s) Celsius : {}°C\n'.format(kelvin2celsius(value))
-                result += 'Degré(s) Fahrenheit : {}°F\n'.format(kelvin2fahrenheit(value))
+                result = '{0} : {1}°C\n'.format(text.celsius,
+                                                kelvin2celsius(value))
+                result += '{0} : {1}°F\n'.format(text.fahrenheit,
+                                                 kelvin2fahrenheit(value))
 
             self.convert_label.set_text(result)
         else:
             pass
 
-    def on_help_pressed(self, *args):
-        help_window = HelpWindow()
-        help_window.connect('delete-event', help_window.app_quit)
-        help_window.show_all()
+    def on_about_clicked(self, *args):
+        about = AboutDialog()
+        about.dialog.run()
+        about.dialog.destroy()
 
     def app_quit(self, *args):
-        self.destroy()
-
-if __name__ == '__main__':
-    win = ConvertWindow()
-    win.connect('delete-event', Gtk.main_quit)
-    win.show_all()
-    Gtk.main()
+        self.window.destroy()

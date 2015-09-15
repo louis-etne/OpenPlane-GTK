@@ -1,5 +1,7 @@
 # OpenPlane
 
+**Version actuelle :** 0.7
+
 # Dépendances
 - python3
 - PyGObject

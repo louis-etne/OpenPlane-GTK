@@ -24,15 +24,16 @@ class WeightWindow:
             'on_spinButton_changed': self.on_spin_changed,
             'on_save_clicked': self.on_save_clicked,
             'on_addPlane_clicked': self.on_addPlane_clicked,
-            'on_quit_clicked': self.app_quit
+            'on_quit_clicked': self.app_quit,
+            'on_delete_event': self.app_quit
         }
 
         builder.connect_signals(handlers)
 
+        self.window = builder.get_object('mainWindow')
+
         main_layout = builder.get_object('mainLayout')
         self.planes_list = Gtk.ListStore(str, str)
-
-        self.update_plane_list()
 
         plane_chooser = Gtk.ComboBox.new_with_model(self.planes_list)
         plane_chooser.connect('changed', self.on_plane_chooser_changed)
@@ -45,8 +46,6 @@ class WeightWindow:
         self.btn_save.set_sensitive(False)
 
         self.preview = builder.get_object('preview')
-
-        self.window = builder.get_object('mainWindow')
 
         self.masse_std1 = builder.get_object('masseVideStd1')
         self.masse_std2 = builder.get_object('masseVideStd2')
@@ -78,9 +77,11 @@ class WeightWindow:
         self.bdl_avc_carbu_lab = builder.get_object('bdlAvecCarbu')
         self.bdl_sns_carbu_lab = builder.get_object('bdlSansCarbu')
 
+        self.update_plane_list()
         self.calc_label()
 
     def update_plane_list(self):
+        self.planes_list.clear()
         for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
                 plane = os.path.basename(plane_file)
                 self.planes_list.append([os.path.splitext(plane)[0],
@@ -215,7 +216,19 @@ class WeightWindow:
         dom_y = np.array([plane.p1y, plane.p2y, plane.p3y,
                           plane.p4y, plane.p5y])
 
-        plt.plot(dom_x, dom_y, linewidth=1)
+        # On calcule l'équation de droite :
+        # y = ax + b
+        a = (plane.p3y - plane.p2y) / (plane.p3x - plane.p2x)
+        b = (-a * plane.p2x) + plane.p2y
+
+        # Si les points sortent du cadre, on affiche celui-ci en rouge
+        if bdl_total < plane.p1x or bdl_total > plane.p5x or \
+           (masse_total > (a * bdl_total) + b) or \
+           (bdl_total > plane.p3x and masse_total > plane.p3y):
+            plt.plot(dom_x, dom_y, color='r', linewidth=2)
+        else:
+            plt.plot(dom_x, dom_y, color='b', linewidth=1)
+
         plt.ylim((plane.p1y, plane.p3y + 50))  # Limites en y
 
         # Catégorie utilitaire
@@ -225,7 +238,18 @@ class WeightWindow:
             dom_u_y = np.array([plane.up1y, plane.up2y, plane.up3y,
                           plane.up4y, plane.up5y])
 
-            plt.plot(dom_u_x, dom_u_y, 'r--', linewidth=1.5, color='g', )
+            # On calcule l'équation de droite :
+            # y = ax + b
+            ua = (plane.up3y - plane.up2y) / (plane.up3x - plane.up2x)
+            ub = (-ua * plane.up2x) + plane.up2y
+
+            # Si les points sortent du cadre, on affiche celui-ci en rouge
+            if bdl_total < plane.up1x or bdl_total > plane.up5x or \
+               (masse_total > (ua * bdl_total) + ub) or \
+               (bdl_total > plane.up3x and masse_total > plane.up3y):
+                plt.plot(dom_u_x, dom_u_y, 'r--', linewidth=2, color='r')
+            else:
+                plt.plot(dom_u_x, dom_u_y, 'r--', linewidth=1.5, color='g')
 
         # Points de centrage
         total_x = np.array([bdl_total, bdl_vide])
@@ -237,8 +261,11 @@ class WeightWindow:
         plt.xlabel(text.lever_arm)
         plt.ylabel(text.mass)
         plt.grid(True)
+        plt.title(text.weight_title.format(plane.matriculation))
 
         if full:
+            # Si l'utilisateur demande d'exporter le graphique, on le met à
+            # 100 dpi
             plt.savefig(figure_path)
         else:
             plt.savefig(figure_path, dpi=75)

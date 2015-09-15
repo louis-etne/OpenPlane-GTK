@@ -17,10 +17,11 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="save">
-                <property name="label" translatable="yes">Enregistrer</property>
+                <property name="label">gtk-save</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_save_clicked" swapped="no"/>
               </object>
               <packing>
@@ -31,10 +32,11 @@
             </child>
             <child>
               <object class="GtkButton" id="close">
-                <property name="label" translatable="yes">Fermer</property>
+                <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_close_clicked" swapped="no"/>
               </object>
               <packing>
