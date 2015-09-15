@@ -177,7 +177,7 @@ class Plane:
              }}
 
         with open(filename, 'w') as outfile:
-            json.dump(plane_values, outfile, indent=4)
+            json.dump(plane_values, outfile, indent=4, sort_keys=True)
 
     def import_plane(self, filepath):
         values = []
