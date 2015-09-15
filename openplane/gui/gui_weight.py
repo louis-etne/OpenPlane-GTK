@@ -24,6 +24,7 @@ class WeightWindow:
             'on_spinButton_changed': self.on_spin_changed,
             'on_save_clicked': self.on_save_clicked,
             'on_addPlane_clicked': self.on_addPlane_clicked,
+            'on_preview_toggled': self.on_preview_toggled,
             'on_quit_clicked': self.app_quit,
             'on_delete_event': self.app_quit
         }
@@ -31,6 +32,7 @@ class WeightWindow:
         builder.connect_signals(handlers)
 
         self.window = builder.get_object('mainWindow')
+        self.width, self.height = self.window.get_size()
 
         main_layout = builder.get_object('mainLayout')
         self.planes_list = Gtk.ListStore(str, str)
@@ -45,7 +47,9 @@ class WeightWindow:
         self.btn_save = builder.get_object('save')
         self.btn_save.set_sensitive(False)
 
+        self.preview_box = builder.get_object('previewBtn')
         self.preview = builder.get_object('preview')
+        self.preview.clear()
 
         self.masse_std1 = builder.get_object('masseVideStd1')
         self.masse_std2 = builder.get_object('masseVideStd2')
@@ -194,16 +198,29 @@ class WeightWindow:
             self.bdl_avc_carbu_lab.set_text(str(0.00))
             self.bdl_sns_carbu_lab.set_text(str(0.00))
 
-    def on_spin_changed(self, spin):
+    def on_preview_toggled(self, check):
+        if check.get_active():
+            self.update_preview()
+        else:
+            self.preview.clear()
+            self.window.resize(self.width, self.height)
+
+    def update_preview(self):
         figure_path = config.preview
 
-        self.calc_label()
-
         if self.masse_avec_carbu > 0 or self.masse_sans_carbu > 0:
-            self.create_graph(figure_path, self.plane, self.masse_avec_carbu,
-                               self.bdl_avec_carbu, self.masse_vide,
-                               self.bdl_masse_vide)
+            self.create_graph(figure_path,
+                              self.plane,
+                              self.masse_avec_carbu,
+                              self.bdl_avec_carbu,
+                              self.masse_vide,
+                              self.bdl_masse_vide)
             self.preview.set_from_file(figure_path)
+
+    def on_spin_changed(self, spin):
+        self.calc_label()
+        if self.preview_box.get_active():
+            self.update_preview()
 
     def app_quit(self, *args):
         self.window.destroy()
