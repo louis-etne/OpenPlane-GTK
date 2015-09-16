@@ -139,17 +139,19 @@ class PlanesManagerDialog:
         self.calc_label()
 
     def calc_label(self):
-        empty_moment = float(self.empty_mass.get_value()) * float(self.empty_bdl.get_value())
-        options_moment = float(self.options_mass.get_value()) * float(self.options_bdl.get_value())
-        total1 = float(self.empty_mass.get_value()) + float(self.options_mass.get_value())
-        total2 = float(self.empty_bdl.get_value()) + float(self.options_bdl.get_value())
+        empty_moment = self.empty_mass.get_value() * self.empty_bdl.get_value()
+        options_moment = self.options_mass.get_value() * self.options_bdl.get_value()
+        total1 = self.empty_mass.get_value() + self.options_mass.get_value()
+        total2 = self.empty_bdl.get_value() + self.options_bdl.get_value()
         total_moment = empty_moment + options_moment
 
-        self.total_empty.set_text(str(round(empty_moment)))
-        self.total_options.set_text(str(round(options_moment)))
-        self.total_mass.set_text(str(round(total1)))
-        self.total_bdl.set_text(str(round(total2)))
-        self.total_total.set_text(str(round(total_moment)))
+        print(total_moment)
+
+        self.total_empty.set_text(str(round(empty_moment, 3)))
+        self.total_options.set_text(str(round(options_moment, 3)))
+        self.total_mass.set_text(str(round(total1, 3)))
+        self.total_bdl.set_text(str(round(total2, 3)))
+        self.total_total.set_text(str(round(total_moment, 3)))
 
     def on_showUtil_toggled(self, box):
         if box.get_active():
@@ -281,7 +283,7 @@ class PlanesManagerDialog:
 
         values.append(float(self.empty_mass.get_text()))
         values.append(float(self.empty_bdl.get_text()))
-        values.append(float(self.otpions_mass.get_text()))
+        values.append(float(self.options_mass.get_text()))
         values.append(float(self.options_bdl.get_text()))
         values.append(float(self.pass_av.get_text()))
         values.append(float(self.pass_ar.get_text()))
@@ -373,16 +375,16 @@ class PlanesManagerDialog:
 
         self.show_utility.set_active(plane.utility)
 
-        self.empty_mass.set_text(str(plane.empty_mass))
-        self.empty_bdl.set_text(str(plane.empty_bdl))
-        self.options_mass.set_text(str(plane.options_mass))
-        self.options_bdl.set_text(str(plane.options_bdl))
-        self.pass_av.set_text(str(plane.pass_av))
-        self.pass_ar.set_text(str(plane.pass_ar))
-        self.carbu.set_text(str(plane.fuel))
-        self.bagages.set_text(str(plane.baggage))
+        self.empty_mass.set_value(plane.empty_mass)
+        self.empty_bdl.set_value(plane.empty_bdl)
+        self.options_mass.set_value(plane.options_mass)
+        self.options_bdl.set_value(plane.options_bdl)
+        self.pass_av.set_value(plane.pass_av)
+        self.pass_ar.set_value(plane.pass_ar)
+        self.carbu.set_value(plane.fuel)
+        self.bagages.set_value(plane.baggage)
 
         # Ajustements
+        self.calc_label()
         self.dialog.set_title(text.edit_plane.format(plane.matriculation))
         self.on_carbuUnits_changed()
-        self.calc_label()

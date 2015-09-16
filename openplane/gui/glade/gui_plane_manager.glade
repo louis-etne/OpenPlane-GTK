@@ -2,6 +2,46 @@
 <!-- Generated with glade 3.16.1 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
+  <object class="GtkAdjustment" id="babagesBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="carbuBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="emptyBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="emptyMass">
+    <property name="upper">5000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="optionsBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="optionsMass">
+    <property name="upper">50000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="passArBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="passAvBdl">
+    <property name="upper">100</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkDialog" id="dialog">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
@@ -977,9 +1017,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkGrid" id="entryLayout">
+                  <object class="GtkGrid" id="centrageLayout">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">12</property>
+                    <property name="margin_right">12</property>
+                    <property name="margin_top">12</property>
+                    <property name="margin_bottom">12</property>
                     <property name="row_spacing">5</property>
                     <child>
                       <object class="GtkLabel" id="masseLab">
@@ -1076,7 +1120,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">bagages_bdl</property>
+                        <property name="adjustment">babagesBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1093,7 +1137,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">carbu_bdl</property>
+                        <property name="adjustment">carbuBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1138,7 +1182,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">passager_ar_bdl</property>
+                        <property name="adjustment">passArBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1155,7 +1199,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">passager_av_bdl</property>
+                        <property name="adjustment">passAvBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1283,7 +1327,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">options_masse</property>
+                        <property name="adjustment">optionsMass</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1300,7 +1344,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">options_bdl</property>
+                        <property name="adjustment">optionsBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1343,7 +1387,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">masse_vide_bdl</property>
+                        <property name="adjustment">emptyBdl</property>
                         <property name="climb_rate">0.10000000000000001</property>
                         <property name="digits">3</property>
                       </object>
@@ -1360,7 +1404,7 @@
                         <property name="can_focus">True</property>
                         <property name="width_chars">10</property>
                         <property name="text" translatable="yes">0,000</property>
-                        <property name="adjustment">masse_vide_masse</property>
+                        <property name="adjustment">emptyMass</property>
                         <property name="climb_rate">0.01</property>
                         <property name="digits">3</property>
                       </object>
@@ -1546,7 +1590,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkGrid" id="centrageLayout">
+                  <object class="GtkGrid" id="graphLayout">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_left">6</property>

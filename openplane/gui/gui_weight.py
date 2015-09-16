@@ -49,7 +49,7 @@ class WeightWindow:
 
         self.preview_box = builder.get_object('previewBtn')
         self.preview = builder.get_object('preview')
-        self.preview.clear()
+        self.clear_preview()
 
         self.masse_std1 = builder.get_object('masseVideStd1')
         self.masse_std2 = builder.get_object('masseVideStd2')
@@ -91,6 +91,20 @@ class WeightWindow:
                 self.planes_list.append([os.path.splitext(plane)[0],
                                          plane_file])
 
+    def import_plane_values(self, plane):
+        self.masse_std1.set_value(plane.empty_mass)
+        self.masse_std2.set_value(plane.empty_bdl)
+        self.options1.set_value(plane.options_mass)
+        self.options2.set_value(plane.options_bdl)
+
+        self.pass_av2.set_value(plane.pass_av)
+        self.pass_ar2.set_value(plane.pass_ar)
+        self.carbu2.set_value(plane.fuel)
+        self.bagages2.set_value(plane.baggage)
+
+        if self.masse_std2.get_value() > 0:
+            self.calc_label()
+
     def on_addPlane_clicked(self, btn):
         hangar = HangarDialog()
         hangar.dialog.run()
@@ -102,9 +116,12 @@ class WeightWindow:
             model = combo.get_model()
             name, path = model[tree_iter][:2]
 
+            self.clear_preview()
+
             self.plane = Plane()
             self.plane.import_plane(path)
             self.window.set_title(text.weight_title.format(name))
+
             self.btn_save.set_sensitive(True)
             self.masse_std1.set_editable(True)
             self.masse_std2.set_editable(True)
@@ -118,6 +135,12 @@ class WeightWindow:
             self.carbu2.set_editable(True)
             self.bagages1.set_editable(True)
             self.bagages2.set_editable(True)
+
+            self.import_plane_values(self.plane)
+
+    def clear_preview(self):
+        self.preview.clear()
+        self.window.resize(self.width, self.height)
 
     def on_save_clicked(self, button):
 
@@ -167,12 +190,23 @@ class WeightWindow:
         bagages = self.bagages1.get_value() * self.bagages2.get_value()
 
         # Totaux
-        self.masse_vide = self.masse_std1.get_value() + self.options1.get_value()
+        self.masse_vide = self.masse_std1.get_value() + \
+            self.options1.get_value()
+
         mmt_masse_vide = masse_std + options
-        self.bdl_masse_vide = self.masse_std2.get_value() + self.options2.get_value()
-        self.masse_avec_carbu = self.masse_vide + self.pass_av1.get_value() + self.pass_ar1.get_value() + self.bagages1.get_value() + self.carbu1.get_value()
+
+        self.bdl_masse_vide = self.masse_std2.get_value() + \
+            self.options2.get_value()
+
+        self.masse_avec_carbu = self.masse_vide + self.pass_av1.get_value() + \
+            self.pass_ar1.get_value() + self.bagages1.get_value() + \
+            self.carbu1.get_value()
+
         mmt_avec_carbu = mmt_masse_vide + pass_av + pass_ar + carbu + bagages
-        masse_sans_carbu = self.masse_vide + self.pass_av1.get_value() + self.pass_ar1.get_value() + self.bagages1.get_value()
+
+        masse_sans_carbu = self.masse_vide + self.pass_av1.get_value() + \
+            self.pass_ar1.get_value() + self.bagages1.get_value()
+
         mmt_sans_carbu = mmt_masse_vide + pass_av + pass_ar + bagages
 
         self.masse_vide_std_lab.set_text(str(round(masse_std, 3)))
@@ -202,8 +236,7 @@ class WeightWindow:
         if check.get_active():
             self.update_preview()
         else:
-            self.preview.clear()
-            self.window.resize(self.width, self.height)
+            self.clear_preview()
 
     def update_preview(self):
         figure_path = config.preview
@@ -218,12 +251,10 @@ class WeightWindow:
             self.preview.set_from_file(figure_path)
 
     def on_spin_changed(self, spin):
-        self.calc_label()
-        if self.preview_box.get_active():
-            self.update_preview()
-
-    def app_quit(self, *args):
-        self.window.destroy()
+        if self.masse_std1.get_value() > 0:
+            self.calc_label()
+            if self.preview_box.get_active():
+                self.update_preview()
 
     def create_graph(self, figure_path, plane, masse_total, bdl_total,
                      masse_vide, bdl_vide, full=False):
@@ -251,9 +282,9 @@ class WeightWindow:
         # Catégorie utilitaire
         if plane.utility:
             dom_u_x = np.array([plane.up1x, plane.up2x, plane.up3x,
-                          plane.up4x, plane.up5x])
+                                plane.up4x, plane.up5x])
             dom_u_y = np.array([plane.up1y, plane.up2y, plane.up3y,
-                          plane.up4y, plane.up5y])
+                                plane.up4y, plane.up5y])
 
             # On calcule l'équation de droite :
             # y = ax + b
@@ -288,3 +319,6 @@ class WeightWindow:
             plt.savefig(figure_path, dpi=75)
 
         plt.clf()  # On ferme la figure actuelle
+
+    def app_quit(self, *args):
+        self.window.destroy()
