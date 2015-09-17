@@ -106,16 +106,16 @@ class Plane:
                                    config.planes_ext)
 
         plane_values = {
-             'Immatriculation': self.matriculation,
+             'Matriculation': self.matriculation,
              'Type': self.plane_type,
              'OACI': self.oaci,
-             'Couleurs': self.colors,
-             'Vitesse': {
-                 'Croisiere': self.s_cruising,
-                 'Montee': self.s_up,
-                 'VzMontee': self.v_up,
-                 'Descente': self.s_low,
-                 'VzDescente': self.v_low,
+             'Colors': self.colors,
+             'Speeds': {
+                 'Crusing': self.s_cruising,
+                 'Climb': self.s_up,
+                 'VzClimb': self.v_up,
+                 'Descent': self.s_low,
+                 'VzDescent': self.v_low,
                  'VSO': self.vso,
                  'VFE': self.vfe,
                  'VNO': self.vno,
@@ -123,23 +123,23 @@ class Plane:
                  'Vx': self.vx,
                  'Vy': self.vy
              },
-             'Carburant': {
+             'Fuel': {
                  'Type': self.carbu_type,
-                 'Capacite': self.carbu_capacity,
-                 'Inutilisable': self.carbu_useless,
-                 'Consomation': self.carbu_consom,
-                 'Unite': self.carbu_unit
+                 'Capacity': self.carbu_capacity,
+                 'Unusable': self.carbu_useless,
+                 'Consumption': self.carbu_consom,
+                 'Unit': self.carbu_unit
              },
-             'Piste': {
-                 'Dure': self.runway_hard,
-                 'Herbe': self.runway_grass,
-                 'Unite': self.runway_unit
+             'Runway': {
+                 'Hard': self.runway_hard,
+                 'Grass': self.runway_grass,
+                 'Unit': self.runway_unit
              },
              'RDBA': self.rdba,
-             'Transpondeur': self.transponder,
-             'Turbulence': self.turbulence,
+             'Transponder': self.transponder,
+             'Turbulance': self.turbulence,
              'Certification': self.certification,
-             'Equipement': {
+             'Equipments': {
                  'C': self.equipments['C'],
                  'D': self.equipments['D'],
                  'F': self.equipments['F'],
@@ -158,8 +158,8 @@ class Plane:
                  'X': self.equipments['X'],
                  'Y': self.equipments['Y']
              },
-             'Centrage': {
-                 'Normale': {
+             'Balance': {
+                 'Normal': {
                     'P1x': self.p1x,
                     'P1y': self.p1y,
                     'P2x': self.p2x,
@@ -171,7 +171,7 @@ class Plane:
                     'P5x': self.p5x,
                     'P5y': self.p5y
                  },
-                 'Utilitaire': {
+                 'Utility': {
                     'P1x': self.up1x,
                     'P1y': self.up1y,
                     'P2x': self.up2x,
@@ -182,27 +182,27 @@ class Plane:
                     'P4y': self.up4y,
                     'P5x': self.up5x,
                     'P5y': self.up5y,
-                    'Montrer': self.utility
+                    'Show': self.utility
                  },
-                 'Masse_vide': {
-                    'Masse': self.empty_mass,
-                    'Bras_levier': self.empty_bdl
+                 'Empty_mass': {
+                    'Mass': self.empty_mass,
+                    'Lever_arm': self.empty_bdl
                  },
                  'Options': {
-                    'Masse': self.options_mass,
-                    'Bras_levier': self.options_bdl
+                    'Mass': self.options_mass,
+                    'Lever_arm': self.options_bdl
                  },
-                 'Passager_AV': {
-                    'Bras_levier': self.pass_av
+                 'Pax_AV': {
+                    'Lever_arm': self.pass_av
                  },
-                 'Passager_AR': {
-                    'Bras_levier': self.pass_ar
+                 'Pax_AR': {
+                    'Lever_arm': self.pass_ar
                  },
-                 'Carburant': {
-                    'Bras_levier': self.fuel
+                 'Fuel': {
+                    'Lever_arm': self.fuel
                  },
-                 'Bagages': {
-                    'Bras_levier': self.baggage
+                 'Baggage': {
+                    'Lever_arm': self.baggage
                  }
              }}
 
@@ -215,88 +215,88 @@ class Plane:
         with open(filepath, 'r') as reader:
             datas = json.load(reader)
 
-            values.append(datas['Immatriculation'].upper())
+            values.append(datas['Matriculation'].upper())
             values.append(datas['Type'].upper())
             values.append(datas['OACI'].upper())
-            values.append(datas['Couleurs'])
+            values.append(datas['Colors'])
 
-            values.append(datas['Vitesse']['Croisiere'])
-            values.append(datas['Vitesse']['Montee'])
-            values.append(datas['Vitesse']['VzMontee'])
-            values.append(datas['Vitesse']['Descente'])
-            values.append(datas['Vitesse']['VzDescente'])
+            values.append(datas['Speeds']['Crusing'])
+            values.append(datas['Speeds']['Climb'])
+            values.append(datas['Speeds']['VzClimb'])
+            values.append(datas['Speeds']['Descent'])
+            values.append(datas['Speeds']['VzDescent'])
 
-            values.append(datas['Vitesse']['VSO'])
-            values.append(datas['Vitesse']['VFE'])
-            values.append(datas['Vitesse']['VNO'])
-            values.append(datas['Vitesse']['VNE'])
-            values.append(datas['Vitesse']['Vx'])
-            values.append(datas['Vitesse']['Vy'])
+            values.append(datas['Speeds']['VSO'])
+            values.append(datas['Speeds']['VFE'])
+            values.append(datas['Speeds']['VNO'])
+            values.append(datas['Speeds']['VNE'])
+            values.append(datas['Speeds']['Vx'])
+            values.append(datas['Speeds']['Vy'])
 
-            values.append(datas['Carburant']['Capacite'])
-            values.append(datas['Carburant']['Unite'])
-            values.append(datas['Carburant']['Type'])
-            values.append(datas['Carburant']['Inutilisable'])
-            values.append(datas['Carburant']['Consomation'])
+            values.append(datas['Fuel']['Capacity'])
+            values.append(datas['Fuel']['Unit'])
+            values.append(datas['Fuel']['Type'])
+            values.append(datas['Fuel']['Unusable'])
+            values.append(datas['Fuel']['Consumption'])
 
-            values.append(datas['Piste']['Dure'])
-            values.append(datas['Piste']['Herbe'])
-            values.append(datas['Piste']['Unite'])
+            values.append(datas['Runway']['Hard'])
+            values.append(datas['Runway']['Grass'])
+            values.append(datas['Runway']['Unit'])
 
             values.append(datas['RDBA'])
-            values.append(datas['Transpondeur'])
-            values.append(datas['Turbulence'])
+            values.append(datas['Transponder'])
+            values.append(datas['Turbulance'])
             values.append(datas['Certification'])
 
-            values.append(datas['Equipement']['C'])
-            values.append(datas['Equipement']['D'])
-            values.append(datas['Equipement']['F'])
-            values.append(datas['Equipement']['G'])
-            values.append(datas['Equipement']['H'])
-            values.append(datas['Equipement']['I'])
-            values.append(datas['Equipement']['J'])
-            values.append(datas['Equipement']['K'])
-            values.append(datas['Equipement']['L'])
-            values.append(datas['Equipement']['O'])
-            values.append(datas['Equipement']['R'])
-            values.append(datas['Equipement']['T'])
-            values.append(datas['Equipement']['U'])
-            values.append(datas['Equipement']['V'])
-            values.append(datas['Equipement']['W'])
-            values.append(datas['Equipement']['X'])
-            values.append(datas['Equipement']['Y'])
+            values.append(datas['Equipments']['C'])
+            values.append(datas['Equipments']['D'])
+            values.append(datas['Equipments']['F'])
+            values.append(datas['Equipments']['G'])
+            values.append(datas['Equipments']['H'])
+            values.append(datas['Equipments']['I'])
+            values.append(datas['Equipments']['J'])
+            values.append(datas['Equipments']['K'])
+            values.append(datas['Equipments']['L'])
+            values.append(datas['Equipments']['O'])
+            values.append(datas['Equipments']['R'])
+            values.append(datas['Equipments']['T'])
+            values.append(datas['Equipments']['U'])
+            values.append(datas['Equipments']['V'])
+            values.append(datas['Equipments']['W'])
+            values.append(datas['Equipments']['X'])
+            values.append(datas['Equipments']['Y'])
 
-            values.append(datas['Centrage']['Normale']['P1x'])
-            values.append(datas['Centrage']['Normale']['P1y'])
-            values.append(datas['Centrage']['Normale']['P2x'])
-            values.append(datas['Centrage']['Normale']['P2y'])
-            values.append(datas['Centrage']['Normale']['P3x'])
-            values.append(datas['Centrage']['Normale']['P3y'])
-            values.append(datas['Centrage']['Normale']['P4x'])
-            values.append(datas['Centrage']['Normale']['P4y'])
-            values.append(datas['Centrage']['Normale']['P5x'])
-            values.append(datas['Centrage']['Normale']['P5y'])
+            values.append(datas['Balance']['Normal']['P1x'])
+            values.append(datas['Balance']['Normal']['P1y'])
+            values.append(datas['Balance']['Normal']['P2x'])
+            values.append(datas['Balance']['Normal']['P2y'])
+            values.append(datas['Balance']['Normal']['P3x'])
+            values.append(datas['Balance']['Normal']['P3y'])
+            values.append(datas['Balance']['Normal']['P4x'])
+            values.append(datas['Balance']['Normal']['P4y'])
+            values.append(datas['Balance']['Normal']['P5x'])
+            values.append(datas['Balance']['Normal']['P5y'])
 
-            values.append(datas['Centrage']['Utilitaire']['P1x'])
-            values.append(datas['Centrage']['Utilitaire']['P1y'])
-            values.append(datas['Centrage']['Utilitaire']['P2x'])
-            values.append(datas['Centrage']['Utilitaire']['P2y'])
-            values.append(datas['Centrage']['Utilitaire']['P3x'])
-            values.append(datas['Centrage']['Utilitaire']['P3y'])
-            values.append(datas['Centrage']['Utilitaire']['P4x'])
-            values.append(datas['Centrage']['Utilitaire']['P4y'])
-            values.append(datas['Centrage']['Utilitaire']['P5x'])
-            values.append(datas['Centrage']['Utilitaire']['P5y'])
+            values.append(datas['Balance']['Utility']['P1x'])
+            values.append(datas['Balance']['Utility']['P1y'])
+            values.append(datas['Balance']['Utility']['P2x'])
+            values.append(datas['Balance']['Utility']['P2y'])
+            values.append(datas['Balance']['Utility']['P3x'])
+            values.append(datas['Balance']['Utility']['P3y'])
+            values.append(datas['Balance']['Utility']['P4x'])
+            values.append(datas['Balance']['Utility']['P4y'])
+            values.append(datas['Balance']['Utility']['P5x'])
+            values.append(datas['Balance']['Utility']['P5y'])
 
-            values.append(datas['Centrage']['Utilitaire']['Montrer'])
+            values.append(datas['Balance']['Utility']['Show'])
 
-            values.append(datas['Centrage']['Masse_vide']['Masse'])
-            values.append(datas['Centrage']['Masse_vide']['Bras_levier'])
-            values.append(datas['Centrage']['Options']['Masse'])
-            values.append(datas['Centrage']['Options']['Bras_levier'])
-            values.append(datas['Centrage']['Passager_AV']['Bras_levier'])
-            values.append(datas['Centrage']['Passager_AR']['Bras_levier'])
-            values.append(datas['Centrage']['Carburant']['Bras_levier'])
-            values.append(datas['Centrage']['Bagages']['Bras_levier'])
+            values.append(datas['Balance']['Empty_mass']['Mass'])
+            values.append(datas['Balance']['Empty_mass']['Lever_arm'])
+            values.append(datas['Balance']['Options']['Mass'])
+            values.append(datas['Balance']['Options']['Lever_arm'])
+            values.append(datas['Balance']['Pax_AV']['Lever_arm'])
+            values.append(datas['Balance']['Pax_AR']['Lever_arm'])
+            values.append(datas['Balance']['Fuel']['Lever_arm'])
+            values.append(datas['Balance']['Baggage']['Lever_arm'])
 
         self.create_plane(values)

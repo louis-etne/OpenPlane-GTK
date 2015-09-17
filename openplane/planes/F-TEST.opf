@@ -1,23 +1,16 @@
 {
-    "Carburant": {
-        "Capacite": 110,
-        "Consomation": 25,
-        "Inutilisable": 10,
-        "Type": "100LL",
-        "Unite": "L"
-    },
-    "Centrage": {
-        "Bagages": {
-            "Bras_levier": 0.0
+    "Balance": {
+        "Baggage": {
+            "Lever_arm": 0.0
         },
-        "Carburant": {
-            "Bras_levier": 0.0
+        "Empty_mass": {
+            "Lever_arm": 0.0,
+            "Mass": 0.0
         },
-        "Masse_vide": {
-            "Bras_levier": 0.0,
-            "Masse": 0.0
+        "Fuel": {
+            "Lever_arm": 0.0
         },
-        "Normale": {
+        "Normal": {
             "P1x": 0.889,
             "P1y": 700.0,
             "P2x": 0.889,
@@ -30,17 +23,16 @@
             "P5y": 700.0
         },
         "Options": {
-            "Bras_levier": 0.0,
-            "Masse": 0.0
+            "Lever_arm": 0.0,
+            "Mass": 0.0
         },
-        "Passager_AR": {
-            "Bras_levier": 0.0
+        "Pax_AR": {
+            "Lever_arm": 0.0
         },
-        "Passager_AV": {
-            "Bras_levier": 0.0
+        "Pax_AV": {
+            "Lever_arm": 0.0
         },
-        "Utilitaire": {
-            "Montrer": true,
+        "Utility": {
             "P1x": 0.889,
             "P1y": 700.0,
             "P2x": 0.889,
@@ -50,12 +42,13 @@
             "P4x": 1.028,
             "P4y": 998.0,
             "P5x": 1.028,
-            "P5y": 700.0
+            "P5y": 700.0,
+            "Show": true
         }
     },
     "Certification": "V",
-    "Couleurs": "White and blue",
-    "Equipement": {
+    "Colors": "White and blue",
+    "Equipments": {
         "C": false,
         "D": false,
         "F": true,
@@ -74,28 +67,35 @@
         "X": false,
         "Y": false
     },
-    "Immatriculation": "F-TEST",
-    "OACI": "DR30",
-    "Piste": {
-        "Dure": 280,
-        "Herbe": 350,
-        "Unite": "m"
+    "Fuel": {
+        "Capacity": 110,
+        "Consumption": 25,
+        "Type": "100LL",
+        "Unit": "L",
+        "Unusable": 10
     },
+    "Matriculation": "F-TEST",
+    "OACI": "DR30",
     "RDBA": "4",
-    "Transpondeur": "C",
-    "Turbulence": "L",
-    "Type": "DR300-108",
-    "Vitesse": {
-        "Croisiere": 100,
-        "Descente": 100,
-        "Montee": 80,
+    "Runway": {
+        "Grass": 350,
+        "Hard": 280,
+        "Unit": "m"
+    },
+    "Speeds": {
+        "Climb": 80,
+        "Crusing": 100,
+        "Descent": 100,
         "VFE": 92,
         "VNE": 159,
         "VNO": 140,
         "VSO": 43,
         "Vx": 70,
         "Vy": 81,
-        "VzDescente": 500,
-        "VzMontee": 500
-    }
+        "VzClimb": 500,
+        "VzDescent": 500
+    },
+    "Transponder": "C",
+    "Turbulance": "L",
+    "Type": "DR300-108"
 }

@@ -1,5 +1,5 @@
 {
-    "Equipement": {
+    "Equipments": {
         "O": true,
         "D": false,
         "G": false,
@@ -18,41 +18,41 @@
         "V": true,
         "W": false
     },
-    "Couleurs": "White and blue",
-    "Carburant": {
-        "Unite": "L",
-        "Consomation": 25,
-        "Inutilisable": 10,
+    "Colors": "White and blue",
+    "Fuel": {
+        "Unit": "L",
+        "Consumption": 25,
+        "Unusable": 10,
         "Type": "100LL",
-        "Capacite": 110
+        "Capacity": 110
     },
-    "Vitesse": {
+    "Speeds": {
         "Vy": 81,
-        "Montee": 80,
-        "VzDescente": 500,
+        "Climb": 80,
+        "VzDescent": 500,
         "VNE": 159,
-        "Croisiere": 100,
+        "Crusing": 100,
         "Vx": 70,
         "VNO": 140,
-        "Descente": 100,
-        "VzMontee": 500,
+        "Descent": 100,
+        "VzClimb": 500,
         "VFE": 92,
         "VSO": 43
     },
-    "Piste": {
-        "Dure": 280,
-        "Herbe": 350,
-        "Unite": "m"
+    "Runway": {
+        "Hard": 280,
+        "Grass": 350,
+        "Unit": "m"
     },
     "Type": "DR300-108",
     "OACI": "DR30",
-    "Turbulence": "M",
+    "Turbulance": "M",
     "Certification": "N",
-    "Immatriculation": "F-BTBB",
-    "Transpondeur": "N",
+    "Matriculation": "F-BTBB",
+    "Transponder": "N",
     "RDBA": "N",
-    "Centrage": {
-        "Normale": {
+    "Balance": {
+        "Normal": {
             "P4y": 1150.0,
             "P4x": 2.36,
             "P1x": 2.08,
@@ -64,8 +64,8 @@
             "P5y": 650.0,
             "P3x": 2.25
         },
-        "Utilitaire": {
-            "Montrer": false,
+        "Utility": {
+            "Show": false,
             "P4y": 0.0,
             "P4x": 0.0,
             "P1x": 0.0,
@@ -77,25 +77,25 @@
             "P5y": 0.0,
             "P3x": 0.0
         },
-        "Masse_vide": {
-            "Masse": 722.0,
-            "Bras_levier": 2.181
+        "Empty_mass": {
+            "Mass": 722.0,
+            "Lever_arm": 2.181
         },
         "Options": {
-            "Masse": 0,
-            "Bras_levier": 0
+            "Mass": 0,
+            "Lever_arm": 0
         },
-        "Passager_AV": {
-            "Bras_levier": 2.045
+        "Pax_AV": {
+            "Lever_arm": 2.045
         },
-        "Passager_AR": {
-            "Bras_levier": 3.000
+        "Pax_AR": {
+            "Lever_arm": 3.000
         },
-        "Carburant": {
-            "Bras_levier": 2.431
+        "Fuel": {
+            "Lever_arm": 2.431
         },
-        "Bagages": {
-            "Bras_levier": 3.627
+        "Baggage": {
+            "Lever_arm": 3.627
         }
     }
 }

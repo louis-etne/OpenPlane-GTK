@@ -126,7 +126,7 @@ class HangarDialog():
         with open(filepath, 'r') as reader:
             datas = json.load(reader)
 
-            return datas['Immatriculation'].upper()
+            return datas['Matriculation'].upper()
 
     def add_filters(self, dialog):
         filter_json = Gtk.FileFilter()
