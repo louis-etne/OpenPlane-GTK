@@ -1,0 +1,101 @@
+{
+    "Carburant": {
+        "Capacite": 110,
+        "Consomation": 25,
+        "Inutilisable": 10,
+        "Type": "100LL",
+        "Unite": "L"
+    },
+    "Centrage": {
+        "Bagages": {
+            "Bras_levier": 0.0
+        },
+        "Carburant": {
+            "Bras_levier": 0.0
+        },
+        "Masse_vide": {
+            "Bras_levier": 0.0,
+            "Masse": 0.0
+        },
+        "Normale": {
+            "P1x": 0.889,
+            "P1y": 700.0,
+            "P2x": 0.889,
+            "P2y": 884.0,
+            "P3x": 1.028,
+            "P3y": 1157.0,
+            "P4x": 1.201,
+            "P4y": 1157.0,
+            "P5x": 1.201,
+            "P5y": 700.0
+        },
+        "Options": {
+            "Bras_levier": 0.0,
+            "Masse": 0.0
+        },
+        "Passager_AR": {
+            "Bras_levier": 0.0
+        },
+        "Passager_AV": {
+            "Bras_levier": 0.0
+        },
+        "Utilitaire": {
+            "Montrer": true,
+            "P1x": 0.889,
+            "P1y": 700.0,
+            "P2x": 0.889,
+            "P2y": 884.0,
+            "P3x": 0.947,
+            "P3y": 998.0,
+            "P4x": 1.028,
+            "P4y": 998.0,
+            "P5x": 1.028,
+            "P5y": 700.0
+        }
+    },
+    "Certification": "V",
+    "Couleurs": "White and blue",
+    "Equipement": {
+        "C": false,
+        "D": false,
+        "F": true,
+        "G": false,
+        "H": false,
+        "I": false,
+        "J": false,
+        "K": false,
+        "L": false,
+        "O": true,
+        "R": false,
+        "T": false,
+        "U": false,
+        "V": true,
+        "W": false,
+        "X": false,
+        "Y": false
+    },
+    "Immatriculation": "F-TEST",
+    "OACI": "DR30",
+    "Piste": {
+        "Dure": 280,
+        "Herbe": 350,
+        "Unite": "m"
+    },
+    "RDBA": "4",
+    "Transpondeur": "C",
+    "Turbulence": "L",
+    "Type": "DR300-108",
+    "Vitesse": {
+        "Croisiere": 100,
+        "Descente": 100,
+        "Montee": 80,
+        "VFE": 92,
+        "VNE": 159,
+        "VNO": 140,
+        "VSO": 43,
+        "Vx": 70,
+        "Vy": 81,
+        "VzDescente": 500,
+        "VzMontee": 500
+    }
+}

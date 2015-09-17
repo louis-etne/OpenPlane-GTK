@@ -102,7 +102,8 @@ class Plane:
         self.baggage = values[72]
 
     def save_plane(self):
-        filename = '{}{}.json'.format(config.planes_folder, self.matriculation)
+        filename = '{}{}{}'.format(config.planes_folder, self.matriculation,
+                                   config.planes_ext)
 
         plane_values = {
              'Immatriculation': self.matriculation,
@@ -188,8 +189,8 @@ class Plane:
                     'Bras_levier': self.empty_bdl
                  },
                  'Options': {
-                    'Masse': self.option_mass,
-                    'Bras_levier': self.options_lab
+                    'Masse': self.options_mass,
+                    'Bras_levier': self.options_bdl
                  },
                  'Passager_AV': {
                     'Bras_levier': self.pass_av

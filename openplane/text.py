@@ -21,7 +21,7 @@ file_path = 'Chemin du fichier'
 select_file = 'Sélectionnez le fichier'
 save_weight = 'Enregistrer le bilan'
 edit_plane = 'Modifier {0}'
-json_files = 'Fichiers JSON'
+opf_files = 'Fichiers Open Plane File'
 png_files = 'Images PNG'
 all_files = 'Tous les fichiers'
 

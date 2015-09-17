@@ -145,8 +145,6 @@ class PlanesManagerDialog:
         total2 = self.empty_bdl.get_value() + self.options_bdl.get_value()
         total_moment = empty_moment + options_moment
 
-        print(total_moment)
-
         self.total_empty.set_text(str(round(empty_moment, 3)))
         self.total_options.set_text(str(round(options_moment, 3)))
         self.total_mass.set_text(str(round(total1, 3)))

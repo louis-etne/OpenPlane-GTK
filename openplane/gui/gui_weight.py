@@ -86,7 +86,8 @@ class WeightWindow:
 
     def update_plane_list(self):
         self.planes_list.clear()
-        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
+        for plane_file in glob.glob('{}*{}'.format(config.planes_folder,
+                                                   config.planes_ext)):
                 plane = os.path.basename(plane_file)
                 self.planes_list.append([os.path.splitext(plane)[0],
                                          plane_file])

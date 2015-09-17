@@ -28,7 +28,7 @@ class App:
 
         builder.connect_signals(handlers)
         self.window = builder.get_object('mainWindow')
-        self.window.set_icon_from_file(config.icon_path)
+        self.window.set_icon_from_file(config.icon64_path)
 
     def on_convert_clicked(self, *args):
         convert = ConvertWindow()

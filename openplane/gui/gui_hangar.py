@@ -64,7 +64,8 @@ class HangarDialog():
         self.planes_list.clear()
         planes_path = []
 
-        for plane_file in glob.glob('{}*.json'.format(config.planes_folder)):
+        for plane_file in glob.glob('{}*{}'.format(config.planes_folder,
+                                                   config.planes_ext)):
             planes_path.append(plane_file)
 
         for plane in planes_path:
@@ -110,7 +111,8 @@ class HangarDialog():
             file_path = dialog.get_filename()
             plane_name = self.get_plane_name(file_path)
 
-            new_path = '{}{}.json'.format(config.planes_folder, plane_name)
+            new_path = '{}{}{}'.format(config.planes_folder, plane_name,
+                                       config.planes_ext)
 
             shutil.copy(file_path, new_path)
 
@@ -128,8 +130,8 @@ class HangarDialog():
 
     def add_filters(self, dialog):
         filter_json = Gtk.FileFilter()
-        filter_json.set_name(text.json_file)
-        filter_json.add_pattern("*.json")
+        filter_json.set_name(text.opf_file)
+        filter_json.add_pattern('*{}'.format(config.planes_ext))
         dialog.add_filter(filter_json)
 
         filter_any = Gtk.FileFilter()
