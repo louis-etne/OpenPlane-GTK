@@ -1,4 +1,5 @@
 *.glade~
 __pycache__/
 __pycache__/
-preview.png
+openplane/images/preview.png
+*.pyc

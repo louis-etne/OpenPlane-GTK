@@ -4,6 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk
+from openplane.gui.gui_flightslog import *
 from openplane.gui.gui_convert import *
 from openplane.gui.gui_hangar import *
 from openplane.gui.gui_weight import *
@@ -23,7 +24,8 @@ class App:
             'on_convert_clicked': self.on_convert_clicked,
             'on_hangar_clicked': self.on_hangar_clicked,
             'on_weight_clicked': self.on_weight_clicked,
-            'on_about_clicked': self.on_about_clicked
+            'on_about_clicked': self.on_about_clicked,
+            'on_flightslog_clicked': self.on_flightslog_clicked
         }
 
         builder.connect_signals(handlers)
@@ -41,6 +43,10 @@ class App:
     def on_weight_clicked(self, *args):
         weight = WeightWindow()
         weight.window.show_all()
+
+    def on_flightslog_clicked(self, *args):
+        flightslog = FlightsLogWindow()
+        flightslog.window.show_all()
 
     def on_about_clicked(self, *args):
         about = AboutDialog()

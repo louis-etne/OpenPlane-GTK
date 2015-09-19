@@ -28,6 +28,7 @@ app = '{}gui_app.glade'.format(glade_folder)
 about = '{}gui_about.glade'.format(glade_folder)
 convert = '{}gui_convert.glade'.format(glade_folder)
 flights_log = '{}gui_flightslog.glade'.format(glade_folder)
+flight_manager = '{}gui_flight_manager.glade'.format(glade_folder)
 
 # Images
 preview_balance = '{}preview_balance.png'.format(images_folder)
