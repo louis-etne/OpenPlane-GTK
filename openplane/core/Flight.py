@@ -11,7 +11,7 @@ import json
 class Flight:
 
     def __init__(self, values=None):
-        if values is not None and len(values) == 21:
+        if values is not None and len(values) == 28:
             self.create_flight(values)
 
     def create_flight(self, values):
@@ -21,27 +21,35 @@ class Flight:
         self.type = values[3]
 
         self.members_day = values[4]
-        self.members_night = values[5]
+        self.members_hours = values[5]
+        self.members_minutes = values[6]
 
-        self.single_engine_day_double = values[6]
-        self.single_engine_day_captain = values[7]
-        self.single_engine_night_double = values[8]
-        self.single_engine_night_captain = values[9]
+        self.single_engine_day = values[7]
+        self.single_engine_double = values[8]
+        self.single_engine_hours = values[9]
+        self.single_engine_minutes = values[10]
 
-        self.multi_engines_day_double = values[10]
-        self.multi_engines_day_captain = values[11]
-        self.multi_engines_day_copilot = values[12]
-        self.multi_engines_night_double = values[13]
-        self.multi_engines_night_captain = values[14]
-        self.multi_engines_night_copilot = values[15]
+        self.multi_engines_day = values[11]
+        self.multi_engines_double = values[12]
+        self.multi_engines_captain = values[13]
+        self.multi_engines_hours = values[14]
+        self.multi_engines_minutes = values[15]
 
         self.ifr_double = values[16]
-        self.ifr_captain = values[17]
+        self.ifr_hours = values[17]
+        self.ifr_minutes = values[18]
 
-        self.simulation = values[18]
-        self.ifr_arrivals = values[19]
+        self.simulation_hours = values[19]
+        self.simulation_minutes = values[20]
+        self.ifr_arrivals = values[21]
 
-        self.comments = values[20]
+        self.observations = values[22]
+
+        self.takeoff = values[23]
+        self.landing = values[24]
+        self.departure = values[25]
+        self.arrival = values[26]
+        self.comments = values[27]
 
     def save_flight(self):
         flight_name = '{}{}{}'.format(config.flightslog_folder, self.date,
@@ -53,37 +61,41 @@ class Flight:
             'Role': self.role,
             'Type': self.type,
             'Members': {
-                'Day': self.save_time(self.members_day),
-                'Night': self.save_time(self.members_night)
+                'Day': self.members_day,
+                'Hours': self.members_hours,
+                'Minutes': self.members_minutes
             },
             'Single_engine': {
-                'Day': {
-                    'Double': self.save_time(self.single_engine_day_double),
-                    'Captain': self.save_time(self.single_engine_day_captain)
-                },
-                'Night': {
-                    'Double': self.save_time(self.single_engine_night_double),
-                    'Captain': self.save_time(self.single_engine_night_captain)
-                }
+                'Day': self.single_engine_day,
+                'Double': self.single_engine_double,
+                'Hours': self.single_engine_hours,
+                'Minutes': self.single_engine_minutes
             },
             'Multi_engines': {
-                'Day': {
-                    'Double': self.save_time(self.multi_engines_day_double),
-                    'Captain': self.save_time(self.multi_engines_day_captain),
-                    'Co-Pilot': self.save_time(self.multi_engines_day_copilot)
-                },
-                'Night': {
-                    'Double': self.save_time(self.multi_engines_night_double),
-                    'Captain': self.save_time(self.multi_engines_night_captain),
-                    'Co-Pilot': self.save_time(self.multi_engines_night_copilot)
-                }
+                'Day': self.multi_engines_day,
+                'Double': self.multi_engines_double,
+                'Captain': self.multi_engines_captain,
+                'Hours': self.multi_engines_hours,
+                'Minutes': self.multi_engines_minutes
             },
             'IFR': {
-                'Double': self.save_time(self.ifr_double),
-                'Captain': self.save_time(self.ifr_captain)
+                'Double': self.ifr_double,
+                'Hours': self.ifr_hours,
+                'Minutes': self.ifr_minutes,
+                'Arrivals': self.ifr_arrivals,
             },
-            'Simulation': self.save_time(self.simulation),
-            'IFR_arrivals': self.ifr_arrivals,
+            'Simulation': {
+                'Hours': self.simulation_hours,
+                'Minutes': self.simulation_minutes
+            },
+
+            'Observations': self.observations,
+            'Take-off': self.takeoff,
+            'Landing': self.landing,
+            'Airfields': {
+                'Departure': self.departure,
+                'Arrival': self.arrival
+            },
             'Comments': self.comments
         }
 
@@ -102,81 +114,54 @@ class Flight:
             values.append(datas['Type'])
 
             values.append(datas['Members']['Day'])
-            values.append(datas['Members']['Night'])
+            values.append(datas['Members']['Hours'])
+            values.append(datas['Members']['Minutes'])
 
-            values.append(datas['Single_engine']['Day']['Double'])
-            values.append(datas['Single_engine']['Day']['Captain'])
-            values.append(datas['Single_engine']['Night']['Double'])
-            values.append(datas['Single_engine']['Night']['Captain'])
+            values.append(datas['Single_engine']['Day'])
+            values.append(datas['Single_engine']['Double'])
+            values.append(datas['Single_engine']['Hours'])
+            values.append(datas['Single_engine']['Minutes'])
 
-            values.append(datas['Multi_engines']['Day']['Double'])
-            values.append(datas['Multi_engines']['Day']['Captain'])
-            values.append(datas['Multi_engines']['Day']['Co-Pilot'])
-            values.append(datas['Multi_engines']['Night']['Double'])
-            values.append(datas['Multi_engines']['Night']['Captain'])
-            values.append(datas['Multi_engines']['Night']['Co-Pilot'])
+            values.append(datas['Multi_engines']['Day'])
+            values.append(datas['Multi_engines']['Double'])
+            values.append(datas['Multi_engines']['Captain'])
+            values.append(datas['Multi_engines']['Hours'])
+            values.append(datas['Multi_engines']['Minutes'])
 
             values.append(datas['IFR']['Double'])
-            values.append(datas['IFR']['Captain'])
+            values.append(datas['IFR']['Hours'])
+            values.append(datas['IFR']['Minutes'])
 
-            values.append(datas['Simulation'])
-            values.append(datas['IFR_arrivals'])
+            values.append(datas['Simulation']['Hours'])
+            values.append(datas['Simulation']['Minutes'])
 
+            values.append(datas['IFR']['Arrivals'])
+
+            values.append(datas['Observations'])
+
+            values.append(datas['Take-off'])
+            values.append(datas['Landing'])
+            values.append(datas['Airfields']['Departure'])
+            values.append(datas['Airfields']['Arrival'])
             values.append(datas['Comments'])
 
         self.create_flight(values)
 
     def calc_total_hours(self):
-        t1_hours, t1_minutes = self.divide_time(self.members_day)
-        t2_hours, t2_minutes = self.divide_time(self.members_night)
-        t3_hours, t3_minutes = self.divide_time(self.single_engine_day_double)
-        t4_hours, t4_minutes = self.divide_time(self.single_engine_day_captain)
-        t5_hours, t5_minutes = self.divide_time(self.single_engine_night_double)
-        t6_hours, t6_minutes = self.divide_time(self.single_engine_night_captain)
-        t7_hours, t7_minutes = self.divide_time(self.multi_engines_day_double)
-        t8_hours, t8_minutes = self.divide_time(self.multi_engines_day_captain)
-        t9_hours, t9_minutes = self.divide_time(self.multi_engines_day_copilot)
-        t10_hours, t10_minutes = self.divide_time(self.multi_engines_night_double)
-        t11_hours, t11_minutes = self.divide_time(self.multi_engines_night_captain)
-        t12_hours, t12_minutes = self.divide_time(self.multi_engines_night_copilot)
-        t13_hours, t13_minutes = self.divide_time(self.ifr_double)
-        t14_hours, t14_minutes = self.divide_time(self.ifr_captain)
-        t15_hours, t15_minutes = self.divide_time(self.simulation)
+        t1 = timedelta(hours=self.members_hours,
+                       minutes=self.members_minutes)
 
-        t1 = timedelta(hours=t1_hours , minutes=t1_minutes)
-        t2 = timedelta(hours=t2_hours , minutes=t2_minutes)
-        t3 = timedelta(hours=t3_hours , minutes=t3_minutes)
-        t4 = timedelta(hours=t4_hours , minutes=t4_minutes)
-        t5 = timedelta(hours=t5_hours , minutes=t5_minutes)
-        t6 = timedelta(hours=t6_hours , minutes=t6_minutes)
-        t7 = timedelta(hours=t7_hours , minutes=t7_minutes)
-        t8 = timedelta(hours=t8_hours , minutes=t8_minutes)
-        t9 = timedelta(hours=t9_hours , minutes=t9_minutes)
-        t10 = timedelta(hours=t10_hours , minutes=t10_minutes)
-        t11 = timedelta(hours=t11_hours , minutes=t11_minutes)
-        t12 = timedelta(hours=t12_hours , minutes=t12_minutes)
-        t13 = timedelta(hours=t13_hours , minutes=t13_minutes)
-        t14 = timedelta(hours=t14_hours , minutes=t14_minutes)
-        t15 = timedelta(hours=t15_hours , minutes=t15_minutes)
+        t2 = timedelta(hours=self.single_engine_hours,
+                       minutes=self.single_engine_minutes)
 
-        total = t1 + t2 + t3 + t4 + t5 + t6 + t7 + t8 + t9 + t10 + t11 + \
-            t12 + t13 + t14 + t15
+        t3 = timedelta(hours=self.multi_engines_hours,
+                       minutes=self.multi_engines_minutes)
 
+        t4 = timedelta(hours=self.ifr_hours,
+                       minutes=self.ifr_minutes)
+
+        t5 = timedelta(hours=self.simulation_hours,
+                       minutes=self.simulation_minutes)
+
+        total = t1 + t2 + t3 + t4 + t5
         return str(total)[:-3]
-
-    def divide_time(self, strtime):
-        '''
-            Divise le temps, prend en entrée un temps de la forme hh:mm
-            et sépare les heures des minutes
-        '''
-        hours, minutes = strtime.split(':', 1)
-        return int(hours), int(minutes)
-
-    def save_time(self, strtime):
-        hours, minutes = self.divide_time(strtime)
-        if hours < 10:
-            hours = '0' + str(hours)  # si h = 6, retourne 06
-        if minutes < 10:
-            minutes = '0' + str(minutes)
-
-        return ':'.join([str(hours), str(minutes)])

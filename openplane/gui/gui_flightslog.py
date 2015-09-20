@@ -91,11 +91,20 @@ class FlightsLogWindow:
         flight_manager.dialog.run()
         self.update_flights_list()
 
-    def on_open_clicked(self, button):
+    def on_open_clicked(self, button, selection):
         '''
             Ouvre l'éditeur de vol en passant le lien du vol à éditer
         '''
-        pass
+        model, treeiter = selection.get_selected()
+        if treeiter is not None:
+            file_name = model[treeiter][0]
+            path = '{}{}{}'.format(config.flightslog_folder, file_name,
+                                   config.flights_ext)
+
+            flight_manager = FlightManagerDialog(path)
+            flight_manager.dialog.run()
+
+            self.update_flights_list()
 
     def on_delete_clicked(self, button, selection):
         '''
