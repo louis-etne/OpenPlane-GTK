@@ -20,7 +20,7 @@ class AboutDialog:
         self.dialog = builder.get_object('aboutDialog')
         self.dialog.set_version(text.version)
 
-        logo = GdkPixbuf.Pixbuf.new_from_file(config.logo_path)
+        logo = GdkPixbuf.Pixbuf.new_from_file(config.icon64_path)
         self.dialog.set_logo(logo)
 
     def app_quit(self, *btn):

@@ -10,7 +10,8 @@
     <property name="program_name">OpenPlane</property>
     <property name="copyright" translatable="yes">Copyright © 2015 Louis Etienne
 Merci à Blackline pout le logo</property>
-    <property name="comments" translatable="yes">OpenPlane est un utilitaire pour les pilotes.</property>
+    <property name="comments" translatable="yes">OpenPlane est un utilitaire pour les pilotes.
+Je remercie chaudement la communauté de Zeste de Savoir de m'avoir soutenu et conseillé.</property>
     <property name="website">https://github.com/boopr/OpenPlane</property>
     <property name="website_label" translatable="yes">Le projet est entièrement disponible sur GitHub</property>
     <property name="authors">Louis Etienne</property>

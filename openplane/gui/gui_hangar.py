@@ -129,10 +129,10 @@ class HangarDialog():
             return datas['Matriculation'].upper()
 
     def add_filters(self, dialog):
-        filter_json = Gtk.FileFilter()
-        filter_json.set_name(text.opf_file)
-        filter_json.add_pattern('*{}'.format(config.planes_ext))
-        dialog.add_filter(filter_json)
+        filter_opp = Gtk.FileFilter()
+        filter_opp.set_name(text.opp_files)
+        filter_opp.add_pattern('*{}'.format(config.planes_ext))
+        dialog.add_filter(filter_opp)
 
         filter_any = Gtk.FileFilter()
         filter_any.set_name(text.all_files)

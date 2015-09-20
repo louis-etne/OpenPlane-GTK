@@ -22,7 +22,7 @@ select_file = 'Sélectionnez le fichier'
 save_weight = 'Enregistrer le bilan'
 edit_plane = 'Modifier {0}'
 edit_flight = 'Modifier le vol du {}/{}/{}'
-opf_files = 'Fichiers Open Plane File'
+opp_files = 'Fichiers OpenPlane Plane'
 png_files = 'Images PNG'
 all_files = 'Tous les fichiers'
 

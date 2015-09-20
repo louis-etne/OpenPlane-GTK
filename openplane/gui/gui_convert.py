@@ -59,7 +59,6 @@ class ConvertWindow:
 
         handlers = {
             'on_delete_event': self.app_quit,
-            'on_about_clicked': self.on_about_clicked,
             'on_close_clicked': self.app_quit
         }
 
@@ -124,11 +123,6 @@ class ConvertWindow:
             self.convert_label.set_text(result)
         else:
             pass
-
-    def on_about_clicked(self, *args):
-        about = AboutDialog()
-        about.dialog.run()
-        about.dialog.destroy()
 
     def app_quit(self, *args):
         self.window.destroy()
