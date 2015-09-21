@@ -17,8 +17,11 @@ logo_file_name = 'OpenPlane.png'
 icon32_file_name = 'OpenPlane_32.png'
 icon64_file_name = 'OpenPlane_64.png'
 logo_path = '{}{}'.format(images_folder, logo_file_name)
-icon32_path = '{}{}'.format(images_folder, icon32_file_name)
-icon64_path = '{}{}'.format(images_folder, icon64_file_name)
+
+if os.name == 'posix':
+    icon_path = '{}{}'.format(images_folder, icon64_file_name)
+else:
+    icon_path = '{}{}'.format(images_folder, icon32_file_name)
 
 # Glade files
 hangar = '{}gui_hangar.glade'.format(glade_folder)

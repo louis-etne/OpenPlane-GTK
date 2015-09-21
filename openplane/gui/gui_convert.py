@@ -65,6 +65,7 @@ class ConvertWindow:
         builder.connect_signals(handlers)
 
         self.window = builder.get_object('mainWindow')
+        self.window.set_icon_from_file(config.icon_path)
 
     def on_units_changed(self, combo=None):
         tree_iter = self.units_combo.get_active_iter()

@@ -41,6 +41,7 @@ class FlightsLogWindow:
         self.view = builder.get_object('flightsLogView')
         self.view.set_rules_hint(True)
         self.window = builder.get_object('mainWindow')
+        self.window.set_icon_from_file(config.icon_path)
 
         if flight_path is not None:
             self.import_flightlog(flight_path)

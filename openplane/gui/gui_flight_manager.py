@@ -76,6 +76,7 @@ class FlightManagerDialog:
         self.comments = builder.get_object('comments')
 
         self.dialog = builder.get_object('dialog')
+        self.dialog.set_icon_from_file(config.icon_path)
 
         if flight_path is not None:
             self.import_flight(flight_path)

@@ -23,5 +23,7 @@ class AboutDialog:
         logo = GdkPixbuf.Pixbuf.new_from_file(config.icon64_path)
         self.dialog.set_logo(logo)
 
+        self.dialog.set_icon_from_file(config.icon_path)
+
     def app_quit(self, *btn):
         self.dialog.destroy()

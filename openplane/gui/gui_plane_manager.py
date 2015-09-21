@@ -128,6 +128,7 @@ class PlanesManagerDialog:
 
         # Création de la fenêtre principale
         self.dialog = builder.get_object('dialog')
+        self.dialog.set_icon_from_file(config.icon_path)
 
         if filepath is not None:
             self.import_datas_plane(filepath)

@@ -33,6 +33,7 @@ class WeightWindow:
 
         self.window = builder.get_object('mainWindow')
         self.width, self.height = self.window.get_size()
+        self.window.set_icon_from_file(config.icon_path)
 
         main_layout = builder.get_object('mainLayout')
         self.planes_list = Gtk.ListStore(str, str)
