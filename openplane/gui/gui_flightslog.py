@@ -63,11 +63,17 @@ class FlightsLogWindow:
             plane = Plane()
 
             flight.import_flight(flight_doc)
-            plane.import_plane(flight.plane)
 
             total_hours = flight.calc_total_hours()
-            self.flights_list.append([flight.date, plane.matriculation,
-                                     flight.type, total_hours])
+
+            # On vérifie que l'avion existe bien (bug remonté par WinXaito)
+            if os.path.isfile(flight.plane):
+                plane.import_plane(flight.plane)
+                self.flights_list.append([flight.date, plane.matriculation,
+                                         flight.type, total_hours])
+            else:
+                self.flights_list.append([flight.date, 'UKNOWN',
+                                         flight.type, total_hours])
 
     def on_flight_selected(self, select):
         '''

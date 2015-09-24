@@ -28,7 +28,6 @@ class FlightManagerDialog:
         self.plane_chooser = builder.get_object('planeChooser')
         self.planes_list = builder.get_object('planeChooserList')
         self.update_planes_list()  # On créer la liste des avions
-        self.plane_chooser.set_active(0)
         self.role = builder.get_object('role')
         self.type = builder.get_object('type')
 
@@ -171,17 +170,20 @@ class FlightManagerDialog:
         flight = Flight()
         flight.import_flight(flight_path)
 
-        plane = Plane()
-        plane.import_plane(flight.plane)
-
         year, month, day = flight.date.split('-')
 
         self.date.select_day(int(day))
         self.date.select_month(int(month) - 1, int(year))
 
 
-        self.plane_chooser.set_active_id(plane.matriculation)
         self.role.set_active_id(flight.role)
+
+        # On vérifie que l'avion existe bien (bug remonté par WinXaito)
+        if os.path.isfile(flight.plane):
+            plane = Plane()
+            plane.import_plane(flight.plane)
+            self.plane_chooser.set_active_id(plane.matriculation)
+
         self.type.set_text(flight.type)
 
         # Membres d'équipage
