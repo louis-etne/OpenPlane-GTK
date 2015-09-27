@@ -5,7 +5,7 @@
 
 from gi.repository import Gtk
 from openplane.gui.gui_update_manager import *
-from openplane.gui.gui_flightslog import *
+from openplane.gui.gui_logbook import *
 from openplane.gui.gui_convert import *
 from openplane.gui.gui_hangar import *
 from openplane.gui.gui_weight import *
@@ -26,7 +26,7 @@ class App:
             'on_hangar_clicked': self.on_hangar_clicked,
             'on_weight_clicked': self.on_weight_clicked,
             'on_about_clicked': self.on_about_clicked,
-            'on_flightslog_clicked': self.on_flightslog_clicked,
+            'on_logbook_clicked': self.on_logbook_clicked,
             'on_update_clicked': self.on_update_clicked
         }
 
@@ -46,9 +46,9 @@ class App:
         weight = WeightWindow()
         weight.window.show_all()
 
-    def on_flightslog_clicked(self, *args):
-        flightslog = FlightsLogWindow()
-        flightslog.window.show_all()
+    def on_logbook_clicked(self, *args):
+        logbook = LogbookWindow()
+        logbook.window.show_all()
 
     def on_update_clicked(self, *args):
         update = UpdateManager()
