@@ -14,7 +14,8 @@ Merci à Blackline pout le logo</property>
 Je remercie chaudement la communauté de Zeste de Savoir de m'avoir soutenu et conseillé.</property>
     <property name="website">https://github.com/boopr/OpenPlane</property>
     <property name="website_label" translatable="yes">Le projet est entièrement disponible sur GitHub</property>
-    <property name="authors">Louis Etienne</property>
+    <property name="authors">Louis Etienne
+Nodraak (parseur des aérodromes)</property>
     <property name="artists">Blackline</property>
     <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">

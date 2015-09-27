@@ -237,8 +237,10 @@ class WeightWindow:
     def on_preview_toggled(self, check):
         if check.get_active():
             self.update_preview()
+            self.btn_save.set_sensitive(True)
         else:
             self.clear_preview()
+            self.btn_save.set_sensitive(False)
 
     def update_preview(self):
         figure_path = config.preview

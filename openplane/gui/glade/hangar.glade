@@ -8,7 +8,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
     <property name="title" translatable="yes">Hangar</property>
-    <property name="type_hint">normal</property>
+    <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialogLayout">
         <property name="can_focus">False</property>

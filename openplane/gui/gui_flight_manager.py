@@ -6,7 +6,9 @@
 from gi.repository import Gtk
 from openplane.core.Flight import *
 from openplane.gui.gui_hangar import *
+from openplane.gui.gui_airfields_selector import *
 from openplane import config
+import json
 
 
 class FlightManagerDialog:
@@ -18,7 +20,8 @@ class FlightManagerDialog:
         handlers = {
             'on_close_clicked': self.app_quit,
             'on_save_clicked': self.on_save_clicked,
-            'on_add_clicked': self.on_add_clicked
+            'on_add_clicked': self.on_add_clicked,
+            'on_airfields_clicked': self.open_airfields
         }
         builder.connect_signals(handlers)
 
@@ -228,6 +231,15 @@ class FlightManagerDialog:
         self.comments.set_text(flight.comments)
 
         self.dialog.set_title(text.edit_flight.format(day, month, year))
+
+    def open_airfields(self, btn):
+        selector = AirfieldSelectorDialog()
+        response = selector.dialog.run()
+
+        if response == 1:
+            btn.set_label(selector.return_airfield())
+
+        selector.dialog.destroy()
 
     def app_quit(self, *args):
         '''

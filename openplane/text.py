@@ -11,7 +11,22 @@ matriculation = 'Immatriculation'
 lever_arm = 'Bras de levier (m)'
 mass = 'Masse (kg)'
 
+to_date = 'À jour'
+
 weight_title = 'Masse et centrage du {0}'
+
+side = 'Côté {0}'
+rwy = 'Piste'
+size = 'Dimensions'
+surface = 'Revêtement'
+orientation = 'Orientation'
+thr = 'THR'
+position_thr = 'Position'
+alt_thr = 'Altitude'
+dthr = 'DTHR'
+position_dthr = 'Position'
+alt_dthr = 'Altitude'
+status = 'Status'
 
 app_convert = 'Convertisseur'
 app_hangar = 'Accéder au hangar'

@@ -9,8 +9,11 @@ import os
 gui_folder = 'openplane{0}gui{0}'.format(os.sep)
 glade_folder = 'openplane{0}gui{0}glade{0}'.format(os.sep)
 images_folder = 'openplane{0}images{0}'.format(os.sep)
-planes_folder = 'openplane{0}planes{0}'.format(os.sep)
-flightslog_folder = 'openplane{0}flightslog{0}'.format(os.sep)
+planes_folder = 'openplane{0}datas{0}planes{0}'.format(os.sep)
+flightslog_folder = 'openplane{0}datas{0}flightslog{0}'.format(os.sep)
+
+# Files
+airfields = 'openplane{0}datas{0}airfields.json'.format(os.sep)
 
 # Logo (Thanks to Blackline)
 logo_file_name = 'OpenPlane.png'
@@ -24,14 +27,17 @@ else:
     icon_path = '{}{}'.format(images_folder, icon32_file_name)
 
 # Glade files
-hangar = '{}gui_hangar.glade'.format(glade_folder)
-plane_manager = '{}gui_plane_manager.glade'.format(glade_folder)
-weight = '{}gui_weight.glade'.format(glade_folder)
-app = '{}gui_app.glade'.format(glade_folder)
-about = '{}gui_about.glade'.format(glade_folder)
-convert = '{}gui_convert.glade'.format(glade_folder)
-flights_log = '{}gui_flightslog.glade'.format(glade_folder)
-flight_manager = '{}gui_flight_manager.glade'.format(glade_folder)
+app = '{}app.glade'.format(glade_folder)
+about = '{}about.glade'.format(glade_folder)
+hangar = '{}hangar.glade'.format(glade_folder)
+weight = '{}weight.glade'.format(glade_folder)
+convert = '{}convert.glade'.format(glade_folder)
+flights_log = '{}flightslog.glade'.format(glade_folder)
+plane_manager = '{}plane_manager.glade'.format(glade_folder)
+flight_manager = '{}flight_manager.glade'.format(glade_folder)
+update_manager = '{}update_manager.glade'.format(glade_folder)
+airfield_viewer = '{}airfield_viewer.glade'.format(glade_folder)
+airfields_selector = '{}airfields_selector.glade'.format(glade_folder)
 
 # Images
 preview_balance = '{}preview_balance.png'.format(images_folder)
