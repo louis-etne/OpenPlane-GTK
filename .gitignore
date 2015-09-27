@@ -3,4 +3,4 @@ __pycache__/
 __pycache__/
 openplane/images/preview.png
 *.pyc
-doc/_build
+docs/_build
