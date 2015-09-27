@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/openplane/badge/?version=latest)](http://openplane.readthedocs.org/fr/latest/?badge=latest)
+
 # OpenPlane
 
 **Version actuelle :** 0.7
