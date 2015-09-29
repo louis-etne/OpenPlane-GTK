@@ -41,6 +41,8 @@ airfields_selector = '{}airfields_selector.glade'.format(glade_folder)
 # Images
 preview_balance = '{}preview_balance.png'.format(images_folder)
 preview = '{}preview.png'.format(images_folder)
+plane = '{}plane.png'.format(images_folder)
+simulator = '{}joystick.png'.format(images_folder)
 
 # Extensions
 planes_ext = '.opp'
