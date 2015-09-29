@@ -11,34 +11,35 @@ import json
 class Flight:
 
     def __init__(self, values=None):
-        if values is not None and len(values) == 18:
+        if values is not None and len(values) == 19:
             self.create_flight(values)
 
     def create_flight(self, values):
         self.type = values[0]
-        self.date = values[1]
-        self.plane = values[2]
-        self.flight_rule = values[3]
+        self.id = values[1]
+        self.date = values[2]
+        self.plane = values[3]
+        self.flight_rule = values[4]
 
-        self.departure_airfield = values[4]
-        self.departure_hours = values[5]
-        self.departure_minutes = values[6]
+        self.departure_airfield = values[5]
+        self.departure_hours = values[6]
+        self.departure_minutes = values[7]
 
-        self.arrival_airfield = values[7]
-        self.arrival_hours = values[8]
-        self.arrival_minutes = values[9]
+        self.arrival_airfield = values[8]
+        self.arrival_hours = values[9]
+        self.arrival_minutes = values[10]
 
-        self.time_day_hours = values[10]
-        self.time_day_minutes = values[11]
+        self.time_day_hours = values[11]
+        self.time_day_minutes = values[12]
 
-        self.time_night_hours = values[12]
-        self.time_night_minutes = values[13]
+        self.time_night_hours = values[13]
+        self.time_night_minutes = values[14]
 
-        self.takeoffs = values[14]
-        self.landings = values[15]
+        self.takeoffs = values[15]
+        self.landings = values[16]
 
-        self.crew = values[16]
-        self.briefing = values[17]
+        self.crew = values[17]
+        self.briefing = values[18]
 
         self.time_total_hours, self.time_total_minutes = self.total_hours()
 
@@ -48,6 +49,7 @@ class Flight:
 
         flight_values = {
             'Type': self.type,
+            'Id': self.id,
             'Date': self.date,
             'Plane': self.plane,
             'Flight_rule': self.flight_rule,
@@ -93,6 +95,7 @@ class Flight:
             datas = json.load(reader)
 
             values.append(datas['Type'])
+            values.append(datas['Id'])
             values.append(datas['Date'])
             values.append(datas['Plane'])
             values.append(datas['Flight_rule'])
@@ -113,7 +116,7 @@ class Flight:
             values.append(datas['Operations']['Takeoffs'])
             values.append(datas['Operations']['Landings'])
 
-            values.append['Crew']
+            values.append(datas['Crew'])
 
             values.append(datas['Briefing'])
 
@@ -129,3 +132,59 @@ class Flight:
         total = str(t_day + t_night)[:-3]
         hours, minutes = total.split(':')
         return int(hours), int(minutes)
+
+    def return_total_time(self):
+        if self.time_total_hours < 10:
+            hours = '0{}'.format(self.time_total_hours)
+        else:
+            hours = str(self.time_total_hours)
+
+        if self.time_total_minutes < 10:
+            minutes = '0{}'.format(self.time_total_minutes)
+        else:
+            minutes = str(self.time_total_minutes)
+
+        return ':'.join((hours, minutes))
+
+    def return_day_time(self):
+        if self.time_day_hours < 10:
+            hours = '0{}'.format(self.time_day_hours)
+        else:
+            hours = str(self.time_day_hours)
+
+        if self.time_day_minutes < 10:
+            minutes = '0{}'.format(self.time_day_minutes)
+        else:
+            minutes = str(self.time_day_minutes)
+
+        return ':'.join((hours, minutes))
+
+    def return_night_time(self):
+        if self.time_night_hours < 10:
+            hours = '0{}'.format(self.time_night_hours)
+        else:
+            hours = str(self.time_night_hours)
+
+        if self.time_night_minutes < 10:
+            minutes = '0{}'.format(self.time_night_minutes)
+        else:
+            minutes = str(self.time_night_minutes)
+
+        return ':'.join((hours, minutes))
+
+    def return_date(self):
+        year, month, day = self.date.split('-')
+        if int(day) < 10:
+            day = '0{}'.format(day)
+        if int(month) < 10:
+            month = '0{}'.format(month)
+        return '/'.join((day, month, year))
+
+    def return_day(self):
+        return int(self.date.split('-')[2])
+
+    def return_month(self):
+        return int(self.date.split('-')[1]) - 1
+
+    def return_year(self):
+        return int(self.date.split('-')[0])
