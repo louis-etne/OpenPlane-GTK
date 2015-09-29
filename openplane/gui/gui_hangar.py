@@ -82,9 +82,9 @@ class HangarDialog():
         self.update_file_list()
 
     def on_edit_clicked(self, button):
-            edit_plane = PlanesManagerDialog(self.return_selected())
-            edit_plane.dialog.run()
-            self.update_file_list()
+        edit_plane = PlanesManagerDialog(self.return_selected())
+        edit_plane.dialog.run()
+        self.update_file_list()
 
     def on_import_clicked(self, button):
         dialog = Gtk.FileChooserDialog(text.select_file, self.dialog,
@@ -135,7 +135,7 @@ class HangarDialog():
     def return_selected(self):
         model, treeiter = self.select.get_selected()
         if treeiter is not None:
-            return model[treeiter][1]
+            return model[treeiter][0]
 
     def app_quit(self, *args):
         self.dialog.destroy()
