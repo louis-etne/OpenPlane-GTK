@@ -1,6 +1,8 @@
 Convertisseur
 =============
 
+Introduction
+------------
 .. image:: ../images/converter.png
 
 Le convertisseur est la première fenêtre à avoir été codée. Comme son nom l'indique,

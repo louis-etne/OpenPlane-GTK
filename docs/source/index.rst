@@ -7,6 +7,11 @@ Il est entièrement réalisé grâce à Python 3 et PyGObject.
 
 Ce wiki vous montrera comment installer et utiliser les différents modules d'OpenPlane.
 
+Tous les screens utilisés dans ce wiki viennent soit de moi (Linux Mint Cinnamon 17.2 avec le thème Numix),
+soit de `WinXaito <https://zestedesavoir.com/membres/voir/WinXaito/>`_ (Windows 10).
+
+.. image:: images/logo.png
+
 Sommaire
 ========
 
@@ -15,6 +20,7 @@ Sommaire
 
    installation
    tutorial
+   thanks
 
 Contribuer
 ----------
