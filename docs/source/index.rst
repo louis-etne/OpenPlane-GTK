@@ -1,37 +1,20 @@
+=========
 OpenPlane
 =========
 
-Avoir une description ce serait bien.
+OpenPlane est un logiciel multi plate-forme dédié aux pilotes qui se veut le plus complet possible.
+Il est entièrement réalisé grâce à Python 3 et PyGObject.
 
-Fonctionnalitées
-----------------
+Ce wiki vous montrera comment installer et utiliser les différents modules d'OpenPlane.
 
-- Carnet de vols avec statistiques
-- Devis de masse et centrage
+Sommaire
+========
 
-Installation
-------------
-.. highlight:: bash
+.. toctree::
+   :maxdepth: 2
 
-**Sous Linux**
-
-Comme vous allez le voir, c'est relativement simple.
-Commencez par ouvrir un terminal et mettez vos dépôts à jour :
-::
-    sudo apt-get update
-
-Installez ensuite les dépendances nécessaires :
-::
-    sudo apt-get install python3-gi python3-matplotlib git
-
-Puis, clonez OpenPlane :
-::
-    git clone https://github.com/boopr/OpenPlane.git
-
-Vous pouvez désormais lancer le programme :
-::
-    cd OpenPlane
-    python3 app.py
+   installation
+   tutorial
 
 Contribuer
 ----------
@@ -39,7 +22,7 @@ Contribuer
 - Remonter un bug : https://github.com/boopr/OpenPlane/issues
 - Code source : https://github.com/boopr/OpenPlane
 
-License
+Licence
 -------
 
-OpenPlane est diffusé sous la licence GPL v3
+OpenPlane est diffusé sous la licence GPL v3.
