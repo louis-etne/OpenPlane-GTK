@@ -16,7 +16,7 @@ vos avions personnels.
 Utilisation
 -----------
 La tableau liste les différents fichiers avions présents dans le dossier `openplane/datas/planes`.
-Les colonnes sont ré-organisable (ordre alphabétique ou ordre alphabétique inversé).
+Les colonnes sont ré-organisables (ordre alphabétique ou ordre alphabétique inversé).
 Vous retrouverez votre avion par son immatriculation qui est unique. C'est en effet grâce
 à celle-ci qu'OpenPlane différencie les avions.
 

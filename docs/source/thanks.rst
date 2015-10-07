@@ -16,7 +16,7 @@ réalisé le parseur des aérodromes.
 Graphisme
 ---------
 Merci à `Blackline <https://zestedesavoir.com/membres/voir/Blackline/>`_ pour
-avoir réaliser le logo d'OpenPlane et les petites icônes que vous pouvez voir dans
+avoir réalisé le logo d'OpenPlane et les petites icônes que vous pouvez voir dans
 le carnet de vol.
 
 Autre

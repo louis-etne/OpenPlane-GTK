@@ -13,7 +13,7 @@ supportées :
     - Mètre (m)
     - Kilomètre (km)
     - Pied (ft)
-    - Mille nautique (nm)
+    - Mille nautique (NM)
 - Température
     - Degré Celsius (°C)
     - Degré Fahrenheit (°F)

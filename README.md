@@ -10,7 +10,7 @@
 - matplotlib
 
 # Installation
-[Voir sur mon blog](http://boopr.github.io/2015/openplane_install/).
+[Voir la documentation d'OpenPlane](http://openplane.readthedocs.org/fr/latest/installation.html).
 
 # Screenshots
 ![OpenPlane v0.6 : masse et centrage](images/screenshots/preview_weight_v06.png)

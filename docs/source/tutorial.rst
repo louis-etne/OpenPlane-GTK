@@ -8,7 +8,11 @@ et naturels à utiliser.
 J'espère avoir rempli mon objectif.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :glob:
 
-   tutorial/*
+   tutorial/converter
+   tutorial/hangar
+   tutorial/plane_editor
+   tutorial/weight
+   tutorial/logbook
