@@ -5,7 +5,7 @@
 
 from gi.repository import Gtk
 from openplane.gui.gui_update_manager import *
-from openplane.gui.gui_logbook import *
+from openplane.gui.logbook.logbook import *
 from openplane.gui.gui_convert import *
 from openplane.gui.gui_hangar import *
 from openplane.gui.gui_weight import *
@@ -47,7 +47,7 @@ class App:
         weight.window.show_all()
 
     def on_logbook_clicked(self, *args):
-        logbook = LogbookWindow()
+        logbook = Logbook()
         logbook.window.show_all()
 
     def on_update_clicked(self, *args):

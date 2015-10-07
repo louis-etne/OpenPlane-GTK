@@ -82,7 +82,7 @@ class HangarDialog():
         self.update_file_list()
 
     def on_edit_clicked(self, button):
-        edit_plane = PlanesManagerDialog(self.return_selected())
+        edit_plane = PlanesManagerDialog(self.return_path_plane(self.return_selected()))
         edit_plane.dialog.run()
         self.update_file_list()
 
@@ -129,13 +129,16 @@ class HangarDialog():
         dialog.add_filter(filter_any)
 
     def on_delete_clicked(self, button):
-        os.remove(self.return_selected())
+        os.remove(self.return_path_plane(self.return_selected()))
         self.update_file_list()
 
     def return_selected(self):
         model, treeiter = self.select.get_selected()
         if treeiter is not None:
             return model[treeiter][0]
+
+    def return_path_plane(self, name):
+        return '{}{}{}'.format(config.planes_folder, name, config.planes_ext)
 
     def app_quit(self, *args):
         self.dialog.destroy()
