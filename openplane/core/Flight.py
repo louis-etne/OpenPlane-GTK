@@ -6,7 +6,8 @@
 from openplane import config
 from datetime import timedelta
 import json
-
+import glob
+import os
 
 class Flight:
 
@@ -17,26 +18,26 @@ class Flight:
     def create_flight(self, values):
         self.type = values[0]
         self.id = values[1]
-        self.date = values[2]
+        self.date = self.set_date(values[2])
         self.plane = values[3]
         self.flight_rule = values[4]
 
         self.departure_airfield = values[5]
-        self.departure_hours = values[6]
-        self.departure_minutes = values[7]
+        self.departure_hours = int(values[6])
+        self.departure_minutes = int(values[7])
 
         self.arrival_airfield = values[8]
-        self.arrival_hours = values[9]
-        self.arrival_minutes = values[10]
+        self.arrival_hours = int(values[9])
+        self.arrival_minutes = int(values[10])
 
-        self.time_day_hours = values[11]
-        self.time_day_minutes = values[12]
+        self.time_day_hours = int(values[11])
+        self.time_day_minutes = int(values[12])
 
-        self.time_night_hours = values[13]
-        self.time_night_minutes = values[14]
+        self.time_night_hours = int(values[13])
+        self.time_night_minutes = int(values[14])
 
-        self.takeoffs = values[15]
-        self.landings = values[16]
+        self.takeoffs = int(values[15])
+        self.landings = int(values[16])
 
         self.crew = values[17]
         self.briefing = values[18]
@@ -44,8 +45,8 @@ class Flight:
         self.time_total_hours, self.time_total_minutes = self.total_hours()
 
     def save_flight(self):
-        flight_name = '{}{}{}'.format(config.logbook_folder, self.date,
-                                      config.flights_ext)
+        flight_name = '{}{}{}'.format(self.return_path(self.date),
+                                      self.get_last_id(), config.flights_ext)
 
         flight_values = {
             'Type': self.type,
@@ -87,6 +88,32 @@ class Flight:
 
         with open(flight_name, 'w') as outfile:
             json.dump(flight_values, outfile, indent=4, sort_keys=True)
+
+    def return_path(self, date):
+        year, month, day = filepath.split('-')
+
+        # openplane/datas/logbook/2015/4/15/
+        path = '{0}{1}{4}{2}{4}{3}{4}'.format(config.logbook_folder, year,
+                                              month, day, os.sep)
+
+        if not os.path.isdir(path):
+            os.makedirs(path)
+
+        return path
+
+    def get_last_id(self, path):
+        files = []
+        for flight_file in glob.glob('{}{}'.format(path, config.flights_ext)):
+            files.append(flight_file)
+
+        most_id = 0
+
+        for flight_file in files:
+            id_file = os.path.splitext()[0]
+            if int(id_file) > int(most_id):
+                most_id = int(id_file)
+
+        return int(most_id) + 1
 
     def import_flight(self, filepath):
         values = []
@@ -184,7 +211,12 @@ class Flight:
         return int(self.date.split('-')[2])
 
     def return_month(self):
-        return int(self.date.split('-')[1]) - 1
+        return int(self.date.split('-')[1])
 
     def return_year(self):
         return int(self.date.split('-')[0])
+
+    def set_date(self, date):
+        year, month, day = date.split('-')
+        # On ajoute 1 car les mois ont un décalage d'un indice
+        return '{}-{}-{}'.format(int(year), int(month) + 1, int(day))
