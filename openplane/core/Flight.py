@@ -44,9 +44,13 @@ class Flight:
 
         self.time_total_hours, self.time_total_minutes = self.total_hours()
 
-    def save_flight(self):
-        flight_name = '{}{}{}'.format(self.return_path(self.date),
-                                      self.get_last_id(), config.flights_ext)
+    def save_flight(self, path=None):
+        if path is None:
+            flight_name = '{}{}{}'.format(self.return_path(self.date),
+                                          self.get_last_id(),
+                                          config.flights_ext)
+        else:
+            flight_name = path
 
         flight_values = {
             'Type': self.type,
@@ -204,7 +208,7 @@ class Flight:
         if int(day) < 10:
             day = '0{}'.format(day)
         if int(month) < 10:
-            month = '0{}'.format(month)
+            month = '0{}'.format(int(month) + 1)
         return '/'.join((day, month, year))
 
     def return_day(self):
@@ -218,5 +222,4 @@ class Flight:
 
     def set_date(self, date):
         year, month, day = date.split('-')
-        # On ajoute 1 car les mois ont un décalage d'un indice
-        return '{}-{}-{}'.format(int(year), int(month) + 1, int(day))
+        return '{}-{}-{}'.format(int(year), int(month), int(day))
