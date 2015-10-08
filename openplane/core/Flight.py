@@ -46,8 +46,9 @@ class Flight:
 
     def save_flight(self, path=None):
         if path is None:
-            flight_name = '{}{}{}'.format(self.return_path(self.date),
-                                          self.get_last_id(),
+            path = self.return_path(self.date)
+            flight_name = '{}{}{}'.format(path,
+                                          self.get_last_id(path),
                                           config.flights_ext)
         else:
             flight_name = path
@@ -94,7 +95,7 @@ class Flight:
             json.dump(flight_values, outfile, indent=4, sort_keys=True)
 
     def return_path(self, date):
-        year, month, day = filepath.split('-')
+        year, month, day = date.split('-')
 
         # openplane/datas/logbook/2015/4/15/
         path = '{0}{1}{4}{2}{4}{3}{4}'.format(config.logbook_folder, year,
@@ -205,11 +206,14 @@ class Flight:
 
     def return_date(self):
         year, month, day = self.date.split('-')
+
+        month = int(month) + 1
+
         if int(day) < 10:
             day = '0{}'.format(day)
         if int(month) < 10:
-            month = '0{}'.format(int(month) + 1)
-        return '/'.join((day, month, year))
+            month = '0{}'.format(month)
+        return '/'.join((day, str(month), year))
 
     def return_day(self):
         return int(self.date.split('-')[2])
