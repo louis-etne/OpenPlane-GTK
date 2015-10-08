@@ -32,11 +32,17 @@ class FlightView(Gtk.Box):
         self.pack_start(self.flight_editor, True, True, 0)
 
         # On définit les handlers et on les envoie au builder
-        handlers = {'on_cursor_changed': self.cursor_changed}
+        handlers = {
+            'on_cursor_changed': self.cursor_changed,
+            'on_save': self.on_save
+            }
         builder.connect_signals(handlers)
 
         # On récupère le curseur
         self.cursor = builder.get_object('flightCursor')
+
+        # On charge les boutons
+        self.save = builder.get_object('save')
 
         # On récupère la liste des vols
         self.flight_list = builder.get_object('flightList')
@@ -56,8 +62,12 @@ class FlightView(Gtk.Box):
 
             # On lui envoie le chemin de l'avion
             self.flight_editor.import_flight(self.return_flight_path())
+
+            # Et on active le bouton pour sauvegarder
+            self.save.set_sensitive(True)
         else:
             self.flight_editor.set_widgets_sensitive(False)
+            self.save.set_sensitive(False)
 
 
     def return_flight_selected(self):
@@ -112,7 +122,7 @@ class FlightView(Gtk.Box):
             else:
                 self.flight_list.append([icon, flight.id,
                                          flight.return_date(),
-                                         'UNKNOW',  # Si l'avion n'extiste pas
+                                         'UNKNOW',
                                          flight.departure_airfield,
                                          flight.arrival_airfield,
                                          int(flight.takeoffs),
@@ -147,3 +157,19 @@ class FlightView(Gtk.Box):
             return model.get_value(treeiter, 12)
         else:
             return None
+
+
+    def on_save(self, button):
+        '''
+        Quand le bouton sauvegarder est pressé
+        '''
+        # On sauvegarde les valeurs
+        path = self.return_flight_path()
+
+        if path != '':
+            self.flight_editor.save_flight(path)
+        else:
+            self.flight_editor.save_flight()
+
+        # Et on recharge la liste
+        self.reload_flight()
