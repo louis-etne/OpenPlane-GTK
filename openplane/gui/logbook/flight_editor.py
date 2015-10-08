@@ -8,6 +8,7 @@ import os
 
 from openplane import config
 from openplane.gui.gui_airfields_selector import *
+from openplane.gui.gui_crew_adder import *
 from openplane.gui.gui_hangar import *
 from openplane.core.Flight import *
 from openplane.core.Plane import *
@@ -36,7 +37,10 @@ class FlightEditor(Gtk.Box):
         # Pour finir, on définit tous les handlers
         handlers = {
             'on_add_plane': self.select_plane,
-            'on_add_airfield': self.select_airfield
+            'on_add_airfield': self.select_airfield,
+            'on_add_crew': self.add_crew,
+            'on_delete_crew': self.delete_crew,
+            'on_crewCursor_changed': self.crew_cursor_changed
         }
         # Et on les connecte grâce au builder
         builder.connect_signals(handlers)
@@ -46,9 +50,6 @@ class FlightEditor(Gtk.Box):
         '''
         Récupère tous les widgets
         '''
-        self.save = builder.get_object('save')
-        self.cancel = builder.get_object('cancel')
-
         self.type = builder.get_object('flightType')
         self.id = builder.get_object('id')
 
@@ -76,7 +77,9 @@ class FlightEditor(Gtk.Box):
 
         self.crew_view = builder.get_object('crewView')
         self.add_crew_btn = builder.get_object('addCrew')
+        self.del_crew_btn = builder.get_object('delCrew')
         self.crew_list = builder.get_object('crewList')
+        self.crew_cursor = builder.get_object('crewCursor')
 
         self.briefing = builder.get_object('note')
         self.briefing_buffer = builder.get_object('briefingBuffer')
@@ -183,15 +186,10 @@ class FlightEditor(Gtk.Box):
     def set_date(self, flight):
         '''
         Règle le calendrier sur la date entrée (flight.date)
-        En oubliant pas que dans Gtk, n° du mois = n°-1
-
-        - Exemple :
-            Juin est le 6ème mois, il sera donc le 5ème pour Gtk
         '''
         # On récupère le jour, le mois et l'année
         day = flight.return_day()
-        # On décale l'indice
-        month = flight.return_month() - 1
+        month = flight.return_month()
         year = flight.return_year()
 
         # On règle le calendrier
@@ -226,18 +224,25 @@ class FlightEditor(Gtk.Box):
             for person in flight.crew:
                 # Valeurs possibles :
                 # Pilot, Captain, Co-pilot, Passenger et Instructor
-                if person[1] == 'Captain':
-                    role = 'Commandant de bord'
-                elif person[1] == 'Co-pilot':
-                    role = 'Co-pilote'
-                elif person[1] == 'Passenger':
-                    role = 'Passager'
-                elif person[1] == 'Instructor':
-                    role = 'Instructeur'
-                else:
-                    role = 'Pilote'
+                role = self.convert_crew_role(person[1])
 
                 self.crew_list.append([person[0], role])
+
+
+    def convert_crew_role(self, role):
+        '''
+        Converti le role de l'anglais vers le français
+        '''
+        if role == 'Captain':
+            return 'Commandant de bord'
+        elif role == 'Co-pilot':
+            return 'Co-pilote'
+        elif role == 'Passenger':
+            return 'Passager'
+        elif role == 'Instructor':
+            return 'Instructeur'
+        else:
+            return 'Pilote'
 
 
     def select_plane(self, button):
@@ -266,3 +271,147 @@ class FlightEditor(Gtk.Box):
             button.set_label(selector.return_airfield())
 
         selector.dialog.destroy()
+
+
+    def add_crew(self, button):
+        '''
+        Ouvre le CrewAdder afin d'ajouter une personne
+        '''
+        crew_adder = CrewAdderDialog()
+        response = crew_adder.dialog.run()
+
+        if response == 1:
+            # On récupère les valeurs
+            name, role = crew_adder.return_value()
+
+            # On les ajoutes à la liste
+            self.crew_list.append([name, self.convert_crew_role(role)])
+
+        crew_adder.dialog.destroy()
+
+
+    def delete_crew(self, cursor):
+        '''
+        Supprime le passager sélectionné de la GtkView de l'équipage
+        '''
+        model, treeiter = cursor.get_selected()
+        # On supprime le passager de la liste, la View se mettre à
+        # jour toute seule
+        self.crew_list.remove(treeiter)
+
+
+    def crew_cursor_changed(self, cursor):
+        '''
+        Quand le curseur de la GtkView des passagers est changée
+        '''
+        model, treeiter = cursor.get_selected()
+
+        if treeiter is not None:
+            # On active le bouton pour supprimer un passager
+            self.del_crew_btn.set_sensitive(True)
+        else:
+            self.del_crew_btn.set_sensitive(False)
+
+
+    def save_flight(self, path=None):
+        '''
+        Récupère les valeurs des widgets et les envoie dans la classe
+        Flight
+
+        Si path == None, ça signifie que c'est un nouveau vol, autrement,
+        c'est un vol modifié
+        '''
+
+        values = []
+        # On récupère le type de vol
+        values.append(self.type.get_active_id())
+        # L'ID du vol
+        values.append(self.id.get_text())
+        # La date
+        values.append(self.get_date())
+        # L'avion
+        values.append(self.get_plane())
+        # La règle de vol
+        values.append(self.flight_rule.get_active_id())
+        # L'aérodrome de départ
+        values.append(self.from_btn.get_label())
+        # L'heure de départ
+        values.append(self.departure_hours.get_value())
+        values.append(self.departure_minutes.get_value())
+        # L'aérodrome d'arrivé
+        values.append(self.to_btn.get_label())
+        # L'heure d'arrivé
+        values.append(self.arrival_hours.get_value())
+        values.append(self.arrival_minutes.get_value())
+        # Nombre d'heures le jour
+        values.append(self.day_hours.get_value())
+        values.append(self.day_minutes.get_value())
+        # Nombre d'heures la nuit
+        values.append(self.night_hours.get_value())
+        values.append(self.night_minutes.get_value())
+        # Nombre de décollages & atterrissage
+        values.append(self.takeoffs_nb.get_value())
+        values.append(self.landings_nb.get_value())
+        # Équipage
+        values.append(self.get_crew())
+        # Briefing
+        values.append(self.get_briefing())
+
+        flight = Flight(values)
+
+        # Si on doit écraser ou pas
+        if path is not None:
+            flight.save_flight(path)
+        else:
+            flight.save_flight()
+
+
+    def get_date(self):
+        '''
+        Retourne la date du calendrier sous la forme 'YYYY-MM-JJ'
+        '''
+        # On récupère les trois valeurs
+        year, month, day = self.calendar.get_date()
+        return '-'.join((str(year), str(month), str(day)))
+
+
+    def get_plane(self):
+        '''
+        Retourne le chemin de l'avion
+        '''
+        label = self.add_plane_btn.get_label()
+
+        if label == 'UNKNOWN':
+            return 'UNKNOWN'
+        else:
+            return '{}{}{}'.format(config.planes_folder, label,
+                                   config.planes_ext)
+
+
+    def get_crew(self):
+        '''
+        Retourne sous forme d'une liste l'équipage ayant participé au vol
+        [['Foo Bar', 'Captain'], ['Bar Foo', 'Passenger']]
+        '''
+        model = self.crew_view.get_model()
+        crew_list = []
+
+        for person in model:
+            values = []
+            for entry in person:
+                values.append(entry)
+
+            crew_list.append(values)
+
+        # Et on retourne la liste finale
+        return crew_list
+
+
+    def get_briefing(self):
+        '''
+        Retourne le briefing
+        '''
+        start_iter = self.briefing_buffer.get_start_iter()
+        end_iter = self.briefing_buffer.get_end_iter()
+
+        return self.briefing_buffer.get_text(start_iter, end_iter, True)
