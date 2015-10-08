@@ -4,6 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk, GdkPixbuf
+import time
 import os
 
 from openplane import config
@@ -14,7 +15,7 @@ from openplane.gui.logbook.flight_editor import *
 
 class FlightView(Gtk.Box):
 
-    def __init__(self):
+    def __init__(self, parent):
         Gtk.Box.__init__(self)
         # On défini l'orientation pour que le layout soit horizontal
         self.set_orientation(0)
@@ -27,14 +28,19 @@ class FlightView(Gtk.Box):
         main_layout = builder.get_object('FlightView')
         self.pack_start(main_layout, True, True, 0)
 
+        # On récupère le parent
+        self.logbook = parent
+
         # On ajoute aussi l'éditeur de vol
-        self.flight_editor = FlightEditor()
+        self.flight_editor = FlightEditor(self)
         self.pack_start(self.flight_editor, True, True, 0)
 
         # On définit les handlers et on les envoie au builder
         handlers = {
             'on_cursor_changed': self.cursor_changed,
-            'on_save': self.on_save
+            'on_save': self.on_save,
+            'on_add_flight': self.add_flight,
+            'on_delete_flight': self.delete_flight
             }
         builder.connect_signals(handlers)
 
@@ -43,6 +49,7 @@ class FlightView(Gtk.Box):
 
         # On charge les boutons
         self.save = builder.get_object('save')
+        self.delete = builder.get_object('delete')
 
         # On récupère la liste des vols
         self.flight_list = builder.get_object('flightList')
@@ -60,14 +67,23 @@ class FlightView(Gtk.Box):
             # L'éditeur de vol s'active
             self.flight_editor.set_widgets_sensitive(True)
 
-            # On lui envoie le chemin de l'avion
-            self.flight_editor.import_flight(self.return_flight_path())
+            # On regarde si le vol a un chemin
+            flight_path = self.return_flight_path()
 
-            # Et on active le bouton pour sauvegarder
+            if flight_path == '':
+                 # C'est un nouvel avion
+                self.flight_editor.import_flight()
+            else:
+                # On lui envoie le chemin du vol
+                self.flight_editor.import_flight(flight_path)
+
+            # Et on active le bouton pour sauvegarder et pour supprimer
             self.save.set_sensitive(True)
+            self.delete.set_sensitive(True)
         else:
             self.flight_editor.set_widgets_sensitive(False)
             self.save.set_sensitive(False)
+            self.delete.set_sensitive(False)
 
 
     def return_flight_selected(self):
@@ -173,3 +189,59 @@ class FlightView(Gtk.Box):
 
         # Et on recharge la liste
         self.reload_flight()
+
+
+    def add_flight(self, button):
+        '''
+        Ajoute un vol
+        '''
+        # On récupère la date du jour
+        date = time.strftime('%d/%m/%Y')
+        self.flight_list.append([None, '', date, 'UNKNOW', '', '', None, None,
+                                 '', '', '', '', ''])
+
+
+    def delete_flight(self, button):
+        '''
+        Supprime le vol et les fichier correspondant
+        '''
+        # On récupère toutes les infos du vol
+        path = self.return_flight_path()
+        flight = self.return_flight_selected()
+
+        # On regarde si le vol à un fichier associé
+        if path is '':
+            # Si non, on a juste à le supprimer de la liste
+            self.flight_list.remove(flight)
+        else:
+            # Si oui, c'est plus complexe, car il faut aussi supprimer
+            # les dossiers si ils sont vides
+            working_directory = os.getcwd()
+
+            # On sépare le chemin du fichier
+            path, opf_flight = os.path.split(path)
+
+            # On se déplace dans le dossier contenant le fichier
+            os.chdir(path)
+            # On supprime le fichier
+            os.remove(opf_flight)
+            # On récupère le nom du dossier actuel
+            current_dir = os.path.relpath('.','..')
+
+            # On remonte et on supprime si le dossier est vide
+            while current_dir != 'logbook':
+                # On remonte d'un dossier
+                os.chdir('..')
+                # On regarde si l'ancier dossier à des fichiers/dossiers
+                # Si non, on le supprime,
+                # Si oui, on le laisse
+                if os.listdir(current_dir) == []:
+                    os.rmdir(current_dir)
+
+                # On récupère le dossier parent
+                current_dir = os.path.relpath('.','..')
+
+            # On retourne dans le dossier principal
+            os.chdir(working_directory)
+            # Et on recharge la liste des vols
+            self.reload_flight()

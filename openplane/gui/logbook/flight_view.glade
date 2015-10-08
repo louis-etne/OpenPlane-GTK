@@ -70,7 +70,7 @@
     <property name="orientation">vertical</property>
     <property name="spacing">6</property>
     <child>
-      <object class="GtkBox" id="box27">
+      <object class="GtkButtonBox" id="buttonbox3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">6</property>
@@ -97,13 +97,14 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">6</property>
-            <property name="layout_style">start</property>
+            <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="addFlight">
                 <property name="label" translatable="yes">Ajouter une entrée</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_add_flight" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -361,6 +362,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="use_stock">True</property>
+            <signal name="clicked" handler="on_delete_flight" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>

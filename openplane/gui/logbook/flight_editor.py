@@ -4,6 +4,7 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk, GdkPixbuf
+import time
 import os
 
 from openplane import config
@@ -16,13 +17,14 @@ from openplane.core.Plane import *
 
 class FlightEditor(Gtk.Box):
 
-    def __init__(self):
+    def __init__(self, parent):
         Gtk.Box.__init__(self)
 
         builder = Gtk.Builder()
         builder.add_from_file('openplane/gui/logbook/flight_editor.glade')
 
-        # On récupère le layout principal qu'on attache ensuite à cette classe
+        # On récupère le layout principal qu'on attache
+        #ensuite à cette classe
         main_layout = builder.get_object('FlightEditor')
         self.pack_start(main_layout, True, True, 0)
 
@@ -33,6 +35,11 @@ class FlightEditor(Gtk.Box):
 
         # On charge la liste des types de vol
         self.load_flight_type_values(builder)
+
+        # On récupère le parent
+        self.flight_view = parent
+        # On en déduis la fenêtre principale
+        self.main_window = self.flight_view.logbook.window
 
         # Pour finir, on définit tous les handlers
         handlers = {
@@ -54,6 +61,7 @@ class FlightEditor(Gtk.Box):
         self.id = builder.get_object('id')
 
         self.calendar = builder.get_object('calendar')
+        self.set_date_on_today()
 
         self.add_plane_btn = builder.get_object('selectPlane')
         self.flight_rule = builder.get_object('flightRules')
@@ -141,7 +149,20 @@ class FlightEditor(Gtk.Box):
         self.briefing.set_sensitive(sensitive)
 
 
-    def import_flight(self, path):
+    def set_date_on_today(self):
+        '''
+        Règle le calendrier sur la date du jour
+        '''
+        # On récupère la date du jour
+        date = time.strftime('%-d-%-m-%Y')
+        # On la split en 3
+        day, month, year = date.split('-')
+        # On règle le calendrier
+        self.calendar.select_day(int(day))
+        self.calendar.select_month(int(month) - 1, int(year))
+
+
+    def import_flight(self, path=None):
         '''
         Importe les valeurs du fichier au chemin spécifié dans
         l'éditeur de vol
@@ -181,6 +202,35 @@ class FlightEditor(Gtk.Box):
             self.set_crew(flight)
 
             self.briefing_buffer.set_text(flight.briefing)
+        else:
+            # C'est un nouvel avion, on remet donc les valeurs à 0
+            self.type.set_active_id('Plane')
+            self.id.set_text('')
+            self.set_date_on_today()
+
+            self.add_plane_btn.set_label(Gtk.STOCK_ADD)
+            self.flight_rule.set_active_id('VFR')
+
+            self.from_btn.set_label(Gtk.STOCK_ADD)
+            self.departure_hours.set_value(0)
+            self.departure_minutes.set_value(0)
+
+            self.to_btn.set_label(Gtk.STOCK_ADD)
+            self.arrival_hours.set_value(0)
+            self.arrival_minutes.set_value(0)
+
+            self.day_hours.set_value(0)
+            self.day_minutes.set_value(0)
+
+            self.night_hours.set_value(0)
+            self.night_minutes.set_value(0)
+
+            self.takeoffs_nb.set_value(1)
+            self.landings_nb.set_value(1)
+
+            self.set_crew(None)
+
+            self.briefing_buffer.set_text('')
 
 
     def set_date(self, flight):
@@ -202,31 +252,37 @@ class FlightEditor(Gtk.Box):
         Met le label du bouton de sélection d'avion sur le nom
         de l'avion si existant, sur UNKNOWN si non
         '''
-        # On regarde si le fichier existe bien
-        if os.path.isfile(flight.plane):
-            # On en crée un avion
-            plane = Plane()
-            plane.import_plane(flight.plane)
-
-            self.add_plane_btn.set_label(plane.matriculation)
-        else:
+        if flight is None:
             self.add_plane_btn.set_label('UNKNOWN')
+        else:
+            # On regarde si le fichier existe bien
+            if os.path.isfile(flight.plane):
+                # On en crée un avion
+                plane = Plane()
+                plane.import_plane(flight.plane)
+
+                self.add_plane_btn.set_label(plane.matriculation)
+            else:
+                self.add_plane_btn.set_label('UNKNOWN')
 
 
     def set_crew(self, flight):
         '''
         Importe les membres d'équipage dans l'éditeur de vol
         '''
-        # Rien ne sert de nettoyer la liste si il n'y a pas d'équipage
-        if len(flight.crew) > 0:
+        if flight is None:
             self.crew_list.clear()
+        else:
+            # Rien ne sert de nettoyer la liste si il n'y a pas d'équipage
+            if len(flight.crew) > 0:
+                self.crew_list.clear()
 
-            for person in flight.crew:
-                # Valeurs possibles :
-                # Pilot, Captain, Co-pilot, Passenger et Instructor
-                role = self.convert_crew_role(person[1])
+                for person in flight.crew:
+                    # Valeurs possibles :
+                    # Pilot, Captain, Co-pilot, Passenger et Instructor
+                    role = self.convert_crew_role(person[1])
 
-                self.crew_list.append([person[0], role])
+                    self.crew_list.append([person[0], role])
 
 
     def convert_crew_role(self, role):
@@ -250,6 +306,7 @@ class FlightEditor(Gtk.Box):
         Ouvre le hangar afin de sélectionner un avion
         '''
         selector = HangarDialog(True)
+        selector.dialog.set_transient_for(self.main_window)
         response = selector.dialog.run()
 
         # Le bouton valider renvoie 1
@@ -265,6 +322,7 @@ class FlightEditor(Gtk.Box):
         terrain sélectionné.
         '''
         selector = AirfieldSelectorDialog()
+        selector.dialog.set_transient_for(self.main_window)
         response = selector.dialog.run()
 
         if response == 1:
@@ -278,6 +336,7 @@ class FlightEditor(Gtk.Box):
         Ouvre le CrewAdder afin d'ajouter une personne
         '''
         crew_adder = CrewAdderDialog()
+        crew_adder.dialog.set_transient_for(self.main_window)
         response = crew_adder.dialog.run()
 
         if response == 1:
@@ -334,12 +393,12 @@ class FlightEditor(Gtk.Box):
         # La règle de vol
         values.append(self.flight_rule.get_active_id())
         # L'aérodrome de départ
-        values.append(self.from_btn.get_label())
+        values.append(self.get_label(self.from_btn))
         # L'heure de départ
         values.append(self.departure_hours.get_value())
         values.append(self.departure_minutes.get_value())
         # L'aérodrome d'arrivé
-        values.append(self.to_btn.get_label())
+        values.append(self.get_label(self.to_btn))
         # L'heure d'arrivé
         values.append(self.arrival_hours.get_value())
         values.append(self.arrival_minutes.get_value())
@@ -381,11 +440,23 @@ class FlightEditor(Gtk.Box):
         '''
         label = self.add_plane_btn.get_label()
 
-        if label == 'UNKNOWN':
-            return 'UNKNOWN'
+        if label == 'gtk-add':
+            return ''
         else:
             return '{}{}{}'.format(config.planes_folder, label,
                                    config.planes_ext)
+
+
+    def get_label(self, button):
+        '''
+        Retourne le label du boutton
+        '''
+        label = button.get_label()
+
+        if label == 'gtk-add':
+            return ''
+        else:
+            return label
 
 
     def get_crew(self):

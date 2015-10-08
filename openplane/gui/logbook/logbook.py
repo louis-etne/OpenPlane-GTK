@@ -24,6 +24,6 @@ class Logbook:
         grid = builder.get_object('layout')
 
         # On créer la vue des vols
-        self.flight_view = FlightView()
+        self.flight_view = FlightView(self)
         # Et on l'importe directement dans la grille
         grid.attach(self.flight_view, 1, 0, 1, 1)
