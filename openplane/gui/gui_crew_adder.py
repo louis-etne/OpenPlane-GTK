@@ -21,7 +21,7 @@ class CrewAdderDialog:
         name = self.builder.get_object('name')
         role = self.builder.get_object('role')
 
-        return [name.get_text(), role.get_active_id()]
+        return (name.get_text(), role.get_active_id())
 
     def app_quit(self, button=None):
         self.dialog.destroy()
