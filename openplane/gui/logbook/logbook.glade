@@ -34,13 +34,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkToggleButton" id="allEntries">
                             <property name="label" translatable="yes">Toutes les entrées</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                             <property name="active">True</property>
                           </object>
                           <packing>
@@ -55,7 +55,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -69,7 +68,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -83,7 +81,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -97,7 +94,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -145,13 +141,13 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
+                        <property name="spacing">6</property>
                         <child>
                           <object class="GtkToggleButton" id="allDayEntries">
                             <property name="label" translatable="yes">Vols de jour</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -165,7 +161,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -174,17 +169,29 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="allIfrEntries">
-                            <property name="label" translatable="yes">Vols en IFR</property>
+                          <object class="GtkToggleButton" id="allVfrEntries">
+                            <property name="label" translatable="yes">Vols en VFR</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
-                            <property name="relief">none</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="allIfrEntries">
+                            <property name="label" translatable="yes">Vols en IFR</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                       </object>

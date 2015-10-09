@@ -361,6 +361,7 @@
             <property name="sensitive">False</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="valign">center</property>
             <property name="use_stock">True</property>
             <signal name="clicked" handler="on_delete_flight" swapped="no"/>
           </object>
@@ -380,7 +381,7 @@
             <property name="margin_bottom">6</property>
             <property name="spacing">2</property>
             <child>
-              <object class="GtkLabel" id="totalStatus">
+              <object class="GtkLabel" id="status">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">0:00 heure(s), 0:00 heure(s) de nuit, 0:00 heure(s) de jour et 0 atterrissage(s) pour 0 vol(s)</property>

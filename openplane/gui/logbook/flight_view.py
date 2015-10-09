@@ -4,6 +4,8 @@
 # Made by Louis Etienne
 
 from gi.repository import Gtk, GdkPixbuf
+from pathlib import Path
+from datetime import timedelta
 import time
 import os
 
@@ -50,6 +52,10 @@ class FlightView(Gtk.Box):
         # On charge les boutons
         self.save = builder.get_object('save')
         self.delete = builder.get_object('delete')
+
+        # On récupère la barre de status et la vue
+        self.flight_view = builder.get_object('flightsView')
+        self.status_bar = builder.get_object('status')
 
         # On récupère la liste des vols
         self.flight_list = builder.get_object('flightList')
@@ -148,6 +154,8 @@ class FlightView(Gtk.Box):
                                          flight.return_night_time(),
                                          flight.flight_rule,
                                          flight_doc])
+        # On recharge le footer aussi
+        self.update_footer()
 
 
     def select_icon_type(self, flight_type):
@@ -204,44 +212,163 @@ class FlightView(Gtk.Box):
     def delete_flight(self, button):
         '''
         Supprime le vol et les fichier correspondant
+        Voir : https://zestedesavoir.com/forums/sujet/4223/suppression-de-fichiersdossiers/
+
+        Améloration proposée par nohar
         '''
-        # On récupère toutes les infos du vol
+        # On récupère le lien vers le fichier du vol
         path = self.return_flight_path()
-        flight = self.return_flight_selected()
+        # On le retire de la liste
+        self.flight_list.remove(self.return_flight_selected())
 
-        # On regarde si le vol à un fichier associé
-        if path is '':
-            # Si non, on a juste à le supprimer de la liste
-            self.flight_list.remove(flight)
-        else:
-            # Si oui, c'est plus complexe, car il faut aussi supprimer
-            # les dossiers si ils sont vides
-            working_directory = os.getcwd()
+        # Si le fichier existe vraiment
+        if path != '':
+            file_path = Path(path)
+            if file_path.exists():
+                # supprime le fichier
+                file_path.unlink()
 
-            # On sépare le chemin du fichier
-            path, opf_flight = os.path.split(path)
+            for parent, _ in zip(file_path.parents, range(3)):
+                # On itère sur l'arborescence parente
+                # En ne remontant pas plus de 3 niveaux
+                try:
+                    parent.rmdir()
+                except OSError:
+                    # Le dossier n'est pas vide.
+                    break
 
-            # On se déplace dans le dossier contenant le fichier
-            os.chdir(path)
-            # On supprime le fichier
-            os.remove(opf_flight)
-            # On récupère le nom du dossier actuel
-            current_dir = os.path.relpath('.','..')
+        # Et on recharge la liste des vols
+        self.reload_flight()
 
-            # On remonte et on supprime si le dossier est vide
-            while current_dir != 'logbook':
-                # On remonte d'un dossier
-                os.chdir('..')
-                # On regarde si l'ancier dossier à des fichiers/dossiers
-                # Si non, on le supprime,
-                # Si oui, on le laisse
-                if os.listdir(current_dir) == []:
-                    os.rmdir(current_dir)
 
-                # On récupère le dossier parent
-                current_dir = os.path.relpath('.','..')
+    def update_footer(self):
+        '''
+        Met à jour la barre de status
+        '''
+        # On récupère les différentes valeurs
+        day_time = self.get_day_time()
+        night_time = self.get_night_time()
+        total_time = self.get_total_time(day_time, night_time)
+        landings = self.get_total_landings()
+        flights_nb = self.get_flights_nb()
 
-            # On retourne dans le dossier principal
-            os.chdir(working_directory)
-            # Et on recharge la liste des vols
-            self.reload_flight()
+        # On charge le texte
+        label = '{} heure(s), '\
+                '{} heure(s) de nuit, '\
+                '{} heure(s) de jour et '\
+                '{} atterrissage(s) pour '\
+                '{} vol(s)'.format(total_time, night_time, day_time,
+                                   landings, flights_nb)
+
+        # On met à jour le label avec
+        self.status_bar.set_label(label)
+
+
+    def get_flights_nb(self):
+        '''
+        Retourne le nombre de vols dans la vue
+        '''
+        model = self.flight_view.get_model()
+        counter = 0
+
+        for flight in model:
+            counter += 1
+
+        return counter
+
+
+    def get_total_landings(self):
+        '''
+        Retourne le nombre d'atterrissage de la vue
+        '''
+        model = self.flight_view.get_model()
+        total = 0
+
+        for flight in model:
+            total += int(flight[7])
+
+        return total
+
+
+    def format_timedelta(self, td):
+        '''
+        Retourne le nombre d'heure sans compter les jours :
+        Normalement : 13h + 23h -> 1j et 12h
+        Maintenant : 13h + 23h -> 36h
+        Prend en compte les secondes (mod 60)
+        '''
+        minutes, seconds = divmod(td.seconds + td.days * 86400, 60)
+        hours, minutes = divmod(minutes, 60)
+        return int(hours), int(minutes)
+
+
+    def format_time(self, hours, minutes):
+        '''
+        Retourne l'heure parfaitement formaté :
+        03:05
+        '''
+        hours = int(hours)
+        minutes = int(minutes)
+
+        if hours < 10:
+            hours = '0{}'.format(hours)
+
+        if minutes < 10:
+            minutes = '0{}'.format(minutes)
+
+        return ':'.join((str(hours), str(minutes)))
+
+
+    def get_day_time(self):
+        '''
+        Retourne le nombre d'heures de vol de jour de la vue
+        '''
+        model = self.flight_view.get_model()
+        total = timedelta(hours=0, minutes=0)
+
+        for flight in model:
+            hours, minutes = flight[9].split(':')
+            td = timedelta(hours=int(hours), minutes=int(minutes))
+
+            total += td
+
+        total_hours, total_minutes = self.format_timedelta(total)
+        return self.format_time(total_hours, total_minutes)
+
+
+    def get_night_time(self):
+        '''
+        Retourne le nombre d'heures de vol de nuit de la vue
+        '''
+        model = self.flight_view.get_model()
+        total = timedelta(hours=0, minutes=0)
+
+        for flight in model:
+            hours, minutes = flight[10].split(':')
+            td = timedelta(hours=int(hours), minutes=int(minutes))
+
+            total += td
+
+        total_hours, total_minutes = self.format_timedelta(total)
+        return self.format_time(total_hours, total_minutes)
+
+
+    def get_total_time(self, day_time, night_time):
+        '''
+        Calcule et retourne le temps de vol total de la vue
+        '''
+        day_hours, day_minutes = day_time.split(':')
+        day_hours = int(day_hours)
+        day_minutes = int(day_minutes)
+
+        night_hours, night_minutes = night_time.split(':')
+        night_hours = int(night_hours)
+        night_minutes = int(night_minutes)
+
+        day = timedelta(hours=day_hours, minutes=day_minutes)
+        night = timedelta(hours=night_hours, minutes=night_minutes)
+
+        total = day + night
+        total_hours, total_minutes = self.format_timedelta(total)
+
+        return self.format_time(total_hours, total_minutes)
