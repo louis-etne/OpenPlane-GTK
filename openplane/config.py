@@ -32,18 +32,22 @@ about = '{}about.glade'.format(glade_folder)
 hangar = '{}hangar.glade'.format(glade_folder)
 weight = '{}weight.glade'.format(glade_folder)
 convert = '{}convert.glade'.format(glade_folder)
-logbook = '{}logbook.glade'.format(glade_folder)
 crew_adder = '{}crew_adder.glade'.format(glade_folder)
 plane_manager = '{}plane_manager.glade'.format(glade_folder)
 update_manager = '{}update_manager.glade'.format(glade_folder)
 airfield_viewer = '{}airfield_viewer.glade'.format(glade_folder)
 airfields_selector = '{}airfields_selector.glade'.format(glade_folder)
 
+logbook = '{}logbook{}{}'.format(gui_folder, os.sep, 'logbook.glade')
+flight_view = '{}logbook{}{}'.format(gui_folder, os.sep, 'flight_view.glade')
+flight_editor = '{}logbook{}{}'.format(gui_folder, os.sep, 'flight_editor.glade')
+
 # Images
 preview_balance = '{}preview_balance.png'.format(images_folder)
 preview = '{}preview.png'.format(images_folder)
 plane = '{}plane.png'.format(images_folder)
 simulator = '{}joystick.png'.format(images_folder)
+model = '{}model.png'.format(images_folder)
 
 # Extensions
 planes_ext = '.opp'
