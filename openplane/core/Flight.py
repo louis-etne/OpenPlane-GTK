@@ -161,8 +161,12 @@ class Flight:
         t_night = timedelta(hours=self.time_night_hours,
                        minutes=self.time_night_minutes)
 
-        total = str(t_day + t_night)[:-3]
-        hours, minutes = total.split(':')
+        total = t_day + t_night
+        return self.format_timedelta(total)
+
+    def format_timedelta(self, td):
+        minutes, seconds = divmod(td.seconds + td.days * 86400, 60)
+        hours, minutes = divmod(minutes, 60)
         return int(hours), int(minutes)
 
     def return_total_time(self):
