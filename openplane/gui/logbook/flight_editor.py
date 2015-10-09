@@ -111,6 +111,10 @@ class FlightEditor(Gtk.Box):
                           'Simulateur',
                           'simulator'])
 
+        type_list.append([GdkPixbuf.Pixbuf.new_from_file(config.model),
+                          'Modélisme',
+                          'model'])
+
         self.type.set_active(0)
 
 
@@ -321,7 +325,7 @@ class FlightEditor(Gtk.Box):
         Ouvre le sélecteur de terrain et met le label du boutton sur le
         terrain sélectionné.
         '''
-        selector = AirfieldSelectorDialog()
+        selector = AirfieldSelectorDialog(True)
         selector.dialog.set_transient_for(self.main_window)
         response = selector.dialog.run()
 

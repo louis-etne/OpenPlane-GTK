@@ -166,6 +166,8 @@ class FlightView(Gtk.Box):
             return GdkPixbuf.Pixbuf.new_from_file(config.plane)
         elif flight_type == 'simulator':
             return GdkPixbuf.Pixbuf.new_from_file(config.simulator)
+        elif flight_type == 'model':
+            return GdkPixbuf.Pixbuf.new_from_file(config.model)
 
 
     def return_flight_path(self):
