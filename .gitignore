@@ -1,6 +1,5 @@
 *.glade~
 __pycache__/
-__pycache__/
 openplane/images/preview.png
 *.pyc
 docs/_build
