@@ -4,3 +4,4 @@ __pycache__/
 openplane/images/preview.png
 *.pyc
 docs/_build
+openplane/datas/airfields.json
