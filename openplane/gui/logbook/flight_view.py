@@ -23,7 +23,7 @@ class FlightView(Gtk.Box):
         self.set_orientation(0)
 
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/logbook/flight_view.glade')
+        builder.add_from_file(config.flight_view)
 
         # On récupère le layout principal qu'on attache ensuite à cette classe
         # celle-ci se fait ensuite attachée dans le logbook

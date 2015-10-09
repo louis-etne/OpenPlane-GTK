@@ -21,7 +21,7 @@ class FlightEditor(Gtk.Box):
         Gtk.Box.__init__(self)
 
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/logbook/flight_editor.glade')
+        builder.add_from_file(config.flight_editor)
 
         # On récupère le layout principal qu'on attache
         #ensuite à cette classe

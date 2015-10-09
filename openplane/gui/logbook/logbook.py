@@ -12,7 +12,7 @@ class Logbook:
 
     def __init__(self):
         builder = Gtk.Builder()
-        builder.add_from_file('openplane/gui/logbook/logbook.glade')
+        builder.add_from_file(config.logbook)
 
         self.window = builder.get_object('mainWindow')
         # On défini l'icône de la fenêtre
