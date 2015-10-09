@@ -1,0 +1,42 @@
+{
+    "Arrival": {
+        "Airfield": "LFRD",
+        "Hours": 13,
+        "Minutes": 57
+    },
+    "Briefing": "Tr\u00e8s beau temps tout au long de la route",
+    "Crew": [
+        [
+            "Louis Etienne",
+            "Commandant de bord"
+        ]
+    ],
+    "Date": "2015-8-21",
+    "Departure": {
+        "Airfield": "LFRN",
+        "Hours": 13,
+        "Minutes": 25
+    },
+    "Flight_rule": "VFR",
+    "Id": "Voyage",
+    "Operations": {
+        "Landings": 1,
+        "Takeoffs": 1
+    },
+    "Plane": "openplane/datas/planes/F-BTBB.opp",
+    "Times": {
+        "Day": {
+            "Hours": 0,
+            "Minutes": 32
+        },
+        "Night": {
+            "Hours": 0,
+            "Minutes": 0
+        },
+        "Total": {
+            "Hours": 0,
+            "Minutes": 32
+        }
+    },
+    "Type": "plane"
+}
