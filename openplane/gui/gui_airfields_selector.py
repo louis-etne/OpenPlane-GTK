@@ -12,7 +12,7 @@ import json
 
 class AirfieldSelectorDialog:
 
-    def __init__(self):
+    def __init__(self, local=False):
         builder = Gtk.Builder()
         builder.add_from_file(config.airfields_selector)
 
@@ -33,6 +33,9 @@ class AirfieldSelectorDialog:
             for airfield in data:
                 self.airfields_list.append([airfield['Code'],
                                             airfield['Name']])
+
+        if local == True:
+            self.airfields_list.append(['HOME', 'Vol locale'])
 
         self.scroll_box = builder.get_object('scrollBox')
         self.tree_view = builder.get_object('airfieldsView')
