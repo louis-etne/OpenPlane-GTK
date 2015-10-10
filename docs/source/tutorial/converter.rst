@@ -3,7 +3,8 @@ Convertisseur
 
 Introduction
 ------------
-.. image:: ../images/converter.png
+.. image:: ../images/converter.gif
+   :scale: 50%
 
 Le convertisseur est la première fenêtre à avoir été codée. Comme son nom l'indique,
 elle permet de convertir des unités aéronautiques. Voici les différentes unités
