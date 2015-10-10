@@ -78,6 +78,9 @@ class Logbook:
 
 
     def filter_chose(self, button):
+        '''
+        Agit quand un bouton est activé
+        '''
         f_type = 'all'
         date = 'all'
         rule = 'all'
