@@ -1,6 +1,8 @@
 *.glade~
-__pycache__/
-openplane/images/preview.png
 *.pyc
+__pycache__/
 docs/_build
+openplane/images/preview.png
 openplane/datas/airfields.json
+openplane/datas/logbook
+
