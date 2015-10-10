@@ -5,7 +5,7 @@
 
 from gi.repository import Gtk, GdkPixbuf
 from pathlib import Path
-from datetime import timedelta
+import datetime
 import time
 import os
 
@@ -104,9 +104,9 @@ class FlightView(Gtk.Box):
             return None
 
 
-    def reload_flight(self):
+    def reload_flight(self, date='all', day='all', rule='all', f_type='all'):
         '''
-        Recharge la liste des vols
+        Recharge la liste des vols avec les arguments
         '''
         # On vide la liste des vols
         self.flight_list.clear()
@@ -117,6 +117,73 @@ class FlightView(Gtk.Box):
         # On récupère tous les fichiers avec chemin en entier
         # Exemple : "/home/$USER/.../2015/9/1.opf"
         [flights_path.append(val) for sublist in [[os.path.join(i[0], j) for j in i[2]] for i in os.walk(config.logbook_folder)] for val in sublist]
+
+        for i in range(len(flights_path) - 1, -1, -1):
+            flight = Flight()
+            flight.import_flight(flights_path[i])
+
+            if date == 'week' and not self.is_in_week(flight):
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif date == 'month' and not self.is_in_month(flight):
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif date == '6months' and not self.is_in_6months(flight):
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif date == 'year' and not self.is_in_year(flight):
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+
+            # On vérifie si on veut les vols de jour, de nuits ou peu importe
+            if day == 'day':
+                if flight.time_day_hours < flight.time_night_hours:
+                    del flights_path[i]
+                    # On passe à la prochaine itération
+                    continue
+                elif flight.time_day_hours == flight.time_night_hours:
+                    if flight.time_day_minutes < flight.time_night_minutes:
+                        del flights_path[i]
+                        # On passe à la prochaine itération
+                        continue
+            elif day == 'night':
+                if flight.time_night_hours < flight.time_day_hours:
+                    del flights_path[i]
+                    # On passe à la prochaine itération
+                    continue
+                elif flight.time_night_hours == flight.time_day_hours:
+                    if flight.time_night_minutes < flight.time_day_minutes:
+                        del flights_path[i]
+                        # On passe à la prochaine itération
+                        continue
+
+            # On vérifie la règle de vol
+            if rule == 'vfr' and flight.flight_rule == 'IFR':
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif rule == 'ifr' and flight.flight_rule == 'VFR':
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+
+            # On vérifie le type de vol
+            if f_type == 'plane' and flight.type != 'plane':
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif f_type == 'simulator' and flight.type != 'simulator':
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
+            elif f_type == 'model' and flight.type != 'model':
+                del flights_path[i]
+                # On passe à la prochaine itération
+                continue
 
         # Pour chaque fichier, on en créer un vol
         for flight_doc in flights_path:
@@ -326,11 +393,11 @@ class FlightView(Gtk.Box):
         Retourne le nombre d'heures de vol de jour de la vue
         '''
         model = self.flight_view.get_model()
-        total = timedelta(hours=0, minutes=0)
+        total = datetime.timedelta(hours=0, minutes=0)
 
         for flight in model:
             hours, minutes = flight[9].split(':')
-            td = timedelta(hours=int(hours), minutes=int(minutes))
+            td = datetime.timedelta(hours=int(hours), minutes=int(minutes))
 
             total += td
 
@@ -343,11 +410,11 @@ class FlightView(Gtk.Box):
         Retourne le nombre d'heures de vol de nuit de la vue
         '''
         model = self.flight_view.get_model()
-        total = timedelta(hours=0, minutes=0)
+        total = datetime.timedelta(hours=0, minutes=0)
 
         for flight in model:
             hours, minutes = flight[10].split(':')
-            td = timedelta(hours=int(hours), minutes=int(minutes))
+            td = datetime.timedelta(hours=int(hours), minutes=int(minutes))
 
             total += td
 
@@ -367,10 +434,91 @@ class FlightView(Gtk.Box):
         night_hours = int(night_hours)
         night_minutes = int(night_minutes)
 
-        day = timedelta(hours=day_hours, minutes=day_minutes)
-        night = timedelta(hours=night_hours, minutes=night_minutes)
+        day = datetime.timedelta(hours=day_hours, minutes=day_minutes)
+        night = datetime.timedelta(hours=night_hours, minutes=night_minutes)
 
         total = day + night
         total_hours, total_minutes = self.format_timedelta(total)
 
         return self.format_time(total_hours, total_minutes)
+
+
+    def is_in_week(self, flight):
+        '''
+        Retourne true si la date fait partie des 7 derniers jours
+        '''
+        year, month, day = flight.date.split('-')
+        day = int(day)
+        month = int(month) + 1  # On décalle le mois d'un cran
+        year = int(year)
+        flight = datetime.date(year, month, day)
+
+        # Pareil avec la date du jour
+        now = datetime.date.today()
+        operand = datetime.timedelta(days=7)
+
+        if flight >= now - operand:
+            return True
+        else:
+            return False
+
+
+    def is_in_month(self, flight):
+        '''
+        Retourne True si la date est comprise dans les 28 derniers jours
+        '''
+        year, month, day = flight.date.split('-')
+        day = int(day)
+        month = int(month) + 1  # On décalle le mois d'un cran
+        year = int(year)
+        flight = datetime.date(year, month, day)
+
+        # Pareil avec la date du jour
+        now = datetime.date.today()
+        operand = datetime.timedelta(28)
+
+        if flight >= now - operand:
+            return True
+        else:
+            return False
+
+
+    def is_in_6months(self, flight):
+        '''
+        Retourne True si la date est comprise dans les 6 derniers mois
+        '''
+        year, month, day = flight.date.split('-')
+        day = int(day)
+        month = int(month) + 1  # On décalle le mois d'un cran
+        year = int(year)
+        flight = datetime.date(year, month, day)
+
+        # Pareil avec la date du jour
+        now = datetime.date.today()
+        operand = datetime.timedelta(6 * 365/12)
+
+        if flight >= now - operand:
+            return True
+        else:
+            return False
+
+
+    def is_in_year(self, flight):
+        '''
+        Retourne True si la date est comprise dans l'année
+        '''
+        year, month, day = flight.date.split('-')
+        day = int(day)
+        month = int(month) + 1  # On décalle le mois d'un cran
+        year = int(year)
+        flight = datetime.date(year, month, day)
+
+        # Pareil avec la date du jour
+        now = datetime.date.today()
+        operand = datetime.timedelta(365)
+
+        if flight >= now - operand:
+            return True
+        else:
+            return False
+

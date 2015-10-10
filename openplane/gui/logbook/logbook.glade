@@ -2,6 +2,16 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
+  <object class="GtkListStore" id="typeStore">
+    <columns>
+      <!-- column-name icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
     <property name="border_width">10</property>
@@ -36,12 +46,15 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkToggleButton" id="allEntries">
+                          <object class="GtkRadioButton" id="allEntries">
                             <property name="label" translatable="yes">Toutes les entrées</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
                             <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -50,11 +63,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="7LastDays">
+                          <object class="GtkRadioButton" id="7LastDays">
                             <property name="label" translatable="yes">7 derniers jours</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allEntries</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -63,11 +81,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="28LastDays">
+                          <object class="GtkRadioButton" id="28LastDays">
                             <property name="label" translatable="yes">28 derniers jours</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allEntries</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -76,11 +99,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="6LastMonths">
+                          <object class="GtkRadioButton" id="6LastMonths">
                             <property name="label" translatable="yes">6 derniers mois</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allEntries</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -89,11 +117,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="12LastMonths">
+                          <object class="GtkRadioButton" id="12LastMonths">
                             <property name="label" translatable="yes">12 derniers mois</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allEntries</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -143,11 +176,14 @@
                         <property name="orientation">vertical</property>
                         <property name="spacing">6</property>
                         <child>
-                          <object class="GtkToggleButton" id="allDayEntries">
-                            <property name="label" translatable="yes">Vols de jour</property>
+                          <object class="GtkRadioButton" id="allFlightJourney">
+                            <property name="label" translatable="yes">Toutes les heures</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -156,11 +192,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="allNightEntries">
-                            <property name="label" translatable="yes">Vols de nuit</property>
+                          <object class="GtkRadioButton" id="allDayEntries">
+                            <property name="label" translatable="yes">Vols de jour</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allFlightJourney</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -169,11 +210,16 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="allVfrEntries">
-                            <property name="label" translatable="yes">Vols en VFR</property>
+                          <object class="GtkRadioButton" id="allNightEntries">
+                            <property name="label" translatable="yes">Vol de nuit</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allFlightJourney</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -182,16 +228,105 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="allIfrEntries">
-                            <property name="label" translatable="yes">Vols en IFR</property>
+                          <object class="GtkSeparator" id="separator1">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
+                            <property name="can_focus">False</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="allFlightRule">
+                            <property name="label" translatable="yes">Tous types de vol</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="allVfrEntries">
+                            <property name="label" translatable="yes">Vols en VFR</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allFlightRule</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkRadioButton" id="allIfrEntries">
+                            <property name="label" translatable="yes">Vols en IFR</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="xalign">0</property>
+                            <property name="active">True</property>
+                            <property name="draw_indicator">False</property>
+                            <property name="group">allFlightRule</property>
+                            <signal name="toggled" handler="on_toggled" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="separator2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBox" id="type">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="model">typeStore</property>
+                            <property name="active">0</property>
+                            <property name="id_column">2</property>
+                            <signal name="changed" handler="on_toggled" swapped="no"/>
+                            <child>
+                              <object class="GtkCellRendererPixbuf" id="iconRenderer"/>
+                              <attributes>
+                                <attribute name="pixbuf">0</attribute>
+                              </attributes>
+                            </child>
+                            <child>
+                              <object class="GtkCellRendererText" id="nameRenderer"/>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">8</property>
                           </packing>
                         </child>
                       </object>

@@ -79,7 +79,7 @@
     <property name="visible">True</property>
     <property name="can_focus">True</property>
     <property name="border_width">10</property>
-    <property name="min_content_width">335</property>
+    <property name="min_content_width">338</property>
     <child>
       <object class="GtkViewport" id="viewport1">
         <property name="visible">True</property>
@@ -981,6 +981,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="shadow_type">in</property>
+                        <property name="min_content_height">100</property>
                         <child>
                           <object class="GtkTreeView" id="crewView">
                             <property name="visible">True</property>

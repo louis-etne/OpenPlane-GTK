@@ -208,7 +208,7 @@
             <child>
               <object class="GtkTreeViewColumn" id="planeColumn">
                 <property name="resizable">True</property>
-                <property name="title" translatable="yes">Avion</property>
+                <property name="title" translatable="yes">Appareil</property>
                 <property name="clickable">True</property>
                 <property name="sort_indicator">True</property>
                 <property name="sort_column_id">3</property>
