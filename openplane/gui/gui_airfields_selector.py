@@ -109,6 +109,7 @@ class AirfieldSelectorDialog:
         model, treeiter = self.selector.get_selected()
         if treeiter is not None:
             airfield_viewer = AirfieldViewer(model[treeiter][0])
+            airfield_viewer.dialog.set_transient_for(self.dialog)
             airfield_viewer.dialog.run()
 
     def return_airfield(self):

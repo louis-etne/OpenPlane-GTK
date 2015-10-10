@@ -6,6 +6,7 @@
 from gi.repository import Gtk
 from openplane import config
 from openplane import text
+from openplane.core import weather
 import json
 
 
@@ -34,8 +35,12 @@ class AirfieldViewer:
 
         self.link = builder.get_object('link')
 
+        self.metar = builder.get_object('metar')
+        self.taf = builder.get_object('taf')
+
         airfield = self.get_airfield_datas(code)
         self.set_entry(airfield)
+        self.set_weather(airfield)
 
     def get_airfield_datas(self, code):
         with open(config.airfields, 'r') as input_file:
@@ -261,6 +266,24 @@ class AirfieldViewer:
                'Atlas-VAC/PDF_AIPparSSection/VAC/AD/2/1511_AD-2.{}.pdf'
 
         return link.format(code)
+
+
+    def set_weather(self, airfield):
+        metar = weather.get_metar(str(airfield['Code']))
+        taf = weather.get_taf(str(airfield['Code']))
+        if metar is None:
+            self.metar.set_label('Impossible de télécharger le METAR. Deux raisons possibles :\n'
+                               '\t- Le terrain choisis ne possède pas de METAR associé.\n'
+                               '\t- La connexion avec le serveur n\'est pas possible.')
+        else:
+            self.metar.set_label(metar)
+
+        if taf is None:
+            self.taf.set_label('Impossible de télécharger le TAF. Deux raisons possibles :\n'
+                               '\t- Le terrain choisis ne possède pas de TAF associé.\n'
+                               '\t- La connexion avec le serveur n\'est pas possible.')
+        else:
+            self.taf.set_label(taf)
 
     def app_quit(self, button):
         self.dialog.destroy()
