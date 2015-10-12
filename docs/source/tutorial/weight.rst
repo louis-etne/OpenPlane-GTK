@@ -17,7 +17,7 @@ rendez-vous dans `le manuel d'utilisation de l'éditeur d'avion <plane_editor.ht
 Utilisation
 -----------
 
-Une fois la fenêtre ouverte, sélectionner votre avion dans la liste déroulante,
+Une fois la fenêtre ouverte, sélectionnez votre avion dans la liste déroulante,
 en haut. À droite de cette liste se trouve un accès vers le `hangar <hangar.html>`_
 afin de pouvoir modifier rapidement vos avions avant de faire votre devis.
 
